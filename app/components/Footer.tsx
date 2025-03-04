@@ -1,10 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Urbanist } from "next/font/google";
+import { Outfit } from "next/font/google";
+
+const urbanist = Urbanist({ subsets: ["latin"], weight: ["400"] }); // Load the font
+const outfit = Outfit({ subsets: ["latin"], weight: ["700", "500"] }); // Load the font
 
 export default function Footer() {
   return (
     <footer
-      className="footer sm:footer-horizontal bg-base-200 text-base-content p-10"
+      className={`footer sm:footer-horizontal bg-base-200 text-base-content p-12`}
       // "footer" (daisyUI) applies default footer styles
       // "sm:footer-horizontal" makes the footer layout horizontal on small screens and larger
       // "bg-base-200" sets a light gray background color
@@ -17,61 +22,87 @@ export default function Footer() {
             <Image
               src="/Images/Logos/Logo.png"
               alt="logo"
-              width={102.31}
-              height={78.63}
+              width={206.97}
+              height={154.03}
             />
           </Link>
-          <p>388 Ottawa St. South</p>
-          <p>Kitchener, Ontario, Canada</p>
-          <p>N2M 3P4</p>
+          <p className={urbanist.className}>388 Ottawa St. South</p>
+          <p className={urbanist.className}>Kitchener, Ontario, Canada</p>
+          <p className={urbanist.className}>N2M3P4</p>
+          <p className={urbanist.className}>+1 519 570 2199</p>
         </aside>
       </div>
       <div>
-        <h6 className="footer-title">
-          {/* "footer-title" (daisyUI) styles this like a section heading */}
+        <h6 className={outfit.className} style={{ fontWeight: 700 }}>
           SMSM CHURCH
         </h6>
         <Link href="/Home" legacyBehavior>
-          <a className="link link-hover">HOME</a>
+          <a className={outfit.className}>HOME</a>
           {/* "link" (daisyUI) applies link styles */}
           {/* "link-hover" ensures styling when hovered */}
         </Link>
-        <Link href="/design" legacyBehavior>
-          <a className="link link-hover">ABOUT</a>
+        <Link href="/AboutUs" legacyBehavior>
+          <a className={outfit.className} style={{ fontWeight: 500 }}>
+            ABOUT
+          </a>
         </Link>
-        <Link href="/marketing" legacyBehavior>
-          <a className="link link-hover">MINISTRIES</a>
+        <Link href="/Ministries" legacyBehavior>
+          <a className={outfit.className} style={{ fontWeight: 500 }}>
+            MINISTRIES
+          </a>
         </Link>
-        <Link href="/advertisement" legacyBehavior>
-          <a className="link link-hover">SUNDAY SCHOOL</a>
+        <Link href="/YouthKidsServices" legacyBehavior>
+          <a className={outfit.className} style={{ fontWeight: 500 }}>
+            SUNDAY SCHOOL
+          </a>
         </Link>
       </div>
       <div>
-        <h6 className="footer-title">ENGAGEMENT & RESOURCES</h6>
+        <h6 className={outfit.className} style={{ fontWeight: 700 }}>
+          ENGAGEMENT & RESOURCES
+        </h6>
         <Link href="/about-us" legacyBehavior>
-          <a className="link link-hover">SCHEDULE</a>
+          <a className={outfit.className} style={{ fontWeight: 500 }}>
+            SCHEDULE
+          </a>
         </Link>
         <Link href="/contact" legacyBehavior>
-          <a className="link link-hover">MEDIA</a>
+          <a className={outfit.className} style={{ fontWeight: 500 }}>
+            MEDIA
+          </a>
         </Link>
         <Link href="/jobs" legacyBehavior>
-          <a className="link link-hover">RESOURCES</a>
+          <a className={outfit.className} style={{ fontWeight: 500 }}>
+            RESOURCES
+          </a>
         </Link>
       </div>
       <div>
-        <h6 className="footer-title">CONNECT AND GIVE</h6>
-        <Link href="/terms-of-use" legacyBehavior>
-          <a className="link link-hover">DONATE</a>
+        <h6 className={outfit.className} style={{ fontWeight: 700 }}>
+          CONNECT AND GIVE
+        </h6>
+        <Link href="/Donation" legacyBehavior>
+          <a className={outfit.className} style={{ fontWeight: 500 }}>
+            DONATE
+          </a>
         </Link>
         <Link href="/privacy-policy" legacyBehavior>
-          <a className="link link-hover">CONTACT US</a>
+          <a className={outfit.className} style={{ fontWeight: 500 }}>
+            CONTACT US
+          </a>
         </Link>
       </div>
       <div>
-        <h6 className="footer-title">STAY CONNECTED WITH OUR CHURCH FAMILY</h6>
+        <h6 className={outfit.className} style={{ fontWeight: 700 }}>
+          STAY CONNECTED WITH OUR CHURCH FAMILY
+        </h6>
         <form className="w-80">
           {/* "w-80" sets the width of the form to 80 Tailwind units */}
-          <label htmlFor="email" className="block mb-2">
+          <label
+            htmlFor="email"
+            className={outfit.className}
+            style={{ fontWeight: 500 }}
+          >
             {/* "block" makes the label a block element so it appears on its own line */}
             {/* "mb-2" adds margin-bottom of 2 units */}
             EMAIL
@@ -95,7 +126,11 @@ export default function Footer() {
           </div>
         </form>
         <form className="w-80">
-          <label htmlFor="phone" className="block mb-2">
+          <label
+            htmlFor="phone"
+            className={outfit.className}
+            style={{ fontWeight: 500 }}
+          >
             PHONE NUMBER
           </label>
           <div className="join">
