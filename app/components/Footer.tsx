@@ -39,7 +39,7 @@ export default function Footer() {
               <p className="text-blue underline">N2M3P4</p>
             </Link>
             <div
-              className={`${urbanist.className} text-[18px] font-[400] leading-[50px] tracking-[0.02em] text-[#E8E9EB] w-[320px] h-[27px]`}
+              className={`${urbanist.className} text-[18px] font-[400] leading-[27px] tracking-[0.02em] text-[#E8E9EB] w-[320px] h-[27px]`}
             >
               <a>+1 519 570 2199</a>
             </div>
