@@ -33,7 +33,7 @@ export default function Footer() {
             <p>Kitchener, Ontario, Canada</p>
             <p>N2M3P4</p>
             <div
-              className={`${urbanist.className} text-[18px] font-[400] leading-[57px] tracking-[0.02em] text-[#E8E9EB] w-[320px] h-[27px]`}
+              className={`${urbanist.className} text-[18px] font-[400] leading-[50px] tracking-[0.02em] text-[#E8E9EB] w-[320px] h-[27px]`}
             >
               <p>+1 519 570 2199</p>
             </div>
