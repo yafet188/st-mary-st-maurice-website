@@ -26,10 +26,18 @@ export default function Footer() {
               height={154.03}
             />
           </Link>
-          <p className={urbanist.className}>388 Ottawa St. South</p>
-          <p className={urbanist.className}>Kitchener, Ontario, Canada</p>
-          <p className={urbanist.className}>N2M3P4</p>
-          <p className={urbanist.className}>+1 519 570 2199</p>
+          <div
+            className={`${urbanist.className} text-[18px] font-[400] leading-[27px] tracking-[0.02em] text-[#E8E9EB] w-[318px] h-[54px]`}
+          >
+            <p>388 Ottawa St. South</p>
+            <p>Kitchener, Ontario, Canada</p>
+            <p>N2M3P4</p>
+            <div
+              className={`${urbanist.className} text-[18px] font-[400] leading-[57px] tracking-[0.02em] text-[#E8E9EB] w-[320px] h-[27px]`}
+            >
+              <p>+1 519 570 2199</p>
+            </div>
+          </div>
         </aside>
       </div>
       <div>
@@ -37,22 +45,32 @@ export default function Footer() {
           SMSM CHURCH
         </h6>
         <Link href="/Home" legacyBehavior>
-          <a className={outfit.className}>HOME</a>
+          <a
+            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
+          >
+            HOME
+          </a>
           {/* "link" (daisyUI) applies link styles */}
           {/* "link-hover" ensures styling when hovered */}
         </Link>
         <Link href="/AboutUs" legacyBehavior>
-          <a className={outfit.className} style={{ fontWeight: 500 }}>
+          <a
+            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
+          >
             ABOUT
           </a>
         </Link>
         <Link href="/Ministries" legacyBehavior>
-          <a className={outfit.className} style={{ fontWeight: 500 }}>
+          <a
+            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
+          >
             MINISTRIES
           </a>
         </Link>
         <Link href="/YouthKidsServices" legacyBehavior>
-          <a className={outfit.className} style={{ fontWeight: 500 }}>
+          <a
+            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
+          >
             SUNDAY SCHOOL
           </a>
         </Link>
@@ -62,17 +80,23 @@ export default function Footer() {
           ENGAGEMENT & RESOURCES
         </h6>
         <Link href="/about-us" legacyBehavior>
-          <a className={outfit.className} style={{ fontWeight: 500 }}>
+          <a
+            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
+          >
             SCHEDULE
           </a>
         </Link>
         <Link href="/contact" legacyBehavior>
-          <a className={outfit.className} style={{ fontWeight: 500 }}>
+          <a
+            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
+          >
             MEDIA
           </a>
         </Link>
         <Link href="/jobs" legacyBehavior>
-          <a className={outfit.className} style={{ fontWeight: 500 }}>
+          <a
+            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
+          >
             RESOURCES
           </a>
         </Link>
@@ -82,33 +106,38 @@ export default function Footer() {
           CONNECT AND GIVE
         </h6>
         <Link href="/Donation" legacyBehavior>
-          <a className={outfit.className} style={{ fontWeight: 500 }}>
+          <a
+            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
+          >
             DONATE
           </a>
         </Link>
         <Link href="/privacy-policy" legacyBehavior>
-          <a className={outfit.className} style={{ fontWeight: 500 }}>
+          <a
+            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
+          >
             CONTACT US
           </a>
         </Link>
       </div>
-      <div>
+    </footer>
+  );
+}
+
+/* Subscribe & Phone Number code
+<div>
         <h6 className={outfit.className} style={{ fontWeight: 700 }}>
           STAY CONNECTED WITH OUR CHURCH FAMILY
         </h6>
         <form className="w-80">
-          {/* "w-80" sets the width of the form to 80 Tailwind units */}
+          {}
           <label
             htmlFor="email"
-            className={outfit.className}
-            style={{ fontWeight: 500 }}
-          >
-            {/* "block" makes the label a block element so it appears on its own line */}
-            {/* "mb-2" adds margin-bottom of 2 units */}
+            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
+          
             EMAIL
           </label>
           <div className="join">
-            {/* "join" (daisyUI) groups input and button together */}
             <input
               id="email"
               type="email"
@@ -119,8 +148,6 @@ export default function Footer() {
               // "join-item" ensures proper spacing/alignment inside the "join" container
             />
             <button type="submit" className="btn btn-primary join-item">
-              {/* "btn" (daisyUI) applies button styling */}
-              {/* "btn-primary" makes the button use the primary color */}
               Subscribe
             </button>
           </div>
@@ -128,8 +155,7 @@ export default function Footer() {
         <form className="w-80">
           <label
             htmlFor="phone"
-            className={outfit.className}
-            style={{ fontWeight: 500 }}
+            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
           >
             PHONE NUMBER
           </label>
@@ -146,6 +172,4 @@ export default function Footer() {
           </div>
         </form>
       </div>
-    </footer>
-  );
-}
+*/
