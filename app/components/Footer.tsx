@@ -29,13 +29,19 @@ export default function Footer() {
           <div
             className={`${urbanist.className} text-[18px] font-[400] leading-[27px] tracking-[0.02em] text-[#E8E9EB] w-[318px] h-[54px]`}
           >
-            <p>388 Ottawa St. South</p>
-            <p>Kitchener, Ontario, Canada</p>
-            <p>N2M3P4</p>
+            <Link
+              href="https://www.google.com/maps/dir/?api=1&destination=388+Ottawa+St+South,+Kitchener,+Ontario,+Canada"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <p className="text-blue underline">388 Ottawa St. South</p>
+              <p className="text-blue underline">Kitchener, Ontario, Canada</p>
+              <p className="text-blue underline">N2M3P4</p>
+            </Link>
             <div
               className={`${urbanist.className} text-[18px] font-[400] leading-[50px] tracking-[0.02em] text-[#E8E9EB] w-[320px] h-[27px]`}
             >
-              <p>+1 519 570 2199</p>
+              <a>+1 519 570 2199</a>
             </div>
           </div>
         </aside>
