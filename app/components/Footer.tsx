@@ -1,181 +1,180 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Urbanist } from "next/font/google";
-import { Outfit } from "next/font/google";
+import { Urbanist, Outfit } from "next/font/google";
 
-const urbanist = Urbanist({ subsets: ["latin"], weight: ["400"] }); // Load the font
-const outfit = Outfit({ subsets: ["latin"], weight: ["700", "500"] }); // Load the font
+// Load fonts with correct weights
+const urbanist = Urbanist({ subsets: ["latin"], weight: ["400"] });
+const outfit = Outfit({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
 export default function Footer() {
   return (
-    <footer
-      className={`footer sm:footer-horizontal bg-base-200 text-base-content p-12`}
-      // "footer" (daisyUI) applies default footer styles
-      // "sm:footer-horizontal" makes the footer layout horizontal on small screens and larger
-      // "bg-base-200" sets a light gray background color
-      // "text-base-content" ensures the text color matches the theme
-      // "p-10" adds padding of 10 units
-    >
-      <div>
-        <aside>
-          <Link href="/">
-            <Image
-              src="/Images/Logos/Logo.png"
-              alt="logo"
-              width={206.97}
-              height={154.03}
-            />
+    <footer className="bg-[#0c101f] text-base-content py-[80px] px-[80px] w-full min-h-[396px] border-t border-[#454B5D] grid grid-cols-2 gap-[48px]">
+      {/* Left Section - Logo, Address & Contact */}
+      <div className="flex flex-col gap-[24px]">
+        <Link href="/">
+          <Image
+            src="/Images/Logos/Logo.png"
+            alt="logo"
+            width={206.97}
+            height={154.03}
+          />
+        </Link>
+        <div
+          className={`${urbanist.className} text-[18px] font-[400] leading-[27px] tracking-[0.02em] text-[#E8E9EB]`}
+        >
+          <Link
+            href="https://www.google.com/maps/dir/?api=1&destination=388+Ottawa+St+South,+Kitchener,+Ontario,+Canada"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <p className="text-blue underline">388 Ottawa St. South</p>
+            <p className="text-blue underline">Kitchener, Ontario, Canada</p>
+            <p className="text-blue underline">N2M 3P4</p>
           </Link>
-          <div
-            className={`${urbanist.className} text-[18px] font-[400] leading-[27px] tracking-[0.02em] text-[#E8E9EB] w-[318px] h-[54px]`}
-          >
-            <Link
-              href="https://www.google.com/maps/dir/?api=1&destination=388+Ottawa+St+South,+Kitchener,+Ontario,+Canada"
-              target="_blank"
-              rel="noopener noreferrer"
+        </div>
+        <div
+          className={`${urbanist.className} text-[18px] font-[400] leading-[27px] tracking-[0.02em] text-[#E8E9EB]`}
+        >
+          <a href="tel:+15195702199">+1 519 570 2199</a>
+        </div>
+      </div>
+
+      {/* Right Section - Navigation Links & Subscription Form */}
+      <div className="flex flex-col gap-[48px]">
+        {/* Navigation Links */}
+        <div className="grid grid-cols-3 gap-[32px]">
+          <div className="flex flex-col gap-[16px]">
+            <h6
+              className={`${outfit.className} text-white font-[700] text-[16px] leading-[24px] tracking-[0.02em]`}
             >
-              <p className="text-blue underline">388 Ottawa St. South</p>
-              <p className="text-blue underline">Kitchener, Ontario, Canada</p>
-              <p className="text-blue underline">N2M3P4</p>
+              SMSM CHURCH
+            </h6>
+            <Link href="/Home">
+              <p
+                className={`${outfit.className} text-[14px] font-[500] leading-[21px] tracking-[0.02em] text-white opacity-[80%]`}
+              >
+                HOME
+              </p>
             </Link>
-            <div
-              className={`${urbanist.className} text-[18px] font-[400] leading-[27px] tracking-[0.02em] text-[#E8E9EB] w-[320px] h-[27px]`}
-            >
-              <a>+1 519 570 2199</a>
-            </div>
+            <Link href="/AboutUs">
+              <p
+                className={`${outfit.className} text-[14px] font-[500] leading-[21px] tracking-[0.02em] text-white opacity-[80%]`}
+              >
+                ABOUT
+              </p>
+            </Link>
+            <Link href="/Ministries">
+              <p
+                className={`${outfit.className} text-[14px] font-[500] leading-[21px] tracking-[0.02em] text-white opacity-[80%]`}
+              >
+                MINISTRIES
+              </p>
+            </Link>
+            <Link href="/YouthKidsServices">
+              <p
+                className={`${outfit.className} text-[14px] font-[500] leading-[21px] tracking-[0.02em] text-white opacity-[80%]`}
+              >
+                SUNDAY SCHOOL
+              </p>
+            </Link>
           </div>
-        </aside>
-      </div>
-      <div>
-        <h6 className={outfit.className} style={{ fontWeight: 700 }}>
-          SMSM CHURCH
-        </h6>
-        <Link href="/Home" legacyBehavior>
-          <a
-            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
+          <div className="flex flex-col gap-[16px]">
+            <h6
+              className={`${outfit.className} text-white font-[700] text-[16px]`}
+            >
+              ENGAGEMENT & RESOURCES
+            </h6>
+            <Link href="/schedule">
+              <p
+                className={`${outfit.className} text-[14px] font-[500] leading-[21px] tracking-[0.02em] text-white opacity-[80%]`}
+              >
+                SCHEDULE
+              </p>
+            </Link>
+            <Link href="/media">
+              <p
+                className={`${outfit.className} text-[14px] font-[500] leading-[21px] tracking-[0.02em] text-white opacity-[80%]`}
+              >
+                MEDIA
+              </p>
+            </Link>
+            <Link href="/resources">
+              <p
+                className={`${outfit.className} text-[14px] font-[500] leading-[21px] tracking-[0.02em] text-white opacity-[80%]`}
+              >
+                RESOURCES
+              </p>
+            </Link>
+          </div>
+          <div className="flex flex-col gap-[16px]">
+            <h6
+              className={`${outfit.className} text-white font-[700] text-[16px]`}
+            >
+              CONNECT & GIVE
+            </h6>
+            <Link href="/donation">
+              <p
+                className={`${outfit.className} text-[14px] font-[500] leading-[21px] tracking-[0.02em] text-white opacity-[80%]`}
+              >
+                DONATE
+              </p>
+            </Link>
+            <Link href="/contact">
+              <p
+                className={`${outfit.className} text-[14px] font-[500] leading-[21px] tracking-[0.02em] text-white opacity-[80%]`}
+              >
+                CONTACT US
+              </p>
+            </Link>
+          </div>
+        </div>
+
+        {/* Subscription Form */}
+        <div className="p-6 bg-[#0A0D16] border-[1px] border-[#454B5D] rounded-lg flex flex-col gap-[16px]">
+          <h6
+            className={`${outfit.className} text-white font-[700] text-[16px] leading-[24px] tracking-[0.02em]`}
           >
-            HOME
-          </a>
-          {/* "link" (daisyUI) applies link styles */}
-          {/* "link-hover" ensures styling when hovered */}
-        </Link>
-        <Link href="/AboutUs" legacyBehavior>
-          <a
-            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
-          >
-            ABOUT
-          </a>
-        </Link>
-        <Link href="/Ministries" legacyBehavior>
-          <a
-            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
-          >
-            MINISTRIES
-          </a>
-        </Link>
-        <Link href="/YouthKidsServices" legacyBehavior>
-          <a
-            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
-          >
-            SUNDAY SCHOOL
-          </a>
-        </Link>
-      </div>
-      <div>
-        <h6 className={outfit.className} style={{ fontWeight: 700 }}>
-          ENGAGEMENT & RESOURCES
-        </h6>
-        <Link href="/about-us" legacyBehavior>
-          <a
-            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
-          >
-            SCHEDULE
-          </a>
-        </Link>
-        <Link href="/contact" legacyBehavior>
-          <a
-            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
-          >
-            MEDIA
-          </a>
-        </Link>
-        <Link href="/jobs" legacyBehavior>
-          <a
-            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
-          >
-            RESOURCES
-          </a>
-        </Link>
-      </div>
-      <div>
-        <h6 className={outfit.className} style={{ fontWeight: 700 }}>
-          CONNECT AND GIVE
-        </h6>
-        <Link href="/Donation" legacyBehavior>
-          <a
-            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
-          >
-            DONATE
-          </a>
-        </Link>
-        <Link href="/privacy-policy" legacyBehavior>
-          <a
-            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
-          >
-            CONTACT US
-          </a>
-        </Link>
+            STAY CONNECTED WITH OUR CHURCH FAMILY
+          </h6>
+          <form className="grid grid-cols-[1fr_1fr_auto] gap-[24px] items-end">
+            {/* EMAIL Field */}
+            <div className="flex flex-col gap-[8px]">
+              <label className={`${outfit.className} text-white text-sm`}>
+                EMAIL
+              </label>
+              <input
+                type="email"
+                placeholder="email@example.com"
+                className={`${outfit.className} w-full p-3 bg-[#151B2F] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 font-[400]`}
+              />
+            </div>
+            {/* PHONE Field with Canada Dropdown */}
+            <div className="flex flex-col gap-[8px]">
+              <label className={`${outfit.className} text-white text-sm`}>
+                PHONE NUMBER
+              </label>
+              <div className="flex w-full">
+                <select className="bg-[#454B5D] text-white p-3 rounded-l-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                  <option value="+1">Canada (+1)</option>
+                  {/* Add additional options if needed */}
+                </select>
+                <input
+                  type="tel"
+                  placeholder="000-000-0000"
+                  className="w-full p-3 bg-[#151B2F] text-white rounded-r-md border-t border-b border-r border-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 font-[400]"
+                />
+              </div>
+            </div>
+            {/* Subscribe Button */}
+            <button
+              type="submit"
+              className={`${outfit.className} p-3 bg-white text-black rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500`}
+            >
+              SUBSCRIBE
+            </button>
+          </form>
+        </div>
       </div>
     </footer>
   );
 }
-
-/* Subscribe & Phone Number code
-<div>
-        <h6 className={outfit.className} style={{ fontWeight: 700 }}>
-          STAY CONNECTED WITH OUR CHURCH FAMILY
-        </h6>
-        <form className="w-80">
-          {}
-          <label
-            htmlFor="email"
-            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
-          
-            EMAIL
-          </label>
-          <div className="join">
-            <input
-              id="email"
-              type="email"
-              placeholder="username@email.com"
-              className="input input-bordered join-item"
-              // "input" (daisyUI) applies input field styling
-              // "input-bordered" adds a border around the input
-              // "join-item" ensures proper spacing/alignment inside the "join" container
-            />
-            <button type="submit" className="btn btn-primary join-item">
-              Subscribe
-            </button>
-          </div>
-        </form>
-        <form className="w-80">
-          <label
-            htmlFor="phone"
-            className={`${outfit.className} text-[14px] font-light leading-[21px] tracking-[0.02em] text-white opacity-[79.84%] w-[230px] h-[21px]`}
-          >
-            PHONE NUMBER
-          </label>
-          <div className="join">
-            <input
-              id="phone"
-              type="tel"
-              placeholder="+1 000-000-000"
-              className="input input-bordered join-item"
-            />
-            <button type="submit" className="btn btn-primary join-item">
-              Subscribe
-            </button>
-          </div>
-        </form>
-      </div>
-*/
