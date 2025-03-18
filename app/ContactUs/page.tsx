@@ -235,6 +235,25 @@ const ContactUs = () => {
         </div>
       </div>
 
+      {/* Connect With Our Fathers Form*/}
+      <div className="w-full h-[1170.7px] bg-[#171E34] py-[100px] gap-[80px] flex justify-center">
+        {/* Our Sacred Spaces Text and Button */}
+        <div className="w-[1312px] h-[45px] justify-between flex flex-row">
+          <p
+            className={`${outfit.className} w-[600px] h-[43px] font-[700] text-[39px] leading-[120%] tracking-[0.02em] text-white`}
+          >
+            OUR SACRED SPACES
+          </p>
+
+          <button
+            type="submit"
+            className={`${outfit.className} w-[242px] h-[45px] rounded-[8px] border-[1.5px] px-[12px] py-[16px] gap-[6px] text-[14px] leading-[150%] tracking-[0.02em] border-[#E0AE54] text-[#E0AE54] `}
+          >
+            DISCOVER UPCOMING EVENTS
+          </button>
+        </div>
+      </div>
+
       {/* We'll add other sections here later */}
     </div>
   );
