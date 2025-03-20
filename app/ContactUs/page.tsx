@@ -235,8 +235,8 @@ const ContactUs = () => {
         </div>
       </div>
 
-      {/* Connect With Our Fathers Form*/}
-      <div className="w-full h-[1170.7px] bg-[#171E34] py-[100px] gap-[80px] flex justify-center">
+      {/* Our Sacred Spaces Section*/}
+      <div className="w-full h-[1170.7px] bg-[#171E34] py-[100px] gap-[80px] flex flex-col items-center justify-center">
         {/* Our Sacred Spaces Text and Button */}
         <div className="w-[1312px] h-[45px] justify-between flex flex-row">
           <p
@@ -247,13 +247,119 @@ const ContactUs = () => {
 
           <button
             type="submit"
-            className={`${outfit.className} w-[242px] h-[45px] rounded-[8px] border-[1.5px] px-[12px] py-[16px] gap-[6px] text-[14px] leading-[150%] tracking-[0.02em] border-[#E0AE54] text-[#E0AE54] `}
+            className={`${outfit.className} w-[242px] h-[45px] rounded-[8px] border-[1.5px] px-[16px] py-[16px] gap-[6px] text-[14px] leading-[150%] tracking-[0.02em] border-[#E0AE54] text-[#E0AE54] flex items-center`}
           >
             DISCOVER UPCOMING EVENTS
           </button>
         </div>
-      </div>
 
+        {/* Google Maps API */}
+        <div className="w-[1312px] h-[845.7px] gap-[80px] flex flex-row justify-center">
+          {/* St. Mary St. Maurice API */}
+          <div className="w-[616px] h-[845.7px] rounded-[24px] border-1 border-[#454B5D] flex flex-col">
+            {/* Google Maps Image */}
+            <div className="w-[616px] h-[679.7px] bg-amber-900 rounded-tl-[24px] rounded-tr-[24px] " />
+            {/* Location Card */}
+            <div className="w-[616px] h-[166px] p-[24px] gap-[24px] bg-[#171E34] flex flex-col">
+              {/* St. Mary and St. Maurice's Church */}
+              <div className="w-[500px] h-[24px]">
+                <p
+                  className={`${outfit.className} font-[700] text-[20px] leading-[120%] tracking-[0.02em] text-white`}
+                >
+                  ST. MARY AND ST. MAURICE'S CHURCH
+                </p>
+              </div>
+
+              {/* Location & Telephone*/}
+              <div className="w-[568px] h-[70px] gap-[16px] flex flex-col">
+                {/* Location */}
+                <div className="w-[550px] h-[27px] gap-[14px] flex flex-row">
+                  <Image
+                    src="/Images/Icons/Location.png"
+                    alt="Location"
+                    width={16.28}
+                    height={20.9}
+                    className="mt-1"
+                  />
+                  <p
+                    className={`${urbanist.className} font-[400] text-[18px] leading-[150%] tracking-[0.02em] text-[#E8E9EB]`}
+                  >
+                    388 Ottawa St. South, Kitchener, Ontario, Canada N2M 3P4
+                  </p>
+                </div>
+
+                {/* Phone */}
+                <div className="w-[549px] h-[27px] gap-[12px] flex flex-row">
+                  <Image
+                    src="/Images/Icons/Phone.png"
+                    alt="Phone"
+                    width={19.22}
+                    height={19.43}
+                    className="mt-1"
+                  />
+                  <p
+                    className={`${urbanist.className} font-[400] text-[18px] leading-[150%] tracking-[0.02em] text-[#E8E9EB]`}
+                  >
+                    +1 519 570 2199
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* St. Mary's Retreat Center and St. Cyril VI's Chapel */}
+          <div className="w-[616px] h-[845.7px] rounded-[24px] border-1 border-[#454B5D] flex flex-col">
+            {/* Google Maps Image */}
+            <div className="w-[616px] h-[679.7px] bg-fuchsia-950 rounded-tl-[24px] rounded-tr-[24px] " />
+            {/* Location Card */}
+            <div className="w-[616px] h-[166px] p-[24px] gap-[24px] bg-[#171E34] flex flex-col">
+              {/* ST. MARY'S RETREAT CENTER AND ST. CYRIL VI'S CHAPEL Text */}
+              <div className="w-[600px] h-[24px]">
+                <p
+                  className={`${outfit.className} font-[700] text-[20px] leading-[120%] tracking-[0.02em] text-white`}
+                >
+                  ST. MARY'S RETREAT CENTER AND ST. CYRIL VI'S CHAPEL
+                </p>
+              </div>
+
+              {/* Location & Telephone*/}
+              <div className="w-[568px] h-[70px] gap-[16px] flex flex-col">
+                {/* Location */}
+                <div className="w-[550px] h-[27px] gap-[14px] flex flex-row">
+                  <Image
+                    src="/Images/Icons/Location.png"
+                    alt="Location"
+                    width={16.28}
+                    height={20.9}
+                    className="mt-1"
+                  />
+                  <p
+                    className={`${urbanist.className} font-[400] text-[18px] leading-[150%] tracking-[0.02em] text-[#E8E9EB]`}
+                  >
+                    1708 Cheese Factory Rd, Branchton, ON N0B 1L0
+                  </p>
+                </div>
+
+                {/* Phone */}
+                <div className="w-[549px] h-[27px] gap-[12px] flex flex-row">
+                  <Image
+                    src="/Images/Icons/Phone.png"
+                    alt="Phone"
+                    width={19.22}
+                    height={19.43}
+                    className="mt-1"
+                  />
+                  <p
+                    className={`${urbanist.className} font-[400] text-[18px] leading-[150%] tracking-[0.02em] text-[#E8E9EB]`}
+                  >
+                    +44 16 8765 1098
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       {/* We'll add other sections here later */}
     </div>
   );
@@ -263,3 +369,40 @@ export default ContactUs;
 
 /*{`${outfit.className} w-[180px] h-[45px] bg-[#7A0C02] text-white font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] 
                   flex items-center justify-center transition duration-300 ease-out hover:bg-red-800`} */
+
+{
+  /* GOOGLE MAPS API CODE */
+}
+/*<div className="w-[1312px] h-[845.7px] gap-[80px] flex flex-row">
+          <div className="w-[616px] h-[845.7px] rounded-[24px] border-[1px] ">
+            <div className="w-[616px] h-[679.7px] bg-blue-900 "></div>
+
+            <div className="w-[616px] h-[166px] p-[24px] gap-[24px] bg-[#171E34] flex flex-col">
+              <div className="w-[400px] h-[24px]">
+                <p
+                  className={`${outfit.className} font-[700] text-[20px] leading-[120%] tracking-[0.02em] text-white`}
+                >
+                  ST. MARY AND ST. MAURICE'S CHURCH
+                </p>
+              </div>
+
+              <div className="w-[568px] h-[70px] gap-[16px] flex flex-col ">
+                <div className="w-[549px] h-[27px] gap-[14px] flex flex-row">
+                  <Image
+                    src="/Images/Icons/Location.png"
+                    alt="Location"
+                    width={16.28}
+                    height={20.9}
+                    className="mt-1"
+                  />
+                  <p
+                    className={`${urbanist.className} w-[509px] h-[27px] font-[400] text-[18px] leading-[150%] tracking-[0.02em] text-white`}
+                  >
+                    388 Ottawa St. South, Kitchener, Ontario, Canada N2M 3P4
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+*/
