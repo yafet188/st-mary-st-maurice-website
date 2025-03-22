@@ -12,7 +12,7 @@ const outfit = Outfit({
 
 function NavBar() {
   const pathname = usePathname();
-  const blackTextPages = ["/ContactUs"];
+  const blackTextPages = ["/ContactUs", "/AboutUs"];
   const useBlackText = blackTextPages.includes(pathname);
 
   const navItems = [

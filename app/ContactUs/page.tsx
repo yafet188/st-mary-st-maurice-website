@@ -32,6 +32,9 @@ const fathers = [
 ];
 
 const ContactUs = () => {
+  {
+    /* ------------------------------------CONTACT US SECTION ------------------------------------- */
+  }
   return (
     <div className="min-h-screen">
       {/* Header Section with Background Image */}
@@ -266,7 +269,7 @@ const ContactUs = () => {
                 <p
                   className={`${outfit.className} font-[700] text-[20px] leading-[120%] tracking-[0.02em] text-white`}
                 >
-                  ST. MARY AND ST. MAURICE'S CHURCH
+                  ST. MARY AND ST. MAURICES CHURCH
                 </p>
               </div>
 
@@ -318,7 +321,7 @@ const ContactUs = () => {
                 <p
                   className={`${outfit.className} font-[700] text-[20px] leading-[120%] tracking-[0.02em] text-white`}
                 >
-                  ST. MARY'S RETREAT CENTER AND ST. CYRIL VI'S CHAPEL
+                  ST. MARYS RETREAT CENTER AND ST. CYRIL VIS CHAPEL
                 </p>
               </div>
 
@@ -360,49 +363,8 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
-      {/* We'll add other sections here later */}
     </div>
   );
 };
 
 export default ContactUs;
-
-/*{`${outfit.className} w-[180px] h-[45px] bg-[#7A0C02] text-white font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] 
-                  flex items-center justify-center transition duration-300 ease-out hover:bg-red-800`} */
-
-{
-  /* GOOGLE MAPS API CODE */
-}
-/*<div className="w-[1312px] h-[845.7px] gap-[80px] flex flex-row">
-          <div className="w-[616px] h-[845.7px] rounded-[24px] border-[1px] ">
-            <div className="w-[616px] h-[679.7px] bg-blue-900 "></div>
-
-            <div className="w-[616px] h-[166px] p-[24px] gap-[24px] bg-[#171E34] flex flex-col">
-              <div className="w-[400px] h-[24px]">
-                <p
-                  className={`${outfit.className} font-[700] text-[20px] leading-[120%] tracking-[0.02em] text-white`}
-                >
-                  ST. MARY AND ST. MAURICE'S CHURCH
-                </p>
-              </div>
-
-              <div className="w-[568px] h-[70px] gap-[16px] flex flex-col ">
-                <div className="w-[549px] h-[27px] gap-[14px] flex flex-row">
-                  <Image
-                    src="/Images/Icons/Location.png"
-                    alt="Location"
-                    width={16.28}
-                    height={20.9}
-                    className="mt-1"
-                  />
-                  <p
-                    className={`${urbanist.className} w-[509px] h-[27px] font-[400] text-[18px] leading-[150%] tracking-[0.02em] text-white`}
-                  >
-                    388 Ottawa St. South, Kitchener, Ontario, Canada N2M 3P4
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-*/
