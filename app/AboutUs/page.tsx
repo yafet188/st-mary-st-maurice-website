@@ -35,11 +35,11 @@ const AboutUs = () => {
     /* ------------------------------------ABOUT US SECTION ------------------------------------- */
   }
   return (
-    <div className="relative w-full min-h-screen bg-white overflow-hidden">
+    <div className="relative w-full min-h-screen bg-white overflow-hidden pt-[104.26px]">
       {/* Header Section w/ Cross Image */}
       <div className="absolute inset-0 z-0 max-w-[1276px] h-[1276px]">
         <Image
-          src="/Images/AboutUs/Circles.png"
+          src="/Images/AboutUs/CircleCross.png"
           alt="Golden Cross"
           fill
           className="object-cover"
@@ -47,9 +47,9 @@ const AboutUs = () => {
       </div>
 
       {/* 1st Section */}
-      <div className="relative z-10 w-full h-[3205.74px] flex flex-row items-center">
+      <div className="relative z-10 w-full flex flex-row items-start">
         {/* Our Story Component */}
-        <div className="w-1/3 sticky top-55 self-start flex flex-col items-center pt-[32px] z-20 h-fit">
+        <div className="w-1/3 sticky top-0 h-screen flex flex-col items-center pt-[32px] z-20">
           <div className="w-[228px] h-[327px] flex flex-col justify-between">
             {/* OUR STORY */}
             <div className="w-[228px] h-[160px]">
@@ -73,7 +73,7 @@ const AboutUs = () => {
         </div>
 
         {/* Story Text Components */}
-        <div className="w-[1004px] h-[2841.74px] gap-[80px] flex flex-row justify-center">
+        <div className="w-2/3 h-screen overflow-y-scroll pr-[60px] flex flex-row gap-[80px]">
           {/* First Row */}
           <div className="w-[462px] h-[2841.74px] gap-[80px] flex flex-col justify-center items-start">
             {/* Our Beginnings Text */}
@@ -340,6 +340,9 @@ const AboutUs = () => {
               />
             </div>
           </div>
+
+          {/* Gradient Fade */}
+          <div className="absolute bottom-0 left-0 w-full h-[200px] bg-gradient-to-b from-transparent to-white z-30 pointer-events-none" />
         </div>
       </div>
 

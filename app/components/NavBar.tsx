@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Outfit } from "next/font/google";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -24,8 +25,25 @@ function NavBar() {
     { text: "VOLUNTEER", route: "/Volunteer" },
   ];
 
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="flex items-center justify-between w-full h-[104.26px] bg-transparent fixed top-0 left-0 z-50 px-[80px] pt-[24px] pb-[24px]">
+    <nav
+      className={`flex items-center justify-between w-full h-[104.26px] bg-transparent fixed top-0 left-0 z-50 px-[80px] pt-[24px] pb-[24px] ${
+        scrolled
+          ? "bg-[#695532]/80 backdrop-blur-md shadow-sm"
+          : "bg-transparent"
+      }`}
+    >
       <div className="mr-8">
         <Link href="/Home">
           <Image
