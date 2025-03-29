@@ -49,7 +49,7 @@ const AboutUs = () => {
       {/* 1st Section */}
       <div className="relative z-10 w-full flex flex-row items-start">
         {/* Our Story Component */}
-        <div className="w-1/3 sticky top-0 h-screen flex flex-col items-center pt-[32px] z-20">
+        <div className="w-1/3 sticky top-0 h-screen flex flex-col items-center pt-[175px] z-20">
           <div className="w-[228px] h-[327px] flex flex-col justify-between">
             {/* OUR STORY */}
             <div className="w-[228px] h-[160px]">
@@ -73,7 +73,7 @@ const AboutUs = () => {
         </div>
 
         {/* Story Text Components */}
-        <div className="w-2/3 h-screen overflow-y-scroll pr-[60px] flex flex-row gap-[80px]">
+        <div className="w-2/3 h-screen overflow-y-scroll pr-[60px] flex flex-row gap-[80px] pt-[100px]">
           {/* First Row */}
           <div className="w-[462px] h-[2841.74px] gap-[80px] flex flex-col justify-center items-start">
             {/* Our Beginnings Text */}
