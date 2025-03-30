@@ -48,16 +48,16 @@ const ContactUs = () => {
             className="object-cover object-[center_29%]"
           />
         </div>
-        <div className="relative z-10 max-w-[1512px] mx-auto h-[458.26px] px-[100px] flex items-center">
+        <div className="relative z-10 w-full max-w-[1512px] mx-auto h-[auto] px-6 md:px-12 xl:px-[100px] flex items-center py-40">
           {/* Text component */}
-          <div className="w-[606px]  flex flex-col gap-[20px]">
+          <div className="w-full md:w-[606px] flex flex-col gap-5">
             <h1
-              className={`${outfit.className} w-[606px] h-[80px] leading-[80px] tracking-[-0.02em] text-[64px] font-[700] text-black`}
+              className={`${outfit.className} text-[40px] md:text-[64px] leading-[120%] font-[700] text-black`}
             >
               CONTACT US
             </h1>
             <p
-              className={`${urbanist.className} text-[18px] font-[400] leading-[150%] tracking-[0.02em] text-[#0D11D]`}
+              className={`${urbanist.className} text-[16px] md:text-[18px] text-[#0D11D] leading-[150%]`}
             >
               We warmly welcome your questions, feedback, and any inquiries
               about our events, scheduling confessions or retreats and more.
@@ -67,9 +67,9 @@ const ContactUs = () => {
       </div>
 
       {/* Connect With Our Fathers Section */}
-      <div className="w-full h-[696px] py-[80px] bg-[#E8E9EB]">
+      <div className="w-full py-[80px] bg-[#E8E9EB]">
         <h2
-          className={`${outfit.className} text-center text-[36px] font-bold uppercase tracking-[0.02em] leading-[43.2px] text-black mb-[100px]`}
+          className={`${outfit.className} text-center text-[28px] md:text-[36px] font-bold uppercase tracking-[0.02em] leading-tight text-black mb-20`}
         >
           CONNECT WITH OUR FATHERS
         </h2>
@@ -77,25 +77,25 @@ const ContactUs = () => {
         {/* Fathers Images */}
         <div className="relative flex justify-center items-center">
           {/* Cross image */}
-          <div className="flex justify-center items-center space-x-[24px] relative z-10 gap-[108px]">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-30 px-6">
             {fathers.map((father) => (
               <div
                 key={father.name}
-                className="w-[291px] h-[248px] flex flex-col items-center relative"
+                className="w-full max-w-[300px] flex flex-col items-center relative"
               >
-                {/* Cross image - Positioned behind */}
+                {/* Cross behind */}
                 <div className="absolute top-[-20px]">
                   <Image
                     src="/Images/ContactUs/Cross.png"
                     alt="Cross"
-                    width={243.38}
-                    height={241.26}
+                    width={243}
+                    height={241}
                     className="object-contain"
                   />
                 </div>
 
-                {/* Father's Image - Positioned on top */}
-                <div className="relative w-[188.54px] h-[200px] z-10 rounded-full overflow-hidden">
+                {/* Image */}
+                <div className="relative w-[180px] h-[200px] z-10 rounded-full overflow-hidden">
                   <Image
                     src={father.image}
                     alt={father.name}
@@ -104,9 +104,9 @@ const ContactUs = () => {
                   />
                 </div>
 
-                {/* Name Text */}
+                {/* Name */}
                 <p
-                  className={`${outfit.className} font-[700] text-[20px] leading-[120%] tracking-[0.02em] mt-[28px] text-center text-[#0D111D]`}
+                  className={`${outfit.className} font-bold text-[18px] md:text-[20px] text-center text-[#0D111D] mt-7 w-[500px]`}
                 >
                   {father.name}
                 </p>
@@ -115,10 +115,9 @@ const ContactUs = () => {
           </div>
         </div>
 
-        <div className="mt-[100px] flex justify-center">
+        <div className="mt-16 flex justify-center">
           <button
-            className={`${outfit.className} w-[180px] h-[45px] bg-[#7A0C02] text-white font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] 
-                  flex items-center justify-center transition duration-300 ease-out hover:bg-red-800`}
+            className={`${outfit.className} w-[180px] h-[45px] bg-[#7A0C02] text-white font-semibold text-sm leading-[120%] tracking-[0.02em] rounded-[8px] flex items-center justify-center transition duration-300 ease-out hover:bg-red-800`}
           >
             BOOK A CONFESSION
           </button>
@@ -126,20 +125,20 @@ const ContactUs = () => {
       </div>
 
       {/* Connect With Our Fathers Form*/}
-      <div className="w-full h-[1006px] bg-[#B7B9C0] py-[100px] flex justify-center">
+      <div className="w-full h-[1006px] bg-[#B7B9C0] py-[100px] md:flex-row flex justify-center">
         {/* Outer Container for Text & Form */}
-        <div className="w-[1285.96px] h-[806px] pt-[32px] pb-[32px] gap-[32px] flex justify-between items-center">
+        <div className="w-full max-w-[1285px] flex gap-[32px] md:gap-[32px] items-center justify-between px-6 md:px-12">
           {/* Left Side - Text Container */}
-          <div className="w-[626.98px] h-[148px] gap-[32px] flex flex-col">
+          <div className="w-full md:w-1/2 flex flex-col gap-[32px]">
             {/* Placeholder for heading and description */}
             <h3
-              className={`${urbanist.className} w-[667px] h-[62px] font-[700] text-[52px] leading-[120%] tracking-[-0.02em] text-[#171E34] `}
+              className={`${urbanist.className} text-[32px] md:text-[52px] font-bold text-[#171E34] leading-[120%] tracking-tight`}
             >
               Connect With Our Fathers
             </h3>
 
             <p
-              className={`${urbanist.className} w-[447.61px] h-[54px] font-[700] text-[18px] leading-[150%] tracking-[0.02rem] text-[#454B5D] `}
+              className={`${urbanist.className} text-[16px] md:text-[18px] text-[#454B5D] font-semibold leading-[150%] tracking-[0.02rem]`}
             >
               Please use this form to schedule a confession, request a prayer,
               or submit inquiries.
@@ -147,9 +146,9 @@ const ContactUs = () => {
           </div>
 
           {/* Right Side - Form Container */}
-          <div className="w-[626.98px] h-[760px] bg-[#0A0D16] text-white p-[32px] gap-[48px] rounded-[24px] border border-[#151B2F] shadow-lg">
+          <div className="w-full md:w-1/2 bg-[#0A0D16] text-white p-[32px] md:p-8 rounded-[24px] border border-[#151B2F] shadow-lg">
             {/* Form Placeholder */}
-            <div className="w-[562.98px] h-[585px] flex flex-col gap-[24px]">
+            <div className="w-full max-h-[675px] flex flex-col gap-[24px]">
               {/* Name Section */}
               <div className="flex flex-col gap-[8px]">
                 <label
@@ -161,7 +160,7 @@ const ContactUs = () => {
                 <input
                   type="text"
                   placeholder="First & Last Name"
-                  className={`${raleway.className} w-[562.98px] h-[56px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] font-[400] text-[14px] leading-[120%] tracking-[0.02em] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
+                  className={`${raleway.className} w-full h-[56px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] font-[400] text-[14px] leading-[120%] tracking-[0.02em] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
                 />
               </div>
 
@@ -176,7 +175,7 @@ const ContactUs = () => {
                 <input
                   type="text"
                   placeholder="email@provider.com"
-                  className={`${raleway.className} w-[562.98px] h-[56px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] font-[400] text-[14px] leading-[120%] tracking-[0.02em] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
+                  className={`${raleway.className} w-full h-[56px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] font-[400] text-[14px] leading-[120%] tracking-[0.02em] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
                 />
               </div>
 
@@ -191,7 +190,7 @@ const ContactUs = () => {
                 <input
                   type="text"
                   placeholder="Select Father"
-                  className={`${raleway.className} w-[562.98px] h-[56px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] font-[400] text-[14px] leading-[120%] tracking-[0.02em] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
+                  className={`${raleway.className} w-full h-[56px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] font-[400] text-[14px] leading-[120%] tracking-[0.02em] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
                 />
               </div>
 
@@ -206,7 +205,7 @@ const ContactUs = () => {
                 <input
                   type="text"
                   placeholder="ex. Confession"
-                  className={`${raleway.className} w-[562.98px] h-[56px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] font-[400] text-[14px] leading-[120%] tracking-[0.02em] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
+                  className={`${raleway.className} w-full h-[56px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] font-[400] text-[14px] leading-[120%] tracking-[0.02em] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
                 />
               </div>
 
@@ -220,7 +219,7 @@ const ContactUs = () => {
 
                 <textarea
                   placeholder="What is your inquiry..."
-                  className={`${raleway.className} w-[562.98px] h-[120px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] font-[400] text-[14px] leading-[120%] tracking-[0.02em] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
+                  className={`${raleway.className} w-full h-[120px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] font-[400] text-[14px] leading-[120%] tracking-[0.02em] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
                 />
               </div>
 
@@ -228,7 +227,7 @@ const ContactUs = () => {
               <div className="flex flex-col gap-[48px]">
                 <button
                   type="submit"
-                  className={`${outfit.className} w-[562.98px] h-[48px] rounded-[8px] px-[12px] py-[16px] gap-[6px] text-[14px] leading-[150%] tracking-[0.02em] bg-[#E0AE54] text-white`}
+                  className={`${outfit.className} w-full h-[48px] rounded-[8px] px-[12px] py-[16px] gap-[6px] text-[14px] leading-[150%] tracking-[0.02em] bg-[#E0AE54] text-white`}
                 >
                   SUBMIT
                 </button>
@@ -239,31 +238,31 @@ const ContactUs = () => {
       </div>
 
       {/* Our Sacred Spaces Section*/}
-      <div className="w-full h-[1170.7px] bg-[#171E34] py-[100px] gap-[80px] flex flex-col items-center justify-center">
+      <div className="w-full bg-[#171E34] py-20 px-6 md:px-12 flex flex-col gap-20 items-center">
         {/* Our Sacred Spaces Text and Button */}
-        <div className="w-[1312px] h-[45px] justify-between flex flex-row">
+        <div className="w-full max-w-[1312px] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <p
-            className={`${outfit.className} w-[600px] h-[43px] font-[700] text-[39px] leading-[120%] tracking-[0.02em] text-white`}
+            className={`${outfit.className} text-[28px] md:text-[39px] font-bold text-white`}
           >
             OUR SACRED SPACES
           </p>
 
           <button
             type="submit"
-            className={`${outfit.className} w-[242px] h-[45px] rounded-[8px] border-[1.5px] px-[16px] py-[16px] gap-[6px] text-[14px] leading-[150%] tracking-[0.02em] border-[#E0AE54] text-[#E0AE54] flex items-center`}
+            className={`${outfit.className} w-full md:w-auto h-[45px] rounded-[8px] border-[1.5px] px-6 py-3 border-[#E0AE54] text-[#E0AE54] flex items-center justify-center text-sm font-semibold`}
           >
             DISCOVER UPCOMING EVENTS
           </button>
         </div>
 
         {/* Google Maps API */}
-        <div className="w-[1312px] h-[845.7px] gap-[80px] flex flex-row justify-center">
+        <div className="w-full max-w-[1312px] flex flex-col lg:flex-row gap-12 justify-center">
           {/* St. Mary St. Maurice API */}
-          <div className="w-[616px] h-[845.7px] rounded-[24px] border-1 border-[#454B5D] flex flex-col">
+          <div className="w-full lg:w-1/2 flex flex-col rounded-[24px] border border-[#454B5D] overflow-hidden">
             {/* Google Maps Image */}
-            <div className="w-[616px] h-[679.7px] bg-amber-900 rounded-tl-[24px] rounded-tr-[24px] " />
+            <div className="w-full h-[679.7px] bg-amber-900 rounded-tl-[24px] rounded-tr-[24px] " />
             {/* Location Card */}
-            <div className="w-[616px] h-[166px] p-[24px] gap-[24px] bg-[#171E34] flex flex-col">
+            <div className="w-full h-[166px] p-[24px] gap-[24px] bg-[#171E34] flex flex-col">
               {/* St. Mary and St. Maurice's Church */}
               <div className="w-[500px] h-[24px]">
                 <p
@@ -311,11 +310,11 @@ const ContactUs = () => {
           </div>
 
           {/* St. Mary's Retreat Center and St. Cyril VI's Chapel */}
-          <div className="w-[616px] h-[845.7px] rounded-[24px] border-1 border-[#454B5D] flex flex-col">
+          <div className="w-full lg:w-1/2 flex flex-col rounded-[24px] border border-[#454B5D] overflow-hidden">
             {/* Google Maps Image */}
-            <div className="w-[616px] h-[679.7px] bg-fuchsia-950 rounded-tl-[24px] rounded-tr-[24px] " />
+            <div className="w-full h-[679.7px] bg-fuchsia-950 rounded-tl-[24px] rounded-tr-[24px] " />
             {/* Location Card */}
-            <div className="w-[616px] h-[166px] p-[24px] gap-[24px] bg-[#171E34] flex flex-col">
+            <div className="w-full h-[166px] p-[24px] gap-[24px] bg-[#171E34] flex flex-col">
               {/* ST. MARY'S RETREAT CENTER AND ST. CYRIL VI'S CHAPEL Text */}
               <div className="w-[600px] h-[24px]">
                 <p
