@@ -11,13 +11,13 @@ const outfit = Outfit({
 
 export default function Footer() {
   return (
-    <footer className="w-full h-[669px] bg-[#0c101f] text-white py-16">
+    <footer className="w-full bg-[#0c101f] text-white py-16 px-6 md:px-12">
       {/* Main content container */}
-      <div className="w-[1750px] h-[396px] mx-auto px-6 md:px-8 lg:px-0">
+      <div className="max-w-[1440px] mx-auto flex flex-col gap-16">
         {/* Top section with logo, navigation, and form */}
-        <div className="flex flex-col lg:flex-row gap-[24px] justify-between">
+        <div className="w-full flex flex-col lg:flex-row justify-between ">
           {/* Left section - Logo, address & contact */}
-          <div className="w-full lg:w-[358px] flex flex-col gap-6">
+          <div className="w-full lg:max-w-[358px] flex flex-col gap-6">
             <Link href="/">
               <Image
                 src="/Images/Logos/Logo.png"
@@ -70,7 +70,7 @@ export default function Footer() {
           </div>
 
           {/* Right section - Navigation links & form */}
-          <div className="w-full lg:w-[786px] flex flex-col gap-12">
+          <div className="w-full lg:max-w-[786px] flex flex-col gap-12">
             {/* Navigation links in three columns */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-between">
               {/* Column 1 - SMSM CHURCH */}
@@ -251,7 +251,7 @@ export default function Footer() {
 
         {/* Copyright section - bottom part */}
         <div
-          className={`mt-16 pt-6 border-t border-[#454B5D] flex flex-col md:flex-row justify-between items-center`}
+          className={`<div className="mt-16 pt-6 border-t border-[#454B5D] flex flex-col md:flex-row justify-between items-center gap-4">`}
         >
           <p
             className={`${outfit.className} text-[#9498A2] text-[14px] font-[400] mb-4 md:mb-0`}
