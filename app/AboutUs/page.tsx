@@ -47,7 +47,7 @@ const AboutUs = () => {
       </div>
 
       {/* 1st Section */}
-      <div className="relative z-10 w-full flex flex-col md:flex-row items-start">
+      <div className="relative z-10 w-full flex flex-row items-start">
         {/* Our Story Component */}
         <div className="w-1/3 sticky top-0 h-screen flex flex-col items-center pt-[175px] z-20">
           <div className="w-[228px] h-[327px] flex flex-col justify-between">
