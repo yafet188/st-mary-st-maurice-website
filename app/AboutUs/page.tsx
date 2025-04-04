@@ -49,7 +49,7 @@ const AboutUs = () => {
       {/* 1st Section */}
       <div className="relative z-10 w-full flex flex-row items-start">
         {/* Our Story Component */}
-        <div className="w-1/3 sticky top-0 h-screen flex flex-col items-center pt-[175px] z-20">
+        <div className="w-full md:w-1/3 md:sticky top-0 h-auto md:h-screen flex flex-col items-center pt-[100px] md:pt-[175px] z-20 px-6 md:px-0">
           <div className="w-[228px] h-[327px] flex flex-col justify-between">
             {/* OUR STORY */}
             <div className="w-[228px] h-[160px]">
@@ -73,13 +73,13 @@ const AboutUs = () => {
         </div>
 
         {/* Story Text Components */}
-        <div className="w-2/3 h-screen overflow-y-scroll pr-[60px] flex flex-row gap-[80px] pt-[100px]">
+        <div className="w-full md:w-2/3 h-auto md:h-screen overflow-y-auto flex flex-col md:flex-row gap-[40px] md:gap-[80px] px-6 md:pr-[60px] pt-[60px]">
           {/* First Row */}
-          <div className="w-[462px] h-[2841.74px] gap-[80px] flex flex-col justify-center items-start">
+          <div className="w-full max-w-[462px] h-[2841px] flex flex-col gap-[80px] mx-auto">
             {/* Our Beginnings Text */}
-            <div className="w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
+            <div className="w-full max-w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
               {/* Our Beginnings Header */}
-              <div className="w-[462px] h-[24px]">
+              <div className="w-full max-w-[462px] h-[24px]">
                 <p
                   className={`${outfit.className} font-[700] text-[20px] leading-[120%] tracking-[0.02em] text-[#0A0D16]`}
                 >
@@ -88,7 +88,7 @@ const AboutUs = () => {
               </div>
 
               {/* Our Beginnings Body */}
-              <div className="w-[462px] h-[192px]">
+              <div className="w-full max-w-[462px] h-[192px]">
                 <p
                   className={`${raleway.className} font-[500] text-[16px] leading-[150%] tracking-[0.02em] text-[#151B2F]`}
                 >
@@ -110,14 +110,14 @@ const AboutUs = () => {
                 alt="Old Church Image"
                 width={462}
                 height={327}
-                className="object-cover object-bottom rounded-[16px] w-[462px] h-[327px]"
+                className="object-cover object-bottom rounded-[16px] w-full max-w-[462px] h-[327px]"
               />
             </div>
 
             {/* Renewing Sanctuary Text */}
-            <div className="w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
+            <div className="w-full max-w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
               {/* Renewing Sanctuary Header */}
-              <div className="w-[462px] h-[24px]">
+              <div className="w-full max-w-[462px] h-[24px]">
                 <p
                   className={`${outfit.className} font-[700] text-[20px] leading-[120%] tracking-[0.02em] text-[#0A0D16]`}
                 >
@@ -126,7 +126,7 @@ const AboutUs = () => {
               </div>
 
               {/* Renewing Sanctuary Body */}
-              <div className="w-[462px] h-[192px]">
+              <div className="w-full max-w-[462px] h-[192px]">
                 <p
                   className={`${raleway.className} font-[500] text-[16px] leading-[150%] tracking-[0.02em] text-[#151B2F]`}
                 >
@@ -148,14 +148,14 @@ const AboutUs = () => {
                 alt="Pope Shenouda"
                 width={462}
                 height={327}
-                className="object-cover object-top rounded-[16px] w-[462px] h-[327px]"
+                className="object-cover object-top rounded-[16px] w-full max-w-[462px] h-[327px]"
               />
             </div>
 
             {/* Evolving With Grace Text */}
-            <div className="w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
+            <div className="w-full max-w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
               {/* Evolving With Grace Header */}
-              <div className="w-[462px] h-[24px]">
+              <div className="w-full max-w-[462px] h-[24px]">
                 <p
                   className={`${outfit.className} font-[700] text-[20px] leading-[120%] tracking-[0.02em] text-[#0A0D16]`}
                 >
@@ -164,7 +164,7 @@ const AboutUs = () => {
               </div>
 
               {/* Evolving With Grace Body */}
-              <div className="w-[462px] h-[192px]">
+              <div className="w-full max-w-[462px] h-[192px]">
                 <p
                   className={`${raleway.className} font-[500] text-[16px] leading-[150%] tracking-[0.02em] text-[#151B2F]`}
                 >
@@ -185,14 +185,14 @@ const AboutUs = () => {
                 alt="StMaryMartyrs"
                 width={462}
                 height={327}
-                className="object-cover object-[0_22%] rounded-[16px] w-[462px] h-[327px]"
+                className="object-cover object-[0_22%] rounded-[16px] w-full max-w-[462px] h-[327px]"
               />
             </div>
 
             {/* Church Retreat Text */}
-            <div className="w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
+            <div className="w-full max-w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
               {/* Church Retreat Header */}
-              <div className="w-[462px] h-[24px]">
+              <div className="w-full max-w-[462px] h-[24px]">
                 <p
                   className={`${outfit.className} font-[700] text-[20px] leading-[120%] tracking-[0.02em] text-[#0A0D16]`}
                 >
@@ -201,7 +201,7 @@ const AboutUs = () => {
               </div>
 
               {/* Church Retreat Body */}
-              <div className="w-[462px] h-[192px]">
+              <div className="w-full max-w-[462px] h-[192px]">
                 <p
                   className={`${raleway.className} font-[500] text-[16px] leading-[150%] tracking-[0.02em] text-[#151B2F]`}
                 >
@@ -217,7 +217,7 @@ const AboutUs = () => {
           </div>
 
           {/* Second Row */}
-          <div className="w-[462px] h-[2841.74px] gap-[80px] flex flex-col justify-center items-start">
+          <div className="w-full max-w-[462px] h-[2841px] flex flex-col gap-[80px] mx-auto">
             {/* Old Church Image */}
             <div>
               <Image
@@ -225,14 +225,14 @@ const AboutUs = () => {
                 alt="St Mary Front"
                 width={462}
                 height={327}
-                className="object-cover object-center rounded-[16px] w-[462px] h-[327px]"
+                className="object-cover object-center rounded-[16px] w-full max-w-[462px] h-[327px]"
               />
             </div>
 
             {/* Journey of Expansion Text */}
-            <div className="w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
+            <div className="w-full max-w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
               {/* Journey of Expansion  Header */}
-              <div className="w-[462px] h-[55px]">
+              <div className="w-full max-w-[462px] h-[55px]">
                 <p
                   className={`${outfit.className} font-[700] text-[20px] leading-[120%] tracking-[0.02em] text-[#0A0D16]`}
                 >
@@ -241,7 +241,7 @@ const AboutUs = () => {
               </div>
 
               {/* Journey of Expansion Body */}
-              <div className="w-[462px] h-[192px]">
+              <div className="w-full max-w-[462px] h-[192px]">
                 <p
                   className={`${raleway.className} font-[500] text-[16px] leading-[150%] tracking-[0.02em] text-[#151B2F]`}
                 >
@@ -264,14 +264,14 @@ const AboutUs = () => {
                 alt="St Mary Dark Outside"
                 width={462}
                 height={327}
-                className="object-cover object-center rounded-[16px] w-[462px] h-[327px]"
+                className="object-cover object-center rounded-[16px] w-full max-w-[462px] h-[327px]"
               />
             </div>
 
             {/* Pope Shenouda Text */}
-            <div className="w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
+            <div className="w-full max-w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
               {/* Pope Shenouda Header */}
-              <div className="w-[462px] h-[24px]">
+              <div className="w-full max-w-[462px] h-[24px]">
                 <p
                   className={`${outfit.className} font-[700] text-[20px] leading-[120%] tracking-[0.02em] text-[#0A0D16]`}
                 >
@@ -280,7 +280,7 @@ const AboutUs = () => {
               </div>
 
               {/* Pope Shenouda Body */}
-              <div className="w-[462px] h-[192px]">
+              <div className="w-full max-w-[462px] h-[192px]">
                 <p
                   className={`${raleway.className} font-[500] text-[16px] leading-[150%] tracking-[0.02em] text-[#151B2F]`}
                 >
@@ -300,14 +300,14 @@ const AboutUs = () => {
                 alt="St Mary Outside Forecast"
                 width={462}
                 height={327}
-                className="object-cover object-center rounded-[16px] w-[462px] h-[327px]"
+                className="object-cover object-center rounded-[16px] w-full max-w-[462px] h-[327px]"
               />
             </div>
 
             {/* Boundaries Text */}
-            <div className="w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
+            <div className="w-full max-w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
               {/* Boundaries Header */}
-              <div className="w-[462px] h-[55px]">
+              <div className="w-full max-w-[462px] h-[55px]">
                 <p
                   className={`${outfit.className} font-[700] text-[20px] leading-[120%] tracking-[0.02em] text-[#0A0D16]`}
                 >
@@ -316,7 +316,7 @@ const AboutUs = () => {
               </div>
 
               {/* Boundaries Body */}
-              <div className="w-[462px] h-[192px]">
+              <div className="w-full max-w-[462px] h-[192px]">
                 <p
                   className={`${raleway.className} font-[500] text-[16px] leading-[150%] tracking-[0.02em] text-[#151B2F]`}
                 >
@@ -336,7 +336,7 @@ const AboutUs = () => {
                 alt="St Mary Choir"
                 width={462}
                 height={327}
-                className="object-cover object-center rounded-[16px] w-[462px] h-[327px]"
+                className="object-cover object-center rounded-[16px] w-full max-w-[462px] h-[327px]"
               />
             </div>
           </div>
@@ -347,7 +347,7 @@ const AboutUs = () => {
       </div>
 
       {/* 2nd Section */}
-      <div className="w-full h-[900px] p-[100px] gap-[60px] bg-[#FEFAF1] flex flex-col">
+      <div className="w-full min-h-[900px] py-20 px-6 md:px-[100px] gap-16 bg-[#FEFAF1] flex flex-col">
         {/* Cross Image */}
         <div className="flex justify-center items-center">
           <Image
@@ -385,7 +385,7 @@ const AboutUs = () => {
         {/* Fathers Images */}
         <div className="relative flex justify-center items-center">
           {/* Cross image */}
-          <div className="flex justify-center items-center space-x-[24px] relative z-10 gap-[108px]">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-12">
             {fathers.map((father) => (
               <div
                 key={father.name}
@@ -427,7 +427,7 @@ const AboutUs = () => {
         <div className="flex justify-center items-center">
           <button
             type="submit"
-            className={`${outfit.className} w-[133px] h-[45px] font-[600] rounded-[8px] px-[16px] py-[16px] gap-[6px] text-[14px] leading-[150%] tracking-[0.02em] bg-[#7A0C02] text-white flex items-center`}
+            className={`${outfit.className} w-full md:w-[133px] h-[45px] font-[600] rounded-[8px] px-[16px] py-[16px] gap-[6px] text-[14px] leading-[150%] tracking-[0.02em] bg-[#7A0C02] text-white flex items-center`}
           >
             GET IN TOUCH
           </button>
