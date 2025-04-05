@@ -37,7 +37,7 @@ const AboutUs = () => {
   return (
     <div className="relative w-full min-h-screen bg-white overflow-hidden pt-[104.26px]">
       {/* Header Section w/ Cross Image */}
-      <div className="absolute inset-0 z-0 max-w-[1276px] h-[1276px]">
+      <div className="absolute inset-0 z-5 max-w-[1276px] h-[1276px]">
         <Image
           src="/Images/AboutUs/CircleCross.png"
           alt="Golden Cross"
@@ -347,7 +347,7 @@ const AboutUs = () => {
       </div>
 
       {/* 2nd Section */}
-      <div className="w-full min-h-[900px] py-20 px-6 md:px-[100px] gap-16 bg-[#FEFAF1] flex flex-col">
+      <div className="w-full min-h-[900px] py-20 px-6 md:px-[100px] gap-16 bg-[#FEFAF1] flex flex-col z-10">
         {/* Cross Image */}
         <div className="flex justify-center items-center">
           <Image
@@ -359,7 +359,7 @@ const AboutUs = () => {
         </div>
 
         {/* Guiding Lights Text */}
-        <div className="w-full flex flex-col items-center text-center gap-[16px]">
+        <div className="w-full flex flex-col items-center text-center gap-[16px] z-10">
           {/* Header */}
           <div className="w-[898px] h-[43px]">
             <h3
