@@ -14,7 +14,10 @@ const outfit = Outfit({
 function NavBar() {
   const pathname = usePathname();
   const blackTextPages = ["/ContactUs", "/AboutUs"];
-  const useBlackText = blackTextPages.includes(pathname);
+  const whiteBgPages = ["/Volunteer", "/UpcomingEvents"];
+  const useBlackText =
+    blackTextPages.includes(pathname) || whiteBgPages.includes(pathname);
+  const forceWhiteBg = whiteBgPages.includes(pathname);
 
   const navItems = [
     { text: "MINISTRIES", route: "/Ministries" },
@@ -36,13 +39,15 @@ function NavBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navBgClass = forceWhiteBg
+    ? "bg-white"
+    : scrolled
+    ? "bg-[#695532]/80 backdrop-blur-md shadow-sm"
+    : "bg-transparent";
+
   return (
     <nav
-      className={`flex items-center justify-between w-full h-[104.26px] bg-transparent fixed top-0 left-0 z-50 px-[80px] pt-[24px] pb-[24px] ${
-        scrolled
-          ? "bg-[#695532]/80 backdrop-blur-md shadow-sm"
-          : "bg-transparent"
-      }`}
+      className={`flex items-center justify-between w-full h-[104.26px] fixed top-0 left-0 z-50 px-[80px] pt-[24px] pb-[24px] ${navBgClass}`}
     >
       <div className="mr-8">
         <Link href="/Home">
