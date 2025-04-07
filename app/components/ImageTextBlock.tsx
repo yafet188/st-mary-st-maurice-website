@@ -11,7 +11,7 @@ interface ImageTextBlockProps {
   bgColor: "#FEFAF1" | "#E8E9EB";
   miniTitle?: string;
   btnTxt?: string;
-  btnColor: string;
+  btnColor?: string;
   btnHoverColor?: string;
   btnLink?: string;
 }
@@ -68,7 +68,7 @@ const ImageTextBlock = ({
   btnHoverColor,
 }: ImageTextBlockProps) => {
   return (
-    <div className={`w-full bg-[${bgColor}]`}>
+    <div className={`w-full bg-[${bgColor}] h-[592.69px]`}>
       <div
         className={`bg-[${bgColor}] p-[100px] flex flex-row items-center gap-[80px] w-[1512px] mx-auto`}
       >
