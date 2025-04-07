@@ -21,7 +21,7 @@ export default function Volunteer() {
       </ImageTextBlock>
       <ImageTextBlock
         inverted={true}
-        title="Give Your Time, Transform Lives"
+        title="Give Your Time, Transform LIVES"
         image={DeaconUnderSunPicture}
         altText="A picture of a deacon under ray of sunlight in St.Maurice's Church"
         bgColor="#E8E9EB"

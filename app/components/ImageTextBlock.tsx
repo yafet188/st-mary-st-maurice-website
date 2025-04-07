@@ -81,13 +81,13 @@ const ImageTextBlock = ({
           </h2>
           {miniTitle && (
             <h6 className="font-[outfit] font-bold text-[20px] leading-[120%] tracking-[2%]">
-              Your Efforts Are Crucial
+              {miniTitle}
             </h6>
           )}
           <div className="font-[urbanist] font-normal text-[18px] leading-[150%] tracking-[2%] text-[#151B2F]">
             {children}
           </div>
-          {btnTxt && (
+          {btnTxt && btnColor && (
             <RoundedButton
               link={btnLink}
               hovercolor={btnHoverColor}
