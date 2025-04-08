@@ -1,11 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
 import ImageTextBlock from "../components/ImageTextBlock";
 import OrdainingDeaconsPicture from "../../public/Images/Volunteer/OrdainingDeacons.jpg";
 import DeaconUnderSunPicture from "../../public/Images/Volunteer/DeaconUnderSun.jpg";
 import AltarDuringLiturgy from "../../public/Images/Volunteer/AltarDuringLiturgy.jpg";
 
 export default function Volunteer() {
-  // note to self: fix the apostrophe errors?
-  // ALSO NOTE btnHoverColor is NOT yet implemented
+  // NOTE btnHoverColor is NOT yet implemented
   return (
     <div className="pt-[100px] bg-[#FEFAF1]">
       <ImageTextBlock

@@ -1,14 +1,15 @@
 import ProductCard from "../components/ProductCard";
 import { Urbanist } from "next/font/google";
+import ImageTextBlock from "../components/ImageTextBlock";
+import YouthSittingAroundBonfirePicture from "../../public/Images/YouthKidsServices/YouthSittingAroundBonfire.jpg";
 
 // Initialize the Urbanist font
 const urbanist = Urbanist({
   subsets: ["latin"],
   display: "swap",
-})
+});
 
 export default function YouthKidsServices() {
-
   const products = [
     {
       id: 1,
@@ -96,21 +97,39 @@ export default function YouthKidsServices() {
       in English and Coptic enhance their liturgical participation.`,
       buttontext: "GET STARTED",
     },
-  ]
+  ];
 
   return (
-    <div className="w-full px-[100px] py-[100px] gap-[80px] flex flex-col items-center justify-center bg-[#171E34]">
-      {/* Title */}
-      <h1 className={`${urbanist.className} font-[700] text-[52px] leading-[120%] tracking-[-0.02em] text-white text-center`}>
-        Youth & Kids Ministries
-      </h1>
+    <>
+      <ImageTextBlock
+        inverted={false}
+        title="Empowering Young Lives"
+        image={YouthSittingAroundBonfirePicture}
+        altText="Young youth sitting on lawn chairs around a bonfire at night in the yard beside St. Mary Church"
+        bgColor="#FEFAF1"
+      >
+        Our vibrant Youth & Kids programs foster a nurturing environment that
+        promotes spiritual growth and character development.
+        <br /> <br />
+        Each program is tailored to empower our young members with Orthodox
+        Christian faith, creativity, and community values, supporting them in
+        every stage of their lives.
+      </ImageTextBlock>
+      <div className="w-full px-[100px] py-[100px] gap-[80px] flex flex-col items-center justify-center bg-[#171E34]">
+        {/* Title */}
+        <h1
+          className={`${urbanist.className} font-[700] text-[52px] leading-[120%] tracking-[-0.02em] text-white text-center`}
+        >
+          Youth & Kids Ministries
+        </h1>
 
-      {/* Cards Section */}
-      <div className="w-full max-w-[1312px] grid grid-cols-1 md:grid-cols-2 gap-[48px] justify-center">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {/* Cards Section */}
+        <div className="w-full max-w-[1312px] grid grid-cols-1 md:grid-cols-2 gap-[48px] justify-center">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

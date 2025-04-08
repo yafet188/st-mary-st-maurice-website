@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import ImageTextBlock from "../components/ImageTextBlock";
 import KidsByStMaryAltarPicture from "../../public/Images/UpcomingEvents/KidsByStMaryAltar.jpg";
 import KidsHoldingIconsPicture from "../../public/Images/UpcomingEvents/KidsHoldingIcons.png";
@@ -5,7 +6,7 @@ import AnbaMinaInStMauriceAltarPicture from "../../public/Images/UpcomingEvents/
 
 export default function UpcomingEvents() {
   return (
-    <div className="pt-[100px] bg-[#FEFAF1]">
+    <div className="pt-[100px]  bg-[#FEFAF1]">
       <ImageTextBlock
         inverted={false}
         title="Our Sunday School Program"
@@ -47,7 +48,10 @@ Our Path to Spiritual Enlightenment"
         We believe in fostering a vibrant spiritual foundation for our children
         through our Sunday School program. Here, your child can engage with
         biblical stories and principles in a way that resonates with their young
-        minds.  Our tailored activities and discussions are designed to promote
+        minds.
+        <br />
+        <br />
+        Our tailored activities and discussions are designed to promote
         understanding and application of Christian values in everyday life.
       </ImageTextBlock>
     </div>
