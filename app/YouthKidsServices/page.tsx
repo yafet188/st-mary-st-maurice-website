@@ -1,6 +1,6 @@
 import ProductCard from "../components/ProductCard";
-import { Urbanist } from "next/font/google";
 import ImageTextBlock from "../components/ImageTextBlock";
+import { Urbanist } from "next/font/google";
 import YouthSittingAroundBonfirePicture from "../../public/Images/YouthKidsServices/YouthSittingAroundBonfire.jpg";
 
 // Initialize the Urbanist font

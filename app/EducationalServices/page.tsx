@@ -1,14 +1,15 @@
 import ProductCard from "../components/ProductCard";
+import ImageTextBlock from "../components/ImageTextBlock";
 import { Urbanist } from "next/font/google";
+import StMauriceChurchFromBackPicture from "../../public/Images/EducationalServices/StMauriceChurchFromBack.jpg";
 
 // Initialize the Urbanist font
 const urbanist = Urbanist({
   subsets: ["latin"],
   display: "swap",
-})
+});
 
 export default function EducationalServices() {
-  
   const products = [
     {
       id: 1,
@@ -50,21 +51,36 @@ export default function EducationalServices() {
       \n- Daily Readings\n- Sermons\n- Retreats & Bible Studies\n- Bookstore\n- Spiritual Articles\n- Quiet Time\n- Questions & Answers`,
       buttontext: "START TODAY",
     },
-  ]
+  ];
 
   return (
-    <div className="w-full px-[100px] py-[100px] gap-[80px] flex flex-col items-center justify-center bg-[#171E34]">
-      {/* Title */}
-      <h1 className={`${urbanist.className} font-[700] text-[52px] leading-[120%] tracking-[-0.02em] text-white text-center`}>
-        Educational Services
-      </h1>
-    
-      {/* Cards Section */}
-      <div className="w-full max-w-[1312px] grid grid-cols-1 md:grid-cols-2 gap-[48px] justify-center">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+    <>
+      <ImageTextBlock
+        inverted={false}
+        title="Enrich Your Journey"
+        image={StMauriceChurchFromBackPicture}
+        altText="Fr. Athansius praying over newly wed couple in St. Mary's Church"
+        bgColor="#FEFAF1"
+      >
+        Explore our learning and spiritual growth services with the Educational
+        Services at St. Mary and St. Maurice Church. Our diverse services will
+        deepen your knowledge and strengthen your faith.
+      </ImageTextBlock>
+      <div className="w-full px-[100px] py-[100px] gap-[80px] flex flex-col items-center justify-center bg-[#171E34]">
+        {/* Title */}
+        <h1
+          className={`${urbanist.className} font-[700] text-[52px] leading-[120%] tracking-[-0.02em] text-white text-center`}
+        >
+          Educational Services
+        </h1>
+
+        {/* Cards Section */}
+        <div className="w-full max-w-[1312px] grid grid-cols-1 md:grid-cols-2 gap-[48px] justify-center">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

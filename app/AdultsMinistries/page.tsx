@@ -1,14 +1,15 @@
 import ProductCard from "../components/ProductCard";
 import { Urbanist } from "next/font/google";
+import ImageTextBlock from "../components/ImageTextBlock";
+import FatherAthanasiusAtWeddingPicture from "../../public/Images/AdultsMinistries/FrAthanasiusAtWedding.jpg";
 
 // Initialize the Urbanist font
 const urbanist = Urbanist({
   subsets: ["latin"],
   display: "swap",
-})
+});
 
 export default function AdultsMinistries() {
-
   const products = [
     {
       id: 1,
@@ -76,21 +77,36 @@ export default function AdultsMinistries() {
       Ushers facilitate a welcoming and orderly environment during worship services, feasts and events.`,
       buttontext: "JOIN OUR USHER TEAM",
     },
-  ]
+  ];
 
   return (
-    <div className="w-full px-[100px] py-[100px] gap-[80px] flex flex-col items-center justify-center bg-[#171E34]">
-      {/* Title */}
-      <h1 className={`${urbanist.className} font-[700] text-[52px] leading-[120%] tracking-[-0.02em] text-white text-center`}>
-        Adult Ministries
-      </h1>
-        
-      {/* Cards Section */}
-      <div className="w-full max-w-[1312px] grid grid-cols-1 md:grid-cols-2 gap-[48px] justify-center">
-        {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-        ))}
+    <>
+      <ImageTextBlock
+        inverted={false}
+        title="Nurturing Spiritual Growth"
+        image={FatherAthanasiusAtWeddingPicture}
+        altText="Fr. Athansius praying over newly wed couple in St. Mary's Church"
+        bgColor="#FEFAF1"
+      >
+        Enriching the spiritual journey of our adult and senior parishioners by
+        engaging them with us through tailored programs that foster community
+        connections and personal development.
+      </ImageTextBlock>
+      <div className="w-full px-[100px] py-[100px] gap-[80px] flex flex-col items-center justify-center bg-[#171E34]">
+        {/* Title */}
+        <h1
+          className={`${urbanist.className} font-[700] text-[52px] leading-[120%] tracking-[-0.02em] text-white text-center`}
+        >
+          Adult Ministries
+        </h1>
+
+        {/* Cards Section */}
+        <div className="w-full max-w-[1312px] grid grid-cols-1 md:grid-cols-2 gap-[48px] justify-center">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
