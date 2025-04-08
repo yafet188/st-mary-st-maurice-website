@@ -104,6 +104,34 @@ const Home = () => {
         }}
       >
         <div className="max-w-[1512px] px-[100px] pt-[263px] pb-[74px] mx-auto"></div>
+
+        <section className="w-full px-6 md:px-12 xl:px-24 py-50 bg-[#3C0000]">
+          <div className="max-w-[1312px] mx-auto space-y-10">
+            <div className="text-center">
+              <h2 className="text-white text-2xl md:text-3xl font-bold">
+                UPCOMING EVENTS & COMMUNITY ANNOUNCEMENTS
+              </h2>
+              <p className="text-white text-sm md:text-base mt-2">
+                Stay Updated with Our Upcoming Church Events and Activities
+              </p>
+            </div>
+
+            {/* View toggle buttons */}
+            <div className="flex justify-center gap-4">
+              <button className="bg-transparent border border-white text-white px-4 py-2 rounded">
+                DAY
+              </button>
+              <button className="bg-white text-[#4D0B09] px-4 py-2 rounded font-bold">
+                WEEK
+              </button>
+              <button className="bg-transparent border border-white text-white px-4 py-2 rounded">
+                MONTH
+              </button>
+            </div>
+
+            {/* We'll add the week grid and event cards next... */}
+          </div>
+        </section>
       </section>
     </>
   );

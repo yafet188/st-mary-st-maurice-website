@@ -377,7 +377,7 @@ const AboutUs = () => {
               The spiritual lineage of SMSM Church is adorned with Fathers whose
               dedication and guidance have illuminated our path. With a
               commitment that transcends time, these shepherds have nurtured the
-              faith, unity, and growth of our community. 
+              faith, unity, and growth of our community.
             </p>
           </div>
         </div>
@@ -392,7 +392,7 @@ const AboutUs = () => {
                 className="w-[291px] flex flex-col items-center relative"
               >
                 {/* Cross image - Positioned behind */}
-                <div className="absolute top-[-45px] z-[-10]">
+                <div className="absolute top-[-45px]">
                   <Image
                     src="/Images/AboutUs/BigCircle.png"
                     alt="Cross"
