@@ -41,7 +41,7 @@ const RoundedImage = ({ image, altText }: RoundedImageProps) => {
 
 // ditto for buttons
 const RoundedButton = ({ children, color, link }: RoundedButtonProps) => {
-  const btnStyle = `w-[142px] h-[45px]  text-white font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] flex items-center justify-center transition duration-300 ease-out bg-[${color}]`;
+  const btnStyle = `w-auto px-[16px] py-[16px]  pt-[12px] pb-[12px]  text-white font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] flex items-center justify-center transition duration-300 ease-out bg-[${color}]`;
 
   if (link != "") {
     return (
