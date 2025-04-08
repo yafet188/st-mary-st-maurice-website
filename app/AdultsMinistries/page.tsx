@@ -1,3 +1,96 @@
+import ProductCard from "../components/ProductCard";
+import { Urbanist } from "next/font/google";
+
+// Initialize the Urbanist font
+const urbanist = Urbanist({
+  subsets: ["latin"],
+  display: "swap",
+})
+
 export default function AdultsMinistries() {
-  return <div>{/* Content here */}</div>;
+
+  const products = [
+    {
+      id: 1,
+      image: "/Images/AdultsMinistries/YoungAdultMinistries.png",
+      title: "Young Adult Ministries",
+      subheading: "Faith, Fellowship, and Service",
+      description: `St. Mary and St. Maurice Church's Young Adult Ministries provide a dynamic environment for individuals
+      in their 20s and 30s to explore faith, form meaningful relationships, and engage in community service. 
+      \n- Lectures and Discussion Groups\n- Local Community Service\n- Social Events`,
+      buttontext: "START TODAY",
+    },
+    {
+      id: 2,
+      image: "/Images/AdultsMinistries/FamilyMeeting.png",
+      title: "Pope Kyrillos Family Meeting",
+      subheading: "Spiritual Sermons",
+      description: `Join us to enrich our spiritual lives in the name of Pope Kyrillos. These meetings offer insightful sermons
+      and discussions to deepen our understanding and connection to our faith.`,
+      buttontext: "ATTEND OUR MEETING",
+    },
+    {
+      id: 3,
+      image: "/Images/AdultsMinistries/MarriagePrep.png",
+      title: "Marriage Preparation",
+      subheading: "Foundations for a Lifetime",
+      description: `Getting married? Embark on your marital journey with confidence through our Marriage Preparation program.
+      Our course is designed to strengthen bonds and foster mutual understanding.`,
+      buttontext: "SIGN UP",
+    },
+    {
+      id: 4,
+      image: "/Images/AdultsMinistries/FamilyServices.png",
+      title: "Family Services",
+      subheading: "Empowered Families",
+      description: `St. Mary and St. Maurice Church offers
+      comprehensive Family Services designed to support, educate, and empower families in our community`,
+      buttontext: "JOIN TODAY",
+    },
+    {
+      id: 5,
+      image: "/Images/AdultsMinistries/SeniorServices.png",
+      title: "Senior Services",
+      subheading: "Embracing the Golden Years",
+      description: `Join dedicated support for the senior members of our community through our program,
+      which will enhance well-being, foster spiritual growth, and encourage social interaction among our elders. 
+      \n- Weekly Meetings\n- Health Advice\n- Spiritual Guidance\n- Social Gatherings\n- Special Events`,
+      buttontext: "CONTACT US",
+    },
+    {
+      id: 6,
+      image: "/Images/AdultsMinistries/AdultsChoir.png",
+      title: "Adults Choir",
+      subheading: "Celebrate & Worship",
+      description: `Raise your voice in song with the Adult Choir at St. Mary and St. Maurice Church.
+      Our choir brings together adult members to celebrate and worship through music and beautiful chanting.
+      \n\nA diverse selection of traditional hymns in Coptic, English, and Arabic that inspire and uplift.`,
+      buttontext: "BECOME A MEMBER",
+    },
+    {
+      id: 7,
+      image: "/Images/AdultsMinistries/UsherService.png",
+      title: "Usher Service",
+      subheading: "Serve with Heart",
+      description: `Embrace a pivotal role at St. Mary and St. Maurice Church by joining our Usher Service.
+      Ushers facilitate a welcoming and orderly environment during worship services, feasts and events.`,
+      buttontext: "JOIN OUR USHER TEAM",
+    },
+  ]
+
+  return (
+    <div className="w-full px-[100px] py-[100px] gap-[80px] flex flex-col items-center justify-center bg-[#171E34]">
+      {/* Title */}
+      <h1 className={`${urbanist.className} font-[700] text-[52px] leading-[120%] tracking-[-0.02em] text-white text-center`}>
+        Adult Ministries
+      </h1>
+        
+      {/* Cards Section */}
+      <div className="w-full max-w-[1312px] grid grid-cols-1 md:grid-cols-2 gap-[48px] justify-center">
+        {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </div>
+  );
 }

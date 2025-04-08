@@ -1,81 +1,116 @@
-import React from "react";
-import Image from "next/image";
-import { Urbanist, Outfit, Raleway, Zilla_Slab } from "next/font/google";
+import ProductCard from "../components/ProductCard";
+import { Urbanist } from "next/font/google";
 
+// Initialize the Urbanist font
 const urbanist = Urbanist({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-const outfit = Outfit({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-const raleway = Raleway({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-const zillaSlab = Zilla_Slab({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
+  display: "swap",
+})
 
-const YouthKidsServices = () => {
+export default function YouthKidsServices() {
+
+  const products = [
+    {
+      id: 1,
+      image: "/Images/YouthKidsServices/SundaySchool.png",
+      title: "Sunday School",
+      subheading: "Building Foundations in Faith",
+      description: `Our curriculum at St. Mary and St. Maurice
+      is tailored to each age and educates children and youth about
+      Orthodox faith, Biblical stories, Christian values, and community service`,
+      buttontext: "SIGN UP",
+    },
+    {
+      id: 2,
+      image: "/Images/YouthKidsServices/HighSchool.png",
+      title: "High School",
+      subheading: "Empowering Tomorrow's Leaders",
+      description: `Dive into a journey of faith and fellowship with our High School Ministry at St. Mary and St. Maurice Church.
+      \nTailored for teens, our program encourages spiritual growth, community service, and personal development in a supportive and engaging environment.`,
+      buttontext: "SIGN UP",
+    },
+    {
+      id: 3,
+      image: "/Images/YouthKidsServices/ChildrensChoir.png",
+      title: "Children's Choir",
+      subheading: "Harmony and Joy",
+      description: `This program offers children the chance to develop their musical talents, build confidence, and partake in a nurturing community 
+      focused on spiritual growth and artistic expression.
+      \nChildren learn a rich repertoire of spiritual and Coptic hymns, receiving focused training with exciting performance opportunities.`,
+      buttontext: "SIGN UP",
+    },
+    {
+      id: 4,
+      image: "/Images/YouthKidsServices/KidsClub.png",
+      title: "Summer Kids Club",
+      subheading: "Fun, Learn, and Grow!",
+      description: `Our Kids Club at St. Mary and St. Maurice Church is a Christ-centered ministry for children, 
+      focusing on Bible study, Scripture memory, life skills, and relational discipleship to foster personal and spiritual growth.
+      \nInteractive lessons on Bible topics, skill-building activities, and recreational games crafted to engage and educate.`,
+      buttontext: "JOIN US",
+    },
+    {
+      id: 5,
+      image: "/Images/YouthKidsServices/SummerKidsCamp.png",
+      title: "Summer Kids Camp",
+      subheading: "Summer of Spirit & Exploring Faith",
+      description: `Summer Kids Camp at St. Mary and St. Maurice Church offers a special camp filled with spiritual growth and fun.
+      \nIt's a season where children and servants come together to explore Coptic traditions, hymns, and Bible studies in an atmosphere bursting with enjoyable activities.`,
+      buttontext: "JOIN THE CAMP",
+    },
+    {
+      id: 6,
+      image: "/Images/YouthKidsServices/MosaicClub.png",
+      title: "Mosaic Club",
+      subheading: "Craft Your Creativity",
+      description: `Dive into the rich tradition of mosaic art.
+      \nOur Mosaic Club celebrates this ancient craft, inviting members
+      to create and preserve the beauty of Coptic mosaic art while connecting with community and heritage.`,
+      buttontext: "BECOME A MEMBER",
+    },
+    {
+      id: 7,
+      image: "/Images/YouthKidsServices/Gym.png",
+      title: "Gym",
+      subheading: "Fitness and Fellowship for Youth & Kids",
+      description: `Our gym serves as a hub for physical and community health.
+      \nThis facility supports all ages, focusing on the youth and children with programs integrating physical fitness and social interaction.`,
+      buttontext: "JOIN THE GYM",
+    },
+    {
+      id: 8,
+      image: "/Images/YouthKidsServices/FineArts.png",
+      title: "Fine Arts",
+      subheading: "Unleasing the Artistic Side",
+      description: `We proudly offer a Fine Arts Program that cultivates artistic skills
+      within a faith-based community. Our experienced instructors teach courses in painting.`,
+      buttontext: "SIGN UP",
+    },
+    {
+      id: 9,
+      image: "/Images/YouthKidsServices/HymnsPractice.png",
+      title: "Hymns Practice",
+      subheading: "Harmonizing Faith and Music",
+      description: `St. Mary and St. Maurice Church warmly welcomes children and youth to our Hymns Practice, where they will 
+      learn the art of praising the Lord and chanting.\nSpecialized sessions for children and youth to learn and practice hymns
+      in English and Coptic enhance their liturgical participation.`,
+      buttontext: "GET STARTED",
+    },
+  ]
+
   return (
-    <div className="w-full h-[4534.44px] p-[100px] gap-[80px] flex flex-col bg-[#171E34]">
-      {/* Youth & Kids Minitstries */}
-      <div className="h-[62px] pt-8 text-center">
-        <h1
-          className={`${urbanist.className} font-[700] text-[52px] leading-[120%] tracking-[-0.02em] text-white`}
-        >
-          Youth & Kids Ministries
-        </h1>
-      </div>
+    <div className="w-full px-[100px] py-[100px] gap-[80px] flex flex-col items-center justify-center bg-[#171E34]">
+      {/* Title */}
+      <h1 className={`${urbanist.className} font-[700] text-[52px] leading-[120%] tracking-[-0.02em] text-white text-center`}>
+        Youth & Kids Ministries
+      </h1>
 
-      {/* Cards PlaceHolder */}
-      <div className="w-[632px] h-[811px] bg-[#E8E9EB] rounded-2xl p-6 flex flex-col gap-6">
-        <div className="w-full h-[250px] relative rounded-2xl overflow-hidden">
-          <Image
-            src="/Images/AboutUs/StMaryMartyrs.jpg"
-            alt="StMaryMartyrs"
-            fill
-            className="object-cover"
-          />
-        </div>
-        <div className="space-y-4">
-          <h2
-            className={`${urbanist.className} text-[24px] font-bold text-[#0D111D]`}
-          >
-            Sunday School
-          </h2>
-          <h3 className={`${raleway.className} text-xl text-[#0D111D]`}>
-            Building Foundations in Faith
-          </h3>
-          <p className="text-sm text-[#151B2F]">
-            Our curriculum at St. Mary and St. Maurice is tailored to each age
-            and educates children and youth about Orthodox faith, Biblical
-            stories, Christian values, and community service.
-          </p>
-        </div>
+      {/* Cards Section */}
+      <div className="w-full max-w-[1312px] grid grid-cols-1 md:grid-cols-2 gap-[48px] justify-center">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </div>
     </div>
   );
-};
-
-export default YouthKidsServices;
-
-{
-  /* <div className="w-md bg-[#E8E9EB] rounded-2xl p-6 justify-between flex flex-col">
-      <Image src={product.image} alt={product.title} width={568} height={367.8145751953125} className="rounded-3xl object-cover w-full h-64"/>
-      <div className="space-y-4">
-        <div className='text-left mt-4'>
-          <p className={${urbanist.className} font-bold text-[#0D111D] text-[28px] leading-[120%] tracking-[0.02em]}>{product.title}</p>
-          <p className={${raleway.className} text-xl text-[#0D111D]}>{product.subheading}</p>
-        </div>
-        <div className='text-left space-y-3 text-sm text-[#151B2F] mb-4'>
-          <p>{product.description}</p>
-        </div>
-        </div>
-            <button className='w-full bg-white hover:bg-gray-200 text-black font-semibold py-3 rounded-md'>{product.buttontext}</button>
-    </div> 
-  */
 }
