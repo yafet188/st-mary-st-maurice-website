@@ -42,7 +42,7 @@ function NavBar() {
   const navBgClass = forceWhiteBg
     ? "bg-white"
     : scrolled
-    ? "bg-[#695532]/80 backdrop-blur-md shadow-sm"
+    ? "bg-dark/80 backdrop-blur-md shadow-sm"
     : "bg-transparent";
 
   return (

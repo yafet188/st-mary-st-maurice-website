@@ -108,10 +108,14 @@ const Home = () => {
         <section className="w-full px-6 md:px-12 xl:px-24 py-50 bg-[#3C0000]">
           <div className="max-w-[1312px] mx-auto space-y-10">
             <div className="text-center">
-              <h2 className="text-white text-2xl md:text-3xl font-bold">
+              <h2
+                className={`${outfit.className} text-[36px] md:text-3xl font-[700] leading-[120%] tracking-[0.02em] text-white`}
+              >
                 UPCOMING EVENTS & COMMUNITY ANNOUNCEMENTS
               </h2>
-              <p className="text-white text-sm md:text-base mt-2">
+              <p
+                className={`${outfit.className} text-[20px] md:text-base mt-2 font-[700] leading-[120%] tracking-[0.02em] text-white`}
+              >
                 Stay Updated with Our Upcoming Church Events and Activities
               </p>
             </div>
