@@ -1,7 +1,9 @@
 import ProductCard from "../components/ProductCard";
 import ImageTextBlock from "../components/ImageTextBlock";
+import Hero from "../components/Hero";
 import { Urbanist } from "next/font/google";
 import StMauriceChurchFromBackPicture from "../../public/Images/CommunityServices/StMauriceChurchFromBack.jpg";
+import StMauriceSunlightPicture from "../../public/Images/CommunityServices/StMauriceSunlight.jpg";
 
 // Initialize the Urbanist font
 const urbanist = Urbanist({
@@ -103,6 +105,22 @@ export default function CommunityServices() {
   return (
     <>
       {" "}
+      <Hero
+        image={StMauriceSunlightPicture}
+        altText="St. Maurice chairs under illuminated by sunlight from the windows"
+        textPosition="Center"
+        title={
+          <div className="pt-[50px]">
+            Community Services <br></br> Serving and Supporting Together
+          </div>
+        }
+        textColor="#0D111D"
+        textWidth="1312px"
+        overlayColor="#FEFAF1"
+        overlayOpacity={0.8}
+        height="464px"
+        imagePlacement="10%"
+      ></Hero>
       <ImageTextBlock
         inverted={false}
         title="Nurturing Spiritual Growth"

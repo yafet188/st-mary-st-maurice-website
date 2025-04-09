@@ -11,10 +11,14 @@ const outfit = Outfit({
   weight: ["400", "500", "600", "700"],
 });
 
-interface HeaderProps {
-  children: React.ReactNode;
-  title: string;
+interface HeroProps {
+  children?: React.ReactNode;
+  height?: string;
+  title: React.ReactNode;
+  textColor?: string;
+  textWidth?: string;
   image: StaticImageData;
+  imagePlacement?: string;
   altText: string;
   overlayColor?: string;
   overlayOpacity?: number;
@@ -29,18 +33,25 @@ const Hero = ({
   textPosition = "Center",
   overlayColor,
   overlayOpacity,
-}: HeaderProps) => {
+  textColor = "black",
+  textWidth = "616px",
+  height = "460px",
+  imagePlacement = "29%",
+}: HeroProps) => {
   return (
     <div>
       {/* Header Section with Background Image */}
-      <div className="w-full relative overflow-hidden">
+      <div
+        className="w-full relative overflow-hidden"
+        style={{ height: height }}
+      >
         <div className="absolute inset-0 z-0">
           <Image
             src={image}
             alt={altText}
             fill
             priority
-            className="object-cover object-[center_29%]"
+            className={`object-cover object-[center_${imagePlacement}]`}
           />
           <div
             className="absolute inset-0 z-10"
@@ -62,7 +73,7 @@ const Hero = ({
     }`}
         >
           <div
-            className={`w-full md:w-[606px] flex flex-col gap-5
+            className={`w-full md:w-[${textWidth}] flex flex-col gap-5 
       ${
         textPosition === "Left"
           ? "text-left"
@@ -72,9 +83,13 @@ const Hero = ({
       }`}
           >
             <h1
-              className={`${outfit.className} text-[40px] md:text-[64px] leading-[120%] font-[700] text-black`}
+              className={`${
+                outfit.className
+              } text-[40px] md:text-[64px] leading-[120%] font-[700] ${
+                textColor === "black" ? "text-black" : `text-[${textColor}]`
+              }`}
             >
-              {title}
+              <div className="uppercase">{title}</div>
             </h1>
             <p
               className={`${urbanist.className} text-[16px] md:text-[18px] text-[#0D11D] leading-[150%]`}

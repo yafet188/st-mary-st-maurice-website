@@ -1,7 +1,9 @@
 import ProductCard from "../components/ProductCard";
 import { Urbanist } from "next/font/google";
 import ImageTextBlock from "../components/ImageTextBlock";
+import Hero from "../components/Hero";
 import FatherAthanasiusAtWeddingPicture from "../../public/Images/AdultsMinistries/FrAthanasiusAtWedding.jpg";
+import StMaryVespersPicture from "../../public/Images/AdultsMinistries/StMaryVespers.jpg";
 
 // Initialize the Urbanist font
 const urbanist = Urbanist({
@@ -81,6 +83,18 @@ export default function AdultsMinistries() {
 
   return (
     <>
+      <Hero
+        image={StMaryVespersPicture}
+        altText="Vespers in St Mary's church"
+        textPosition="Center"
+        title={<div className="pt-[50px]">Adult Ministries</div>}
+        textColor="#0D111D"
+        textWidth="1312px"
+        overlayColor="#FEFAF1"
+        overlayOpacity={0.8}
+        height="464px"
+        imagePlacement="47%"
+      ></Hero>
       <ImageTextBlock
         inverted={false}
         title="Nurturing Spiritual Growth"

@@ -42,7 +42,7 @@ const ContactUs = () => {
       <Hero
         image={HeroBackground}
         altText="St.Mary's roof"
-        title="CONTACT US"
+        title={<>CONTACT US</>}
         textPosition="Left"
       >
         We warmly welcome your questions, feedback, and any inquiries about our
