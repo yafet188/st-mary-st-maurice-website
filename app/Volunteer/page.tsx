@@ -1,13 +1,13 @@
+/* eslint-disable react/no-unescaped-entities */
 import ImageTextBlock from "../components/ImageTextBlock";
 import OrdainingDeaconsPicture from "../../public/Images/Volunteer/OrdainingDeacons.jpg";
 import DeaconUnderSunPicture from "../../public/Images/Volunteer/DeaconUnderSun.jpg";
 import AltarDuringLiturgy from "../../public/Images/Volunteer/AltarDuringLiturgy.jpg";
 
 export default function Volunteer() {
-  // note to self: fix the apostrophe errors?
-  // ALSO NOTE btnHoverColor is NOT yet implemented
+  // NOTE btnHoverColor is NOT yet implemented
   return (
-    <div>
+    <div className="pt-[100px] bg-[#FEFAF1]">
       <ImageTextBlock
         inverted={false}
         title="Serve, Support, Succeed: Volunteer Today"
@@ -21,7 +21,7 @@ export default function Volunteer() {
       </ImageTextBlock>
       <ImageTextBlock
         inverted={true}
-        title="Give Your Time, Transform LIVES"
+        title="Give Your Time, Transform Lives"
         image={DeaconUnderSunPicture}
         altText="A picture of a deacon under ray of sunlight in St.Maurice's Church"
         bgColor="#E8E9EB"
