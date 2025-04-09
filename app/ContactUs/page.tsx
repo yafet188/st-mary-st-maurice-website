@@ -1,7 +1,9 @@
 // app/pages/ContactUs.tsx
 import React from "react";
 import Image from "next/image";
+import Hero from "../components/Hero";
 import { Urbanist, Outfit, Raleway } from "next/font/google";
+import HeroBackground from "../../public/Images/ContactUs/HeroBackground.jpg";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -37,34 +39,15 @@ const ContactUs = () => {
   }
   return (
     <div className="min-h-screen">
-      {/* Header Section with Background Image */}
-      <div className="w-full relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/Images/ContactUs/HeaderBackground.jpg"
-            alt="St.Mary's roof"
-            fill
-            priority
-            className="object-cover object-[center_29%]"
-          />
-        </div>
-        <div className="relative z-10 w-full max-w-[1512px] mx-auto h-[auto] px-6 md:px-12 xl:px-[100px] flex items-center py-40">
-          {/* Text component */}
-          <div className="w-full md:w-[606px] flex flex-col gap-5">
-            <h1
-              className={`${outfit.className} text-[40px] md:text-[64px] leading-[120%] font-[700] text-black`}
-            >
-              CONTACT US
-            </h1>
-            <p
-              className={`${urbanist.className} text-[16px] md:text-[18px] text-[#0D11D] leading-[150%]`}
-            >
-              We warmly welcome your questions, feedback, and any inquiries
-              about our events, scheduling confessions or retreats and more.
-            </p>
-          </div>
-        </div>
-      </div>
+      <Hero
+        image={HeroBackground}
+        altText="St.Mary's roof"
+        title="CONTACT US"
+        textPosition="Left"
+      >
+        We warmly welcome your questions, feedback, and any inquiries about our
+        events, scheduling confessions or retreats and more.
+      </Hero>
 
       {/* Connect With Our Fathers Section */}
       <div className="w-full py-[80px] bg-[#E8E9EB]">
