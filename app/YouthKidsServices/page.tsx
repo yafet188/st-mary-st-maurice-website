@@ -106,7 +106,7 @@ export default function YouthKidsServices() {
         title="Empowering Young Lives"
         image={YouthSittingAroundBonfirePicture}
         altText="Young youth sitting on lawn chairs around a bonfire at night in the yard beside St. Mary Church"
-        bgColor="#FEFAF1"
+        bgColor="#FFFFFF"
       >
         Our vibrant Youth & Kids programs foster a nurturing environment that
         promotes spiritual growth and character development.

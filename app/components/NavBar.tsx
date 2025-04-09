@@ -13,14 +13,14 @@ const outfit = Outfit({
 
 function NavBar() {
   const pathname = usePathname();
-  const blackTextPages = ["/ContactUs", "/AboutUs"];
+  const blackTextPages = ["/ContactUs", "/AboutUs", "/YouthKidsServices"];
   const whiteBgPages = ["/Volunteer", "/UpcomingEvents"];
   const useBlackText =
     blackTextPages.includes(pathname) || whiteBgPages.includes(pathname);
   const forceWhiteBg = whiteBgPages.includes(pathname);
 
   const navItems = [
-    { text: "MINISTRIES", route: "/Ministries" },
+    { text: "MINISTRIES", route: "/AdultsMinistries" },
     { text: "EVENTS", route: "/UpcomingEvents" },
     { text: "ABOUT US", route: "/AboutUs" },
     { text: "CONTACT US", route: "/ContactUs" },

@@ -1,13 +1,6 @@
-/* eslint-disable react/no-unescaped-entities */
 import React from "react";
 import Image from "next/image";
-import {
-  Urbanist,
-  Outfit,
-  Raleway,
-  Zilla_Slab,
-  Zilla_Slab,
-} from "next/font/google";
+import { Urbanist, Outfit, Raleway, Zilla_Slab } from "next/font/google";
 
 const urbanist = Urbanist({
   subsets: ["latin"],

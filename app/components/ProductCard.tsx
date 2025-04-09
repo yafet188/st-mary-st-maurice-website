@@ -31,30 +31,27 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <div
-      className="w-[568px] bg-[#E8E9EB] rounded-[32px] p-8 flex flex-col justify-between"
-      style={{ height: "100%" }}
-    >
+    <div className="w-[632px] h-[811px] bg-[#E8E9EB] rounded-[16px] p-[32px] gap-[32px] flex flex-col justify-between">
       {/* Image (Taller) */}
       <Image
         src={product.image}
         alt={product.title}
         width={568}
-        height={368}
-        className="rounded-[24px] object-cover w-full h-[300px]"
+        height={367.81}
+        className="rounded-[24px] object-cover"
       />
 
       {/* Content */}
-      <div className="flex flex-col gap-6 flex-grow mt-6">
+      <div className="flex flex-col gap-6 flex-grow">
         {/* Title & Subheading */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-[12px] justify-between">
           <p
-            className={`${urbanist.className} font-bold text-[#0D111D] text-[28px] leading-[120%] tracking-[0.56px]`}
+            className={`${urbanist.className} font-[700] text-[#0D111D] text-[28px] leading-[120%] tracking-[0.02em]`}
           >
             {product.title}
           </p>
           <p
-            className={`${raleway.className} font-semibold text-[#0D111D] text-[18px] leading-[120%] tracking-[0.56px]`}
+            className={`${raleway.className} font-[600] text-[#0D111D] text-[18px] leading-[120%] tracking-[0.02em]`}
           >
             {product.subheading}
           </p>
@@ -62,7 +59,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Description */}
         <p
-          className={`${urbanist.className} font-normal text-[#151B2F] text-[18px] leading-[150%] tracking-[0.56px]`}
+          className={`${urbanist.className} font-[400] text-[#151B2F] text-[18px] leading-[150%] tracking-[0.02em]`}
         >
           {product.description}
         </p>
@@ -70,7 +67,9 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       {/* Button at bottom */}
       <div className="mt-6">
-        <button className="w-full h-[45px] bg-white border border-[#E8E9EB] rounded-[8px] text-[#0D111D] text-sm font-semibold tracking-[0.5px] hover:bg-gray-100 transition">
+        <button
+          className={`${outfit.className} w-full h-[45px] bg-white border border-[#E8E9EB] rounded-[8px] text-[#0D111D] text-sm font-semibold tracking-[0.02em] hover:bg-gray-100 transition`}
+        >
           {product.buttontext}
         </button>
       </div>

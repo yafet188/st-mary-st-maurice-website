@@ -1,6 +1,24 @@
 import { ReactNode } from "react";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
+import { Urbanist, Outfit, Raleway, Zilla_Slab } from "next/font/google";
+
+const urbanist = Urbanist({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+const raleway = Raleway({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+const zillaSlab = Zilla_Slab({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 interface ImageTextBlockProps {
   children: ReactNode;
@@ -8,7 +26,7 @@ interface ImageTextBlockProps {
   inverted: boolean;
   title: string;
   altText: string;
-  bgColor: "#FEFAF1" | "#E8E9EB";
+  bgColor: "#FEFAF1" | "#E8E9EB" | "#FFFFFF";
   miniTitle?: string;
   btnTxt?: string;
   btnColor?: string;
@@ -41,7 +59,7 @@ const RoundedImage = ({ image, altText }: RoundedImageProps) => {
 
 // ditto for buttons
 const RoundedButton = ({ children, color, link }: RoundedButtonProps) => {
-  const btnStyle = `w-auto px-[16px] py-[16px]  pt-[12px] pb-[12px]  text-white font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] flex items-center justify-center transition duration-300 ease-out bg-[${color}]`;
+  const btnStyle = `${outfit.className} w-auto px-[16px] py-[16px]  pt-[12px] pb-[12px]  text-white font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] flex items-center justify-center transition duration-300 ease-out bg-[${color}]`;
 
   if (link != "") {
     return (
@@ -67,16 +85,25 @@ const ImageTextBlock = ({
   btnLink,
   btnHoverColor,
 }: ImageTextBlockProps) => {
+  const bgClass =
+    bgColor === "#FEFAF1"
+      ? "bg-[#FEFAF1]"
+      : bgColor === "#E8E9EB"
+      ? "bg-[#E8E9EB]"
+      : "bg-[#FFFFFF]";
+
   return (
-    <div className={`w-full bg-[${bgColor}] h-[592.69px]`}>
+    <div className={`w-full ${bgClass} h-[592.69px]`}>
       <div
-        className={`bg-[${bgColor}] p-[100px] flex flex-row items-center gap-[80px] w-[1512px] mx-auto`}
+        className={`${bgClass} p-[100px] flex flex-row items-center gap-[80px] w-[1512px] mx-auto`}
       >
         {!inverted && (
           <RoundedImage image={image} altText={altText}></RoundedImage>
         )}
         <div className="w-[616px] flex flex-col gap-[24px]">
-          <h2 className="font-[outfit] font-bold text-[36px] leading-[120%] tracking-[2%] uppercase">
+          <h2
+            className={`${outfit.className} font-bold text-[36px] leading-[120%] tracking-[2%] uppercase`}
+          >
             {title}
           </h2>
           {miniTitle && (
