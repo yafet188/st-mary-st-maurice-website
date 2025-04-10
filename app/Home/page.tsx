@@ -162,6 +162,7 @@ export default function Home() {
         roundedTextColor="#896F41"
         title="Engaging and Inspiring Youth & Kids"
         titleColor="#000000"
+        textColor=""
         image={MahraganKids}
         altText="A picture of the kids recieving rewards from Mahragan."
         bgColor="#FEFAF1"
@@ -184,6 +185,7 @@ export default function Home() {
         roundedTextColor="#430701"
         title="Diverse Ministries for Adults"
         titleColor="#000000"
+        textColor=""
         image={Choir}
         altText="A picture of the choir from St. Mary's."
         bgColor="#FFFFFF"
