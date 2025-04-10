@@ -14,6 +14,9 @@ export default function Volunteer() {
         image={OrdainingDeaconsPicture}
         altText="A picture of the priests and Bishop Mina with the newly ordained young chanters in St. Maurice Church"
         bgColor="#FEFAF1"
+        roundedText=""
+        roundedBgColor=""
+        roundedTextColor=""
       >
         At St. Mary and St. Maurice's, volunteering is about making a meaningful
         difference. You can engage in our missions through community outreach,
@@ -28,6 +31,9 @@ export default function Volunteer() {
         btnTxt="SERVE WITH US"
         btnColor="#171E34"
         btnHoverColor="#7A0C02"
+        roundedText=""
+        roundedBgColor=""
+        roundedTextColor=""
       >
         Each volunteer role supports our church's activities and offers personal
         growth. Join our dedicated team of volunteers to contribute to a network
@@ -44,6 +50,9 @@ export default function Volunteer() {
         btnTxt="GET INVOLVED"
         btnColor="#7A0C02"
         btnHoverColor="#171E34"
+        roundedText=""
+        roundedBgColor=""
+        roundedTextColor=""
       >
         Your efforts embody our mission to spread love and foster spiritual
         growth, creating lasting impacts and deeper community connections.

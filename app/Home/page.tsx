@@ -1,6 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import { Urbanist, Outfit, Raleway, Zilla_Slab } from "next/font/google";
+import ImageTextBlock from "../components/ImageTextBlock";
+import MahraganKids from "../../public/Images/Home/MahraganKids.jpg";
+import Choir from "../../public/Images/Home/Choir.jpeg";
+import Tasbeha from "../../public/Images/Home/St.MaryTasbeha.jpeg";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -19,7 +23,7 @@ const zillaSlab = Zilla_Slab({
   weight: ["400", "500", "600", "700"],
 });
 
-const Home = () => {
+export default function Home() {
   {
     /* ------------------------------------HOME PAGE------------------------------------- */
   }
@@ -101,6 +105,14 @@ const Home = () => {
 
         <section className="w-full px-6 md:px-12 xl:px-24 py-50 bg-[#3C0000]">
           <div className="max-w-[1312px] mx-auto space-y-10">
+            <div className="flex justify-center items-center">
+              <Image
+                src="/Images/Home/WhiteCross.png"
+                alt="Gold Cross"
+                width={40}
+                height={40}
+              />
+            </div>
             <div className="text-center">
               <h2
                 className={`${outfit.className} text-[36px] md:text-3xl font-[700] leading-[120%] tracking-[0.02em] text-white`}
@@ -131,8 +143,83 @@ const Home = () => {
           </div>
         </section>
       </section>
+
+      {/* 35 YEARS OF SERVICE VIDEO SECTION */}
+      <div className="w-full h-[1040px] pt-[100px] pr-[100px] pl-[100px] gap-[80px] bg-[#E8E9EB] items-center text-center flex flex-col">
+        <h3
+          className={`${outfit.className} font-bold text-4xl leading-[120%] tracking-[0.02em] text-[#0A0D16]`}
+        >
+          35 YEARS OF SERVICE
+        </h3>
+      </div>
+
+      {/* Youth & Kids */}
+      <ImageTextBlock
+        inverted={false}
+        showTag={true}
+        roundedText="Youth & Kids Services"
+        roundedBgColor="#FDEFD5"
+        roundedTextColor="#896F41"
+        title="Engaging and Inspiring Youth & Kids"
+        titleColor="#000000"
+        image={MahraganKids}
+        altText="A picture of the kids recieving rewards from Mahragan."
+        bgColor="#FEFAF1"
+        btnTxt="EXPLORE ALL MINISTRIES"
+        btnColor="#7A0C02"
+        btnHoverColor="#171E34"
+        btnTextColor="#FFFFFF"
+      >
+        Explore a variety of engaging programs for youth and kids at our church,
+        from Sunday School to Kids Camp and Fine Arts Service, all crafted to
+        nurture faith and foster personal growth.
+      </ImageTextBlock>
+
+      {/* Adults Services */}
+      <ImageTextBlock
+        inverted={true}
+        showTag={true}
+        roundedText="Adults Services"
+        roundedBgColor="#F2E7E6"
+        roundedTextColor="#430701"
+        title="Diverse Ministries for Adults"
+        titleColor="#000000"
+        image={Choir}
+        altText="A picture of the choir from St. Mary's."
+        bgColor="#FFFFFF"
+        btnTxt="GET INVOLVED TODAY"
+        btnColor="#FFFFFF"
+        btnHoverColor=""
+        btnTextColor="#7A0C02"
+        borderColor="#7A0C02"
+      >
+        Join various adult ministries, from Family and Senior ministries to
+        Young Adult Ministries and the Adults Choir. Enrich your spiritual and
+        social life with us.
+      </ImageTextBlock>
+
+      {/* Educational Services */}
+      <ImageTextBlock
+        inverted={false}
+        showTag={true}
+        roundedText="Educational Services"
+        roundedBgColor="#E8E9EB"
+        roundedTextColor="#0A0D16"
+        title="Nurture Your Spiritual Intelligence & Join Our Educational Services"
+        titleColor="#FFFFFF"
+        textColor="#E8E9EB"
+        image={Tasbeha}
+        altText="A picture of the choir from St. Mary's."
+        bgColor="#171E34"
+        btnTxt="CHECK NOW"
+        btnColor="#171E34"
+        btnHoverColor=""
+        btnTextColor="#E0AE54"
+        borderColor="#E0AE54"
+      >
+        Deepen your faith, illuminate your life and empower your spiritual
+        journey with our educational services.
+      </ImageTextBlock>
     </>
   );
-};
-
-export default Home;
+}
