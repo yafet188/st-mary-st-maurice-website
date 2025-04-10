@@ -13,7 +13,14 @@ const outfit = Outfit({
 
 function NavBar() {
   const pathname = usePathname();
-  const blackTextPages = ["/ContactUs", "/AboutUs", "/YouthKidsServices"];
+  const blackTextPages = [
+    "/ContactUs",
+    "/AboutUs",
+    "/YouthKidsServices",
+    "/AdultsMinistries",
+    "/CommunityServices",
+    "/EducationalServices",
+  ];
   const whiteBgPages = ["/Volunteer", "/UpcomingEvents"];
   const useBlackText =
     blackTextPages.includes(pathname) || whiteBgPages.includes(pathname);

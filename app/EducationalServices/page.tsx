@@ -1,7 +1,9 @@
 import ProductCard from "../components/ProductCard";
 import ImageTextBlock from "../components/ImageTextBlock";
+import Hero from "../components/Hero";
 import { Urbanist } from "next/font/google";
 import StMauriceChurchFromBackPicture from "../../public/Images/EducationalServices/StMauriceChurchFromBack.jpg";
+import SoccerWatchingStMauriceHallPicture from "../../public/Images/EducationalServices/SoccerWatchingStMauriceHall.jpg";
 
 // Initialize the Urbanist font
 const urbanist = Urbanist({
@@ -55,6 +57,18 @@ export default function EducationalServices() {
 
   return (
     <>
+      <Hero
+        image={SoccerWatchingStMauriceHallPicture}
+        altText="Youth gathered with Fr. Jeremiah in St. Maurice Hall watching a soccer game on the projector screen"
+        textPosition="Center"
+        title={<div className="pt-[50px]">Educational Services</div>}
+        textColor="#0D111D"
+        textWidth="1312px"
+        overlayColor="#FEFAF1"
+        overlayOpacity={0.8}
+        height="464px"
+        imagePlacement="47%"
+      ></Hero>
       <ImageTextBlock
         inverted={false}
         title="Enrich Your Journey"

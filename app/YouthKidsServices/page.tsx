@@ -1,7 +1,9 @@
 import ProductCard from "../components/ProductCard";
 import ImageTextBlock from "../components/ImageTextBlock";
+import Hero from "../components/Hero";
 import { Urbanist } from "next/font/google";
 import YouthSittingAroundBonfirePicture from "../../public/Images/YouthKidsServices/YouthSittingAroundBonfire.jpg";
+import KidsByStMaryAltarPicture from "../../public/Images/UpcomingEvents/KidsByStMaryAltar.jpg";
 
 // Initialize the Urbanist font
 const urbanist = Urbanist({
@@ -101,6 +103,25 @@ export default function YouthKidsServices() {
 
   return (
     <>
+      <Hero
+        image={KidsByStMaryAltarPicture}
+        altText="Kids with Fr. Athanasius standing in front of St. Mary's Altar"
+        textPosition="Center"
+        title={
+          <div className="pt-[50px]">
+            Youth & Kids Services
+            <br />
+            Growing in Faith and Fun
+          </div>
+        }
+        textColor="#0D111D"
+        textWidth="1312px"
+        overlayColor="#FEFAF1"
+        overlayOpacity={0.8}
+        height="464px"
+        imagePlacement="47%"
+      ></Hero>
+
       <ImageTextBlock
         inverted={false}
         title="Empowering Young Lives"
