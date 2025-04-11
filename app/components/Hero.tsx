@@ -32,7 +32,6 @@ const Hero = ({
   children,
   textPosition = "Center",
   overlayColor,
-  overlayOpacity,
   textColor = "black",
   textWidth = "616px",
   height = "460px",
@@ -56,8 +55,7 @@ const Hero = ({
           <div
             className="absolute inset-0 z-10"
             style={{
-              backgroundColor: `${overlayColor}`,
-              opacity: overlayOpacity,
+              backgroundColor: overlayColor || "transparent",
             }}
           />
         </div>
@@ -83,11 +81,8 @@ const Hero = ({
       }`}
           >
             <h1
-              className={`${
-                outfit.className
-              } text-[40px] md:text-[64px] leading-[120%] font-[700] ${
-                textColor === "black" ? "text-black" : `text-[${textColor}]`
-              }`}
+              className={`${outfit.className} text-[40px] md:text-[64px] leading-[120%] font-[700]`}
+              style={{ color: textColor }}
             >
               <div className="uppercase">{title}</div>
             </h1>

@@ -1,10 +1,15 @@
 import React from "react";
 import Image from "next/image";
+import Hero from "../components/Hero";
 import { Urbanist, Outfit, Raleway, Zilla_Slab } from "next/font/google";
 import ImageTextBlock from "../components/ImageTextBlock";
 import MahraganKids from "../../public/Images/Home/MahraganKids.jpg";
 import Choir from "../../public/Images/Home/Choir.jpeg";
 import Tasbeha from "../../public/Images/Home/St.MaryTasbeha.jpeg";
+import Hall from "../../public/Images/Home/St.MauriceHall.jpeg";
+import Priests from "../../public/Images/Home/Priests.jpeg";
+import Gym from "../../public/Images/Home/Gym.jpeg";
+import Tree from "../../public/Images/Home/St.MaryTree.jpeg";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -211,7 +216,7 @@ export default function Home() {
         titleColor="#FFFFFF"
         textColor="#E8E9EB"
         image={Tasbeha}
-        altText="A picture of the choir from St. Mary's."
+        altText="A picture of youth doing Tasbeha in St. Mary's"
         bgColor="#171E34"
         btnTxt="CHECK NOW"
         btnColor="#171E34"
@@ -222,6 +227,91 @@ export default function Home() {
         Deepen your faith, illuminate your life and empower your spiritual
         journey with our educational services.
       </ImageTextBlock>
+
+      {/* Community Services */}
+      <ImageTextBlock
+        inverted={true}
+        showTag={true}
+        roundedText="Community Services"
+        roundedBgColor="#FDEFD5"
+        roundedTextColor="#896F41"
+        title="Serving Hearts and Enriching the Community"
+        titleColor="#171E34"
+        textColor="#151B2F"
+        image={Hall}
+        altText="A picture of St. Maurice Hall"
+        bgColor="#E8E9EB"
+        btnTxt="ALL COMMUNITY MINISTRIES"
+        btnColor="#171E34"
+        btnHoverColor=""
+        btnTextColor="#FFFFFF"
+        borderColor="#171E34"
+      >
+        Join our dynamic Community Ministries to make a real difference.
+        Participate today and elevate your impact; everyone has a role.
+      </ImageTextBlock>
+
+      {/* Priests*/}
+      <ImageTextBlock
+        inverted={false}
+        showTag={true}
+        roundedText=""
+        roundedBgColor=""
+        roundedTextColor=""
+        title="Where Faith Meets Family and Fellowship"
+        titleColor="#000000"
+        textColor=""
+        image={Priests}
+        altText="A picture of priests."
+        bgColor="#FEFAF1"
+        btnTxt="LEARN MORE ABOUT SMSM"
+        btnColor="#7A0C02"
+        btnHoverColor="#171E34"
+        btnTextColor="#FFFFFF"
+      >
+        St. Mary and St. Maurice's Coptic Orthodox Church in Kitchener embodied
+        a fusion of Orthodox tradition with a vibrant community spirit. Here,
+        faith, education, and service unite, fostering spiritual growth and
+        compassionate outreach. All are welcome to explore faith and journey
+        together in Christ's love.
+      </ImageTextBlock>
+
+      {/* Book & Schedule */}
+      <ImageTextBlock
+        inverted={true}
+        showTag={true}
+        roundedText=""
+        roundedBgColor=""
+        roundedTextColor=""
+        title="Book Your Space & Plan Your Event"
+        titleColor="#000000"
+        textColor=""
+        image={Gym}
+        altText="A picture of the St. Maurice gym."
+        bgColor="#FFFFFF"
+        btnTxt="SCHEDULE TODAY"
+        btnColor="#FFFFFF"
+        btnHoverColor=""
+        btnTextColor="#000000"
+        borderColor="#000000"
+      >
+        Join various adult ministries, from Family and Senior ministries to
+        Young Adult Ministries and the Adults Choir. Enrich your spiritual and
+        social life with us.
+      </ImageTextBlock>
+
+      <Hero
+        overlayColor="#171E34EB"
+        image={Tree}
+        altText="Vespers in St Mary's church"
+        textPosition="Center"
+        title={<div className="pt-[50px]">Explore Our Spiritual Resources</div>}
+        textColor="white"
+        textWidth="1312px"
+        overlayOpacity={0.8}
+        height="500px"
+        imagePlacement="40%"
+      ></Hero>
     </>
   );
 }

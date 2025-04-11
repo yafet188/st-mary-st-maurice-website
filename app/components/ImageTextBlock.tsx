@@ -182,6 +182,7 @@ const ImageTextBlock = ({
           >
             {children}
           </div>
+          <div></div>
           {btnTxt && btnColor && (
             <RoundedButton
               link={btnLink}

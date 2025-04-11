@@ -90,12 +90,15 @@ export default function AdultsMinistries() {
         title={<div className="pt-[50px]">Adult Ministries</div>}
         textColor="#0D111D"
         textWidth="1312px"
-        overlayColor="#FEFAF1"
+        overlayColor="#FEFAF1CC"
         overlayOpacity={0.8}
         height="464px"
         imagePlacement="47%"
       ></Hero>
       <ImageTextBlock
+        roundedText=""
+        textColor=""
+        titleColor=""
         inverted={false}
         title="Nurturing Spiritual Growth"
         image={FatherAthanasiusAtWeddingPicture}
