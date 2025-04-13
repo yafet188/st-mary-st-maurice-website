@@ -15,6 +15,7 @@ interface HeroProps {
   children?: React.ReactNode;
   height?: string;
   title: React.ReactNode;
+  titleSize?: string;
   textColor?: string;
   textWidth?: string;
   image: StaticImageData;
@@ -23,6 +24,9 @@ interface HeroProps {
   overlayColor?: string;
   overlayOpacity?: number;
   textPosition?: "Center" | "Left" | "Right";
+  descriptionText?: string;
+  descriptionColor?: string;
+  descriptionSize?: string;
 }
 
 const Hero = ({
