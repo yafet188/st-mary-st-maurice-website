@@ -33,6 +33,7 @@ const Hero = ({
   image,
   altText,
   title,
+  titleSize,
   children,
   textPosition = "Center",
   overlayColor,
@@ -40,6 +41,9 @@ const Hero = ({
   textWidth = "616px",
   height = "460px",
   imagePlacement = "29%",
+  descriptionText = "",
+  descriptionColor = "#0D111D",
+  descriptionSize = "18px",
 }: HeroProps) => {
   return (
     <div>
