@@ -12,7 +12,6 @@ const outfit = Outfit({
 });
 
 interface HeroProps {
-  children?: React.ReactNode;
   height?: string;
   title: React.ReactNode;
   titleSize?: string;
@@ -27,6 +26,10 @@ interface HeroProps {
   descriptionText?: string;
   descriptionColor?: string;
   descriptionSize?: string;
+  buttonText?: string;
+  buttonColor?: string;
+  buttonTextColor?: string;
+  buttonLink?: string;
 }
 
 const Hero = ({
@@ -34,16 +37,19 @@ const Hero = ({
   altText,
   title,
   titleSize,
-  children,
   textPosition = "Center",
   overlayColor,
   textColor = "black",
-  textWidth = "616px",
+  textWidth,
   height = "460px",
   imagePlacement = "29%",
   descriptionText = "",
   descriptionColor = "#0D111D",
   descriptionSize = "18px",
+  buttonText,
+  buttonColor = "#7A0C02",
+  buttonTextColor = "#ffffff",
+  buttonLink = "#",
 }: HeroProps) => {
   return (
     <div>
@@ -80,25 +86,47 @@ const Hero = ({
         >
           <div
             className={`w-full md:w-[${textWidth}] flex flex-col gap-5 
-      ${
-        textPosition === "Left"
-          ? "text-left"
-          : textPosition === "Right"
-          ? "text-right"
-          : "text-center"
-      }`}
+    ${
+      textPosition === "Left"
+        ? "text-left"
+        : textPosition === "Right"
+        ? "text-right"
+        : "text-center"
+    }`}
           >
             <h1
-              className={`${outfit.className} text-[40px] md:text-[64px] leading-[120%] font-[700]`}
-              style={{ color: textColor }}
+              className={`${outfit.className} font-[700] uppercase leading-[120%]`}
+              style={{ color: textColor, fontSize: titleSize }}
             >
-              <div className="uppercase">{title}</div>
+              {title}
             </h1>
-            <p
-              className={`${urbanist.className} text-[16px] md:text-[18px] text-[#0D11D] leading-[150%]`}
-            >
-              {children}
-            </p>
+
+            {descriptionText && (
+              <p
+                className={`${urbanist.className} leading-[150%] mx-auto text-center`}
+                style={{
+                  color: descriptionColor,
+                  fontSize: descriptionSize,
+                  maxWidth: textWidth,
+                }}
+              >
+                {descriptionText}
+              </p>
+            )}
+
+            {buttonText && (
+              <a href={buttonLink}>
+                <button
+                  className={`${outfit.className} px-6 py-3 mt-4 rounded-[8px] font-semibold transition duration-200`}
+                  style={{
+                    backgroundColor: buttonColor,
+                    color: buttonTextColor,
+                  }}
+                >
+                  {buttonText}
+                </button>
+              </a>
+            )}
           </div>
         </div>
       </div>

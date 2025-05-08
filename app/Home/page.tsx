@@ -10,6 +10,7 @@ import Hall from "../../public/Images/Home/St.MauriceHall.jpeg";
 import Priests from "../../public/Images/Home/Priests.jpeg";
 import Gym from "../../public/Images/Home/Gym.jpeg";
 import Tree from "../../public/Images/Home/St.MaryTree.jpeg";
+import Box from "../../public/Images/Home/PrayerBox.png";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -300,18 +301,51 @@ export default function Home() {
         social life with us.
       </ImageTextBlock>
 
+      {/* Explore Our Spiritual Resources */}
       <Hero
         overlayColor="#171E34EB"
         image={Tree}
         altText="Vespers in St Mary's church"
         textPosition="Center"
         title={<div className="pt-[50px]">Explore Our Spiritual Resources</div>}
+        titleSize="36px"
         textColor="white"
-        textWidth="1312px"
+        textWidth="540px"
+        descriptionText="We provide resources for spiritual growth. Discover Orthodox teachings, prayer guides, and scholarly articles. Access sermons, educational tools, and community resources to deepen your faith."
+        descriptionColor="#E8E9EB"
+        descriptionSize="18px"
         overlayOpacity={0.8}
         height="500px"
         imagePlacement="40%"
+        buttonText="ACCESS SPIRITUAL RESOURCES"
+        buttonColor="#E0AE54"
+        buttonTextColor="#171E34"
+        buttonLink=""
       ></Hero>
+
+      {/* Unite in Generosity */}
+      <ImageTextBlock
+        inverted={true}
+        showTag={true}
+        roundedText=""
+        roundedBgColor=""
+        roundedTextColor=""
+        title="Book Your Space & Plan Your Event"
+        titleColor="#000000"
+        textColor=""
+        image={Box}
+        altText="A picture of the St. Maurice gym."
+        bgColor="#FFFFFF"
+        btnTxt="SCHEDULE TODAY"
+        btnColor="#FFFFFF"
+        btnHoverColor=""
+        btnTextColor="#000000"
+        borderColor="#000000"
+      >
+        Join various adult ministries, from Family and Senior ministries to
+        Young Adult Ministries and the Adults Choir. Enrich your spiritual and
+        social life with us.
+      </ImageTextBlock>
     </>
   );
 }
