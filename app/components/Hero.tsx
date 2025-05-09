@@ -30,6 +30,8 @@ interface HeroProps {
   buttonColor?: string;
   buttonTextColor?: string;
   buttonLink?: string;
+  textAlignment?: "left" | "center" | "right";
+  contentAlignment?: "left" | "center" | "right";
 }
 
 const Hero = ({
@@ -50,6 +52,8 @@ const Hero = ({
   buttonColor = "#7A0C02",
   buttonTextColor = "#ffffff",
   buttonLink = "#",
+  textAlignment = "center",
+  contentAlignment = "center",
 }: HeroProps) => {
   return (
     <div>
@@ -85,14 +89,16 @@ const Hero = ({
     }`}
         >
           <div
-            className={`w-full md:w-[${textWidth}] flex flex-col gap-5 
-    ${
-      textPosition === "Left"
-        ? "text-left"
-        : textPosition === "Right"
-        ? "text-right"
-        : "text-center"
-    }`}
+            className={`w-full flex flex-col gap-5 ${
+              contentAlignment === "left"
+                ? "items-start"
+                : contentAlignment === "right"
+                ? "items-end"
+                : "items-center"
+            }`}
+            style={{
+              textAlign: textAlignment,
+            }}
           >
             <h1
               className={`${outfit.className} font-[700] uppercase leading-[120%]`}
@@ -103,7 +109,7 @@ const Hero = ({
 
             {descriptionText && (
               <p
-                className={`${urbanist.className} leading-[150%] mx-auto text-center`}
+                className={`${urbanist.className} leading-[150%]`}
                 style={{
                   color: descriptionColor,
                   fontSize: descriptionSize,

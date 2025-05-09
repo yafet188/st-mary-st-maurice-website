@@ -11,6 +11,8 @@ import Priests from "../../public/Images/Home/Priests.jpeg";
 import Gym from "../../public/Images/Home/Gym.jpeg";
 import Tree from "../../public/Images/Home/St.MaryTree.jpeg";
 import Box from "../../public/Images/Home/PrayerBox.png";
+import Kids from "../../public/Images/Home/KidsPaintings.png";
+import Abouna from "../../public/Images/Home/AbounasHand.png";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -330,22 +332,69 @@ export default function Home() {
         roundedText=""
         roundedBgColor=""
         roundedTextColor=""
-        title="Book Your Space & Plan Your Event"
+        title="Unite in Generosity"
         titleColor="#000000"
         textColor=""
         image={Box}
-        altText="A picture of the St. Maurice gym."
-        bgColor="#FFFFFF"
-        btnTxt="SCHEDULE TODAY"
+        altText="A picture of Prayer Box."
+        bgColor="#E8E9EB"
+        btnTxt="DONATE"
         btnColor="#FFFFFF"
         btnHoverColor=""
         btnTextColor="#000000"
-        borderColor="#000000"
+        borderColor=""
       >
-        Join various adult ministries, from Family and Senior ministries to
-        Young Adult Ministries and the Adults Choir. Enrich your spiritual and
-        social life with us.
+        Your giving creates a legacy that inspires and uplifts. Help us sustain
+        our programs, preserve traditions, and encourage new ones.
       </ImageTextBlock>
+
+      <ImageTextBlock
+        inverted={false}
+        showTag={true}
+        roundedText=""
+        roundedBgColor="#FFFFFF"
+        roundedTextColor=""
+        title="Serve with Us and Volunteer"
+        titleColor="#000000"
+        textColor=""
+        image={Kids}
+        altText="A picture of kids with paintings."
+        bgColor="#FFFFFF"
+        btnTxt="VOLUNTEER"
+        btnColor="#FFFFFF"
+        btnHoverColor=""
+        btnTextColor="#000000"
+        borderColor="Black"
+      >
+        Join us in making a meaningful impact. Share your talents and time to
+        enrich our community through acts of service and faith. Together, we can
+        strengthen our bonds and uplift those in need.
+      </ImageTextBlock>
+
+      <Hero
+        overlayColor="#E0AE546B"
+        image={Abouna}
+        altText="Vespers in St Mary's church"
+        textPosition="Center"
+        title={<div className="pt-[50px]">Renew Your Spirit</div>}
+        titleSize="36px"
+        textColor="white"
+        textWidth="540px"
+        descriptionText="Schedule a confidential confession with your father, 
+        and find peace, guidance, and the transformative grace of Christ as you embrace a path of healing and 
+        reconciliation."
+        descriptionColor="#E8E9EB"
+        descriptionSize="18px"
+        overlayOpacity={0.8}
+        height="500px"
+        imagePlacement="20%"
+        buttonText="SCHEDULE A CONFESSION"
+        buttonColor="#E0AE54"
+        buttonTextColor="#FFFFFF"
+        buttonLink=""
+        contentAlignment="left"
+        textAlignment="left"
+      ></Hero>
     </>
   );
 }
