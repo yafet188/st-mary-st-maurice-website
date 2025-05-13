@@ -395,6 +395,8 @@ export default function Home() {
         contentAlignment="left"
         textAlignment="left"
       ></Hero>
+
+      <div className="h-[1082px] bg-[#E8E9EB] "></div>
     </>
   );
 }
