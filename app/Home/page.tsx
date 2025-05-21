@@ -348,6 +348,7 @@ export default function Home() {
         our programs, preserve traditions, and encourage new ones.
       </ImageTextBlock>
 
+      {/* KIDS PAINTINGS */}
       <ImageTextBlock
         inverted={false}
         showTag={true}
@@ -371,6 +372,7 @@ export default function Home() {
         strengthen our bonds and uplift those in need.
       </ImageTextBlock>
 
+      {/* RENEW YOUR SPIRIT */}
       <Hero
         overlayColor="#E0AE546B"
         image={Abouna}
@@ -396,7 +398,25 @@ export default function Home() {
         textAlignment="left"
       ></Hero>
 
-      <div className="h-[1082px] bg-[#E8E9EB] "></div>
+      <Hero
+        overlayColor="#171E34EB"
+        altText="Vespers in St Mary's church"
+        textPosition="Center"
+        title={<div className="pt-[50px]">Explore Our Spiritual Resources</div>}
+        titleSize="36px"
+        textColor="white"
+        textWidth="540px"
+        descriptionText="We provide resources for spiritual growth. Discover Orthodox teachings, prayer guides, and scholarly articles. Access sermons, educational tools, and community resources to deepen your faith."
+        descriptionColor="#E8E9EB"
+        descriptionSize="18px"
+        overlayOpacity={0.8}
+        height="500px"
+        imagePlacement="40%"
+        buttonText="ACCESS SPIRITUAL RESOURCES"
+        buttonColor="#E0AE54"
+        buttonTextColor="#171E34"
+        buttonLink=""
+      ></Hero>
     </>
   );
 }

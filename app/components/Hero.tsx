@@ -17,7 +17,7 @@ interface HeroProps {
   titleSize?: string;
   textColor?: string;
   textWidth?: string;
-  image: StaticImageData;
+  image?: StaticImageData;
   imagePlacement?: string;
   altText: string;
   overlayColor?: string;
@@ -62,21 +62,23 @@ const Hero = ({
         className="w-full relative overflow-hidden"
         style={{ height: height }}
       >
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={image}
-            alt={altText}
-            fill
-            priority
-            className={`object-cover object-[center_${imagePlacement}]`}
-          />
-          <div
-            className="absolute inset-0 z-10"
-            style={{
-              backgroundColor: overlayColor || "transparent",
-            }}
-          />
-        </div>
+        {image && (
+          <div className="absolute inset-0 z-0">
+            <Image
+              src={image}
+              alt={altText}
+              fill
+              priority
+              className={`object-cover object-[center_${imagePlacement}]`}
+            />
+            <div
+              className="absolute inset-0 z-10"
+              style={{
+                backgroundColor: overlayColor || "transparent",
+              }}
+            />
+          </div>
+        )}
 
         <div
           className={`relative z-10 w-full max-w-[1512px] mx-auto h-auto px-6 md:px-12 xl:px-[100px] py-40 flex items-center
