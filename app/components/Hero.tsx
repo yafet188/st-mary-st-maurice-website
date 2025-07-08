@@ -1,6 +1,6 @@
 import React from "react";
 import Image, { StaticImageData } from "next/image";
-import { Urbanist, Outfit } from "next/font/google";
+import { Urbanist, Outfit, Zilla_Slab } from "next/font/google";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -11,10 +11,17 @@ const outfit = Outfit({
   weight: ["400", "500", "600", "700"],
 });
 
+const zilla_slab = Zilla_Slab({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
 interface HeroProps {
+  backgroundColor?: string;
   height?: string;
   title: React.ReactNode;
   titleSize?: string;
+  subtitle?: string;
   textColor?: string;
   textWidth?: string;
   image?: StaticImageData;
@@ -35,10 +42,12 @@ interface HeroProps {
 }
 
 const Hero = ({
+  backgroundColor,
   image,
   altText,
   title,
   titleSize,
+  subtitle,
   textPosition = "Center",
   overlayColor,
   textColor = "black",
@@ -60,7 +69,11 @@ const Hero = ({
       {/* Header Section with Background Image */}
       <div
         className="w-full relative overflow-hidden"
-        style={{ height: height }}
+        style={{
+          height: height,
+          backgroundColor:
+            !image && backgroundColor ? backgroundColor : undefined,
+        }}
       >
         {image && (
           <div className="absolute inset-0 z-0">
@@ -81,7 +94,7 @@ const Hero = ({
         )}
 
         <div
-          className={`relative z-10 w-full max-w-[1512px] mx-auto h-auto px-6 md:px-12 xl:px-[100px] py-40 flex items-center
+          className={`relative z-10 w-full max-w-[1512px] mx-auto h-auto px-6 md:px-12 xl:px-[100px] py-20 flex items-center
     ${
       textPosition === "Left"
         ? "justify-start"
@@ -102,6 +115,14 @@ const Hero = ({
               textAlign: textAlignment,
             }}
           >
+            {subtitle && (
+              <h2
+                className={`${zilla_slab.className} font-[500] text-[36px] leading-[120%] tracking-[-0.02em] text-black`}
+              >
+                {subtitle}
+              </h2>
+            )}
+
             <h1
               className={`${outfit.className} font-[700] uppercase leading-[120%]`}
               style={{ color: textColor, fontSize: titleSize }}

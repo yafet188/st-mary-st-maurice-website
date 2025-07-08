@@ -256,21 +256,13 @@ export default function Footer() {
           <p
             className={`${outfit.className} text-[#9498A2] text-[14px] font-[400] mb-4 md:mb-0`}
           >
-            © Copyright 2024 St.Mary and St.Maurice Coptic Orthodox Church- All
+            © Copyright 2024 St.Mary and St.Maurice Coptic Orthodox Church - All
             rights reserved.
           </p>
           <p
             className={`${outfit.className} text-[#9498A2] text-[14px] font-[400]`}
           >
-            Designed & Developed by{" "}
-            <a
-              href="https://webelocity.io"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline"
-            >
-              Webelocity
-            </a>
+            Designed and Developed by Yafet Tegbaru
           </p>
         </div>
       </div>

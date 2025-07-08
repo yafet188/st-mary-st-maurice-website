@@ -13,6 +13,7 @@ import Tree from "../../public/Images/Home/St.MaryTree.jpeg";
 import Box from "../../public/Images/Home/PrayerBox.png";
 import Kids from "../../public/Images/Home/KidsPaintings.png";
 import Abouna from "../../public/Images/Home/AbounasHand.png";
+import { px } from "framer-motion";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -153,12 +154,23 @@ export default function Home() {
       </section>
 
       {/* 35 YEARS OF SERVICE VIDEO SECTION */}
-      <div className="w-full h-[1040px] pt-[100px] pr-[100px] pl-[100px] gap-[80px] bg-[#E8E9EB] items-center text-center flex flex-col">
+      <div className="w-full pt-[100px] pr-[100px] pl-[100px] gap-[80px] bg-[#E8E9EB] items-center text-center flex flex-col">
         <h3
           className={`${outfit.className} font-bold text-4xl leading-[120%] tracking-[0.02em] text-[#0A0D16]`}
         >
           35 YEARS OF SERVICE
         </h3>
+
+        {/* 🎥 Video Block */}
+        <video
+          className="w-full h-auto rounded-lg shadow-lg"
+          controls
+          autoPlay={false}
+          loop={true}
+        >
+          <source src="/videos/Abouna35thAnniversary.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
 
       {/* Youth & Kids */}
@@ -398,25 +410,57 @@ export default function Home() {
         textAlignment="left"
       ></Hero>
 
-      <Hero
-        overlayColor="#171E34EB"
-        altText="Vespers in St Mary's church"
-        textPosition="Center"
-        title={<div className="pt-[50px]">Explore Our Spiritual Resources</div>}
-        titleSize="36px"
-        textColor="white"
-        textWidth="540px"
-        descriptionText="We provide resources for spiritual growth. Discover Orthodox teachings, prayer guides, and scholarly articles. Access sermons, educational tools, and community resources to deepen your faith."
-        descriptionColor="#E8E9EB"
-        descriptionSize="18px"
-        overlayOpacity={0.8}
-        height="500px"
-        imagePlacement="40%"
-        buttonText="ACCESS SPIRITUAL RESOURCES"
-        buttonColor="#E0AE54"
-        buttonTextColor="#171E34"
-        buttonLink=""
-      ></Hero>
+      {/* Captured Moments */}
+      <div className="w-full bg-[#E8E9EB] flex flex-col items-center pb-25">
+        <Hero
+          backgroundColor="#E8E9EB"
+          altText="Priests and Bishop in Altar"
+          textPosition="Center"
+          subtitle="Captured Moments"
+          title={<div className="pt-[10px]">A look back at our events</div>}
+          titleSize="36px"
+          textColor="#0A0D16"
+          textWidth="522px"
+          descriptionText="Explore our gallery to relive moments at St Mary and St Maurice's. From celebrations to workship, each photo tells a story of faith, devotion and community."
+          descriptionColor="#151B2F"
+          descriptionSize="18px"
+          overlayOpacity={0.8}
+          height="500px"
+          imagePlacement="40%"
+          buttonText="VIEW OUR GALLERY"
+          buttonColor="White"
+          buttonTextColor="#171E34"
+          buttonLink=""
+        ></Hero>
+
+        <div className="relative w-full max-w-[1400px] aspect-[2.5/1] rounded-xl overflow-hidden shadow-md mx-auto">
+          <Image
+            src="/images/Clergy.jpg"
+            alt="Clergy in Altar"
+            fill
+            className="object-cover"
+          />
+
+          {/* Centered Play Button */}
+          <a
+            href="https://photos.google.com/share/AF1QipOMYuoJTuEZ0hQfWszzH5GW4ifZLQI11A8lVFQlEgFLCvDWNKqr7Yzd97XFFitCtg?key=eElIVDlka3k5YVM3LXlNOGV4MDVkcXRlOTdBTjhB"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute inset-0 flex items-center justify-center"
+          >
+            <div className="bg-white p-4 rounded-full shadow-lg hover:scale-105 transition">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-10 w-10 text-[#7A0C02]"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </a>
+        </div>
+      </div>
     </>
   );
 }
