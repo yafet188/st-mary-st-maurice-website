@@ -32,6 +32,7 @@ interface ImageTextBlockProps {
   altText: string;
   bgColor: "#FEFAF1" | "#E8E9EB" | "#FFFFFF" | "#171E34";
   miniTitle?: string;
+  bottomMiniTitle?: string | React.ReactNode;
   btnTxt?: string;
   btnColor?: string;
   btnHoverColor?: string;
@@ -132,6 +133,7 @@ const ImageTextBlock = ({
   titleColor,
   textColor,
   miniTitle,
+  bottomMiniTitle,
   altText,
   bgColor,
   borderColor,
@@ -182,7 +184,14 @@ const ImageTextBlock = ({
           >
             {children}
           </div>
-          <div></div>
+          {bottomMiniTitle && (
+            <p
+              className={`${outfit.className} font-bold text-[18px] leading-[150%] tracking-[2%]`}
+            >
+              {bottomMiniTitle}
+            </p>
+          )}
+
           {btnTxt && btnColor && (
             <RoundedButton
               link={btnLink}

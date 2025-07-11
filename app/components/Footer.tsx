@@ -117,28 +117,21 @@ export default function Footer() {
                 <h6
                   className={`${outfit.className} hover:underline font-bold text-base tracking-wide`}
                 >
-                  ENGAGEMENT & RESOURCES
+                  CONNECT & GIVE
                 </h6>
                 <nav className="flex flex-col gap-3">
                   <Link href="/schedule">
                     <p
                       className={`${outfit.className} hover:underline text-sm font-medium leading-tight tracking-wide opacity-80 hover:opacity-100`}
                     >
-                      SCHEDULE
+                      DONATE
                     </p>
                   </Link>
                   <Link href="/media">
                     <p
                       className={`${outfit.className} hover:underline text-sm font-medium leading-tight tracking-wide opacity-80 hover:opacity-100`}
                     >
-                      MEDIA
-                    </p>
-                  </Link>
-                  <Link href="/resources">
-                    <p
-                      className={`${outfit.className} hover:underline text-sm font-medium leading-tight tracking-wide opacity-80 hover:opacity-100`}
-                    >
-                      RESOURCES
+                      CONTACT US
                     </p>
                   </Link>
                 </nav>
@@ -149,21 +142,21 @@ export default function Footer() {
                 <h6
                   className={`${outfit.className} hover:underline font-bold text-base tracking-wide`}
                 >
-                  CONNECT & GIVE
+                  RESOURCES
                 </h6>
                 <nav className="flex flex-col gap-3">
                   <Link href="/donation">
                     <p
                       className={`${outfit.className} hover:underline text-sm font-medium leading-tight tracking-wide opacity-80 hover:opacity-100`}
                     >
-                      DONATE
+                      ABOUNA A'S RESOURCES
                     </p>
                   </Link>
                   <Link href="/contact">
                     <p
                       className={`${outfit.className} hover:underline text-sm font-medium leading-tight tracking-wide opacity-80 hover:opacity-100`}
                     >
-                      CONTACT US
+                      SUNDAY SCHOOL WIKI
                     </p>
                   </Link>
                 </nav>

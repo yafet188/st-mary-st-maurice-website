@@ -86,15 +86,18 @@ export default function AdultsMinistries() {
       <Hero
         image={StMaryVespersPicture}
         altText="Vespers in St Mary's church"
-        textPosition="Center"
-        title={<div className="pt-[50px]">Adult Ministries</div>}
+        title={<div className="pt-30 text-center">Adult Ministries</div>}
+        titleSize="64px"
         textColor="#0D111D"
         textWidth="1312px"
         overlayColor="#FEFAF1CC"
         overlayOpacity={0.8}
         height="464px"
         imagePlacement="47%"
-      ></Hero>
+        textPosition="Center"
+        contentAlignment="center"
+      />
+
       <ImageTextBlock
         roundedText=""
         textColor=""

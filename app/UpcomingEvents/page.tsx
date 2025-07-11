@@ -9,6 +9,9 @@ export default function UpcomingEvents() {
     <div className="pt-[100px]  bg-[#FEFAF1]">
       <ImageTextBlock
         inverted={false}
+        roundedText=""
+        textColor=""
+        titleColor=""
         title="Our Sunday School Program"
         image={KidsByStMaryAltarPicture}
         altText="A picture of the Fr.Anthanasius, a couple of young chanters and kids in front of St. Mary's Altar"
@@ -21,6 +24,9 @@ export default function UpcomingEvents() {
       </ImageTextBlock>
       <ImageTextBlock
         inverted={true}
+        roundedText=""
+        textColor=""
+        titleColor=""
         title="Explore Our Sunday School"
         miniTitle="Building Foundations in Faith"
         image={KidsHoldingIconsPicture}
@@ -36,6 +42,9 @@ export default function UpcomingEvents() {
       </ImageTextBlock>
       <ImageTextBlock
         inverted={false}
+        roundedText=""
+        textColor=""
+        titleColor=""
         title="Shaping Young Minds: 
 Our Path to Spiritual Enlightenment"
         miniTitle="Join the World of Faith and Learning"

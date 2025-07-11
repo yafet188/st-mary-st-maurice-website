@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Hero from "../components/Hero";
+import CalendarViewSwitcherWrapper from "../components/Calendar/CalenarViewSwitcherWrapper";
 import { Urbanist, Outfit, Raleway, Zilla_Slab } from "next/font/google";
 import ImageTextBlock from "../components/ImageTextBlock";
 import MahraganKids from "../../public/Images/Home/MahraganKids.jpg";
@@ -13,7 +15,6 @@ import Tree from "../../public/Images/Home/St.MaryTree.jpeg";
 import Box from "../../public/Images/Home/PrayerBox.png";
 import Kids from "../../public/Images/Home/KidsPaintings.png";
 import Abouna from "../../public/Images/Home/AbounasHand.png";
-import { px } from "framer-motion";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -39,122 +40,142 @@ export default function Home() {
 
   return (
     <>
-      <div className="w-full h-[650px] bg-[#171E34] pt-[100px] relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/Images/StMaryChurchBackground.png"
-            alt="Home Church"
-            fill
-            priority
-            className="object-cover"
-          />
+      <div className="relative w-full min-h-screen overflow-visible">
+        {/* GLOBAL BACKGROUND IMAGE */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 transform translate-y-[-28.5%]">
+            <Image
+              src="/Images/StMaryChurchBackground.png"
+              alt="Home Church"
+              fill
+              priority
+              className="object-cover brightness-[1.1] transition-all duration-500"
+              style={{
+                objectPosition: "62.5%",
+              }}
+            />
+          </div>
         </div>
-        {/* 1st Header Section */}
-        <div className="w-[1512px] h-[548px] mx-auto relative z-10 px-[100px] flex justify-center items-center gap-[24px]">
-          {/* Text Components Frame*/}
-          <div className="w-[1124px] h-[411px] gap-[26px] flex flex-col items-center justify-center">
-            {/* Text Components */}
-            <div className="flex flex-col items-center">
-              {/* Living Orthodoxy */}
-              <div className="w-[267px] h-[41px] rounded-[25px] py-[6px] px-[14px] gap-[8px] bg-[#FDEFD5]">
-                <p
-                  className={`${zillaSlab.className} w-[239px] h-[29px] font-[600] text-[24px] leading-[120%] tracking-[0.02em] text-[#896F41]`}
+        <div className="bg-[#171E34] overflow-visible">
+          <div className="w-full h-[1000px] md:h-[800px] sm:h-[750px] pt-[100px] relative overflow-visible">
+            {/* 1st Header Section */}
+            <div className="w-[1512px] h-[548px] mx-auto relative px-[100px] flex justify-center items-center gap-[24px]">
+              {/* Text Components Frame*/}
+              <div className="w-[1124px] h-[411px] gap-[26px] flex flex-col items-center justify-center">
+                {/* Text Components */}
+                <div className="flex flex-col items-center">
+                  {/* Living Orthodoxy */}
+                  <div className="w-[267px] h-[41px] rounded-[25px] py-[6px] px-[14px] gap-[8px] bg-[#FDEFD5] shadow-[0_6px_24px_rgba(0,0,0,1)]">
+                    <p
+                      className={`${zillaSlab.className} w-[239px] h-[29px] font-[600] text-[24px] leading-[120%] tracking-[0.02em] text-[#896F41] drop-shadow-md`}
+                    >
+                      LIVING ORTHODOXY
+                    </p>
+                  </div>
+
+                  {/* Faith, Family, Fellowship */}
+                  <div className="w-full h-[80px]">
+                    <h3
+                      className={`${outfit.className} font-[700] text-[64px] tracking-[0.02em] text-white drop-shadow-xl`}
+                      style={{
+                        textShadow: "2px 4px 6px rgba(0, 0, 0, 0.8)",
+                      }}
+                    >
+                      FAITH, FAMILY, FELLOWSHIP
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Yellow Text Section */}
+        <div className="relative bg-[rgba(60,0,0,0.2)] z-10 -mt-[150px] overflow-visible">
+          <div className="w-full h-[380px] mx-auto px-[100px] rounded-[64px] gap-[24px] flex items-center justify-between bg-[rgba(177,143,84,0.8)] z-10">
+            {/* Text and Button Section */}
+            <div className="w-full h-[144px] gap-[158px] flex justify-between items-center">
+              {/* Text */}
+              <p
+                className={`${outfit.className} w-[969px] h-[144px] font-[700] text-[40px] leading-[120%] tracking-[0.02em] text-white`}
+              >
+                Join us at St. Mary and St. Maurice's Coptic Orthodox Church,
+                where ancient traditions meet modern hearts in Kitchener.
+              </p>
+
+              {/* Button */}
+              <div>
+                <button
+                  className={`${outfit.className} w-[185px] h-[45px] bg-[#171E34] text-white font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] 
+                    flex items-center justify-center transition duration-300 ease-out hover:bg-red-800`}
                 >
-                  LIVING ORTHODOXY
+                  VISIT US THIS SUNDAY
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CALENDAR SECTION */}
+        <section
+          className="relative w-full h-[2175px] bg-[#430600] text-white z-0"
+          style={{
+            clipPath: "polygon(50% 30%, 100% 0, 100% 100%, 0 100%, 0 0)",
+          }}
+        >
+          {/* Cross overlapping the triangle tip */}
+          {/* Faint Cross in Calendar Background */}
+          <div className="absolute top-[75%] left-[-4%] w-[300px] h-[300px] opacity-100 z-0 pointer-events-none">
+            <Image
+              src="/Images/Home/Calendar/Cross.png"
+              alt="Faint Calendar Background Cross"
+              fill
+              className="object-contain"
+            />
+          </div>
+
+          <div className="absolute top-[70%] left-[-2.5%] w-[300px] h-[300px] opacity-100 z-0 pointer-events-none">
+            <Image
+              src="/Images/Home/Calendar/Circle.png"
+              alt="Faint Calendar Background Circle"
+              width={500}
+              height={500}
+              className="object-contain"
+            />
+          </div>
+
+          <div className="absolute top-[31.5%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
+            <Image
+              src="/Images/Home/WhiteCross.png"
+              alt="Gold Cross"
+              width={40}
+              height={40}
+            />
+          </div>
+
+          <div className="max-w-[1512px] px-[100px] pt-[263px] pb-[40px] mx-auto"></div>
+          <section className="w-full md:px-12 xl:px-24 py-110 bg-[#430600]">
+            <div className="max-w-[1312px] mx-auto space-y-10">
+              <div className="text-center">
+                <h2
+                  className={`${outfit.className} text-[36px] md:text-3xl font-[700] leading-[120%] tracking-[0.02em] text-white`}
+                >
+                  UPCOMING EVENTS & COMMUNITY ANNOUNCEMENTS
+                </h2>
+                <p
+                  className={`${outfit.className} text-[20px] md:text-base mt-2 font-[700] leading-[120%] tracking-[0.02em] text-white`}
+                >
+                  Stay Updated with Our Upcoming Church Events and Activities
                 </p>
               </div>
-
-              {/* Faith, Family, Fellowship */}
-              <div className="w-full h-[80px]">
-                <h3
-                  className={`${outfit.className} font-[700] text-[64px] tracking-[0.02em] text-white`}
-                >
-                  FAITH, FAMILY, FELLOWSHIP
-                </h3>
-              </div>
+              <CalendarViewSwitcherWrapper />
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Yellow Text Section */}
-      <div className="w-full bg-[#3C0000]">
-        <div className="w-full h-[380px] mx-auto px-[100px] rounded-[64px] gap-[24px] flex items-center justify-between bg-[rgba(177,143,84,0.8)]">
-          {/* Text and Button Section */}
-          <div className="w-full h-[144px] gap-[158px] flex justify-between items-center">
-            {/* Text */}
-            <p
-              className={`${outfit.className} w-[969px] h-[144px] font-[700] text-[40px] leading-[120%] tracking-[0.02em] text-white`}
-            >
-              Join us at St. Mary and St. Maurice's Coptic Orthodox Church,
-              where ancient traditions meet modern hearts in Kitchener.
-            </p>
-
-            {/* Button */}
-            <div>
-              <button
-                className={`${outfit.className} w-[185px] h-[45px] bg-[#171E34] text-white font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] 
-                    flex items-center justify-center transition duration-300 ease-out hover:bg-red-800`}
-              >
-                VISIT US THIS SUNDAY
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* CALENDAR SECTION */}
-      <section
-        className="relative w-full h-[1638px] bg-[#3C0000] text-white"
-        style={{
-          clipPath: "polygon(50% 30%, 100% 0, 100% 100%, 0 100%, 0 0)",
-        }}
-      >
-        <div className="max-w-[1512px] px-[100px] pt-[263px] pb-[74px] mx-auto"></div>
-
-        <section className="w-full px-6 md:px-12 xl:px-24 py-50 bg-[#3C0000]">
-          <div className="max-w-[1312px] mx-auto space-y-10">
-            <div className="flex justify-center items-center">
-              <Image
-                src="/Images/Home/WhiteCross.png"
-                alt="Gold Cross"
-                width={40}
-                height={40}
-              />
-            </div>
-            <div className="text-center">
-              <h2
-                className={`${outfit.className} text-[36px] md:text-3xl font-[700] leading-[120%] tracking-[0.02em] text-white`}
-              >
-                UPCOMING EVENTS & COMMUNITY ANNOUNCEMENTS
-              </h2>
-              <p
-                className={`${outfit.className} text-[20px] md:text-base mt-2 font-[700] leading-[120%] tracking-[0.02em] text-white`}
-              >
-                Stay Updated with Our Upcoming Church Events and Activities
-              </p>
-            </div>
-
-            {/* View toggle buttons */}
-            <div className="flex justify-center gap-4">
-              <button className="bg-transparent border border-white text-white px-4 py-2 rounded">
-                DAY
-              </button>
-              <button className="bg-white text-[#4D0B09] px-4 py-2 rounded font-bold">
-                WEEK
-              </button>
-              <button className="bg-transparent border border-white text-white px-4 py-2 rounded">
-                MONTH
-              </button>
-            </div>
-
-            {/* We'll add the week grid and event cards next... */}
-          </div>
+          </section>
         </section>
-      </section>
+      </div>
 
       {/* 35 YEARS OF SERVICE VIDEO SECTION */}
-      <div className="w-full pt-[100px] pr-[100px] pl-[100px] gap-[80px] bg-[#E8E9EB] items-center text-center flex flex-col">
+      <div className="w-full pt-[100px] pr-[100px] pl-[100px] pb-[100px] gap-[80px] bg-[#E8E9EB] items-center text-center flex flex-col">
         <h3
           className={`${outfit.className} font-bold text-4xl leading-[120%] tracking-[0.02em] text-[#0A0D16]`}
         >
@@ -163,7 +184,7 @@ export default function Home() {
 
         {/* 🎥 Video Block */}
         <video
-          className="w-full h-auto rounded-lg shadow-lg"
+          className="max-w-7xl w-full h-auto rounded-lg shadow-lg"
           controls
           autoPlay={false}
           loop={true}
@@ -459,6 +480,113 @@ export default function Home() {
               </svg>
             </div>
           </a>
+        </div>
+      </div>
+
+      {/* Reach Out Form*/}
+      <div className="w-full bg-[#0D111D] py-[100px] px-6 md:px-12 flex border border-[#646877] justify-center">
+        {/* Outer Container for Text & Form */}
+        <div className="w-full max-w-[1280px] flex flex-col lg:flex-row justify-between items-start gap-12">
+          {/* Left Side - Text Container */}
+          <div className="flex-1 flex flex-col justify-center gap-6 h-full">
+            {/* Heading and description */}
+            <h3
+              className={`${urbanist.className} text-[32px] md:text-[52px] font-[700] leading-[120%] tracking-[-0.02em] text-[#ffffff]`}
+            >
+              REACH OUT
+            </h3>
+            <p
+              className={`${urbanist.className} text-[18px] md:text-[18px] font-[400] leading-[150%] tracking-[0.02rem] text-[#E8E9EB]`}
+            >
+              Please contact us with any questions regarding our ministries,
+              masses, or upcoming events. We are here to assist you.
+            </p>
+
+            <div className="flex items-start gap-3">
+              <Image
+                src="/Images/Icons/Location.png"
+                alt="Location"
+                width={16}
+                height={20}
+                className="mt-1"
+              />
+              <Link
+                href="https://www.google.com/maps/dir/?api=1&destination=388+Ottawa+St+South,+Kitchener,+Ontario,+Canada"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${urbanist.className} hover:underline text-lg leading-7 tracking-wide text-[#E8E9EB]`}
+              >
+                <p className="text-blue hover:underline">
+                  388 Ottawa St. South, Kitchener, Ontario, Canada N2M 3P4
+                </p>
+              </Link>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <Image
+                src="/Images/Icons/Phone.png"
+                alt="Phone"
+                width={18}
+                height={18}
+                className="mt-1"
+              />
+              <a
+                href="tel:+15195702199"
+                className={`${urbanist.className} text-lg leading-7 tracking-wide text-[#E8E9EB] hover:underline`}
+              >
+                +1 519 570 2199
+              </a>
+            </div>
+          </div>
+
+          {/* Right Side - Form Container */}
+          <div className="flex-1 bg-[#0A0D16] text-white p-6 md:p-8 gap-12 rounded-[24px] border border-[#646877] shadow-lg">
+            {/* Form Placeholder */}
+            <form className="w-full flex flex-col gap-[24px]">
+              {/* Input Fields */}
+              {[
+                { label: "NAME", placeholder: "First & Last Name" },
+                { label: "EMAIL ADDRESS", placeholder: "email@provider.com" },
+                { label: "PHONE NUMBER", placeholder: "000-000-0000" },
+              ].map((field) => (
+                <div key={field.label} className="flex flex-col gap-[8px]">
+                  <label
+                    className={`${outfit.className} text-[14px] font-[600] leading-[150%] tracking-[0.02em] text-white`}
+                  >
+                    {field.label}
+                  </label>
+                  <input
+                    type="text"
+                    placeholder={field.placeholder}
+                    className={`${raleway.className} h-[56px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
+                  />
+                </div>
+              ))}
+
+              {/* Message Section */}
+              <div className="flex flex-col gap-[8px]">
+                <label
+                  className={`${outfit.className} text-[14px] font-[600] leading-[150%] tracking-[0.02em] text-white`}
+                >
+                  MESSAGE
+                </label>
+                <textarea
+                  placeholder="What is your inquiry..."
+                  className={`${raleway.className} h-[120px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
+                />
+              </div>
+
+              {/* Submit Button */}
+              <div>
+                <button
+                  type="submit"
+                  className={`${outfit.className} w-full h-[48px] rounded-[8px] px-[12px] py-[16px] text-[14px] font-semibold bg-[#E0AE54] text-white`}
+                >
+                  SUBMIT
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </>
