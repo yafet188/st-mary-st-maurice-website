@@ -1,6 +1,10 @@
+"use client";
+
 import React from "react";
+import { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import { Urbanist, Outfit, Zilla_Slab } from "next/font/google";
+import { useInView } from "react-intersection-observer";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -41,6 +45,40 @@ interface HeroProps {
   contentAlignment?: "left" | "center" | "right";
 }
 
+// Custom typewriter hook
+const useTypewriter = (text: string, speed: number = 50, delay: number = 0) => {
+  const [displayText, setDisplayText] = useState("");
+  const [isComplete, setIsComplete] = useState(false);
+  const [showCursor, setShowCursor] = useState(true);
+
+  useEffect(() => {
+    setDisplayText("");
+    setIsComplete(false);
+    setShowCursor(true);
+
+    const timer = setTimeout(() => {
+      let i = 0;
+      const typeInterval = setInterval(() => {
+        if (i < text.length) {
+          setDisplayText(text.slice(0, i + 1));
+          i++;
+        } else {
+          clearInterval(typeInterval);
+          setIsComplete(true);
+          // Hide cursor after completion
+          setTimeout(() => setShowCursor(false), 500);
+        }
+      }, speed);
+
+      return () => clearInterval(typeInterval);
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [text, speed, delay]);
+
+  return { displayText, isComplete, showCursor };
+};
+
 const Hero = ({
   backgroundColor,
   image,
@@ -64,6 +102,36 @@ const Hero = ({
   textAlignment = "center",
   contentAlignment = "center",
 }: HeroProps) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+
+  const extractTextFromNode = (node: React.ReactNode): React.ReactNode[] => {
+    if (typeof node === "string") return [node];
+    if (Array.isArray(node)) return node.flatMap(extractTextFromNode);
+    if (React.isValidElement(node)) {
+      if (node.type === "br") return ["\n"];
+      const props = node.props as { children?: React.ReactNode };
+      return extractTextFromNode(props.children || "");
+    }
+    return [];
+  };
+
+  const getTitleText = () => {
+    const nodes = extractTextFromNode(title);
+    return nodes.join("");
+  };
+
+  // Use custom typewriter hooks
+  const titleTypewriter = useTypewriter(inView ? getTitleText() : "", 100, 250);
+
+  const descriptionTypewriter = useTypewriter(
+    inView && titleTypewriter.isComplete ? descriptionText : "",
+    30,
+    500
+  );
+
   return (
     <div>
       {/* Header Section with Background Image */}
@@ -94,7 +162,7 @@ const Hero = ({
         )}
 
         <div
-          className={`relative z-10 w-full max-w-[1512px] mx-auto h-auto px-6 md:px-12 xl:px-[100px] py-20 flex items-center
+          className={`relative z-10 w-full max-w-[1512px] mx-auto h-full px-6 md:px-12 xl:px-[100px] flex items-center
     ${
       textPosition === "Left"
         ? "justify-start"
@@ -104,6 +172,7 @@ const Hero = ({
     }`}
         >
           <div
+            ref={ref}
             className={`w-full flex flex-col gap-5 ${
               contentAlignment === "left"
                 ? "items-start"
@@ -111,24 +180,32 @@ const Hero = ({
                 ? "items-end"
                 : "items-center"
             }`}
-            style={{
-              textAlign: textAlignment,
-            }}
           >
             {subtitle && (
               <h2
                 className={`${zilla_slab.className} font-[500] text-[36px] leading-[120%] tracking-[-0.02em] text-black`}
+                style={{ textAlign: textAlignment }}
               >
                 {subtitle}
               </h2>
             )}
 
-            <h1
-              className={`${outfit.className} font-[700] uppercase leading-[120%]`}
-              style={{ color: textColor, fontSize: titleSize }}
-            >
-              {title}
-            </h1>
+            {title && (
+              <h1
+                className={`${outfit.className} font-[700] uppercase items-center text-center justify-center leading-[120%] whitespace-pre-line`}
+                style={{
+                  color: textColor,
+                  fontSize: titleSize,
+                  textAlign: textAlignment,
+                  width: "100%",
+                }}
+              >
+                {titleTypewriter.displayText}
+                {titleTypewriter.showCursor && (
+                  <span className="animate-pulse">|</span>
+                )}
+              </h1>
+            )}
 
             {descriptionText && (
               <p
@@ -137,9 +214,14 @@ const Hero = ({
                   color: descriptionColor,
                   fontSize: descriptionSize,
                   maxWidth: textWidth,
+                  textAlign: textAlignment,
+                  width: "100%",
                 }}
               >
-                {descriptionText}
+                {descriptionTypewriter.displayText}
+                {descriptionTypewriter.showCursor && (
+                  <span className="animate-pulse">|</span>
+                )}
               </p>
             )}
 
