@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Outfit } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -13,7 +14,7 @@ const outfit = Outfit({
 
 function NavBar() {
   const pathname = usePathname();
-  const blackTextPages = [
+  const useBlackText = [
     "/ContactUs",
     "/AboutUs",
     "/YouthKidsServices",
@@ -24,14 +25,7 @@ function NavBar() {
     "/JoinAMinistryForm",
     "/Volunteer",
     "/UpcomingEvents",
-  ];
-
-  const useBlackText = blackTextPages.includes(pathname);
-
-  const [ministriesHovered, setMinistriesHovered] = useState(false);
-
-  const [ministriesTimeout, setMinistriesTimeout] =
-    useState<NodeJS.Timeout | null>(null);
+  ].includes(pathname);
 
   const navItems = [
     { text: "MINISTRIES", route: "/AdultsMinistries" },
@@ -42,27 +36,135 @@ function NavBar() {
     { text: "VOLUNTEER", route: "/Volunteer" },
   ];
 
-  const [scrolled, setScrolled] = useState(false);
+  const [ministriesHovered, setMinistriesHovered] = useState(false);
+  const [ministriesTimeout, setMinistriesTimeout] =
+    useState<NodeJS.Timeout | null>(null);
+
+  const [shrink, setShrink] = useState(false);
   const [youthHovered, setYouthHovered] = useState(false);
+  const [adultsHovered, setAdultsHovered] = useState(false);
+  const [educationHovered, setEducationHovered] = useState(false);
+  const [communityHovered, setCommunityHovered] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-
+    const handleScroll = () => setShrink(window.scrollY > 30);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navBgClass = scrolled
+  const containerVariants = {
+    hidden: {},
+    show: {
+      transition: { staggerChildren: 0.15 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: -100 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring" as const, stiffness: 300, damping: 15 },
+    },
+  };
+
+  const dropdownVariants = {
+    hidden: { opacity: 0, y: -10, scale: 0.98 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring" as const,
+        stiffness: 200,
+        damping: 20,
+        staggerChildren: 0.05,
+        delayChildren: 0.1,
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: -10,
+      scale: 0.98,
+      transition: {
+        duration: 0.15,
+        staggerChildren: 0.03,
+        staggerDirection: -1,
+      },
+    },
+  };
+
+  const submenuVariants = {
+    hidden: { opacity: 0, x: 10, scale: 0.98 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: {
+        type: "spring" as const,
+        stiffness: 200,
+        damping: 20,
+        staggerChildren: 0.05,
+        delayChildren: 0.1,
+      },
+    },
+    exit: {
+      opacity: 0,
+      x: 10,
+      scale: 0.98,
+      transition: {
+        duration: 0.15,
+        staggerChildren: 0.03,
+        staggerDirection: -1,
+      },
+    },
+  };
+
+  const menuItemVariants = {
+    hidden: { opacity: 0, x: -10, y: -10 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      transition: { type: "spring" as const, stiffness: 200, damping: 20 },
+    },
+    exit: {
+      opacity: 0,
+      x: -10,
+      y: -10,
+      transition: { duration: 0.1 },
+    },
+  };
+
+  const navBgClass = shrink
     ? "bg-dark/90 backdrop-blur-xl shadow-lg"
     : "bg-transparent";
 
   return (
-    <nav
-      className={`flex items-center justify-between w-full h-[104.26px] fixed top-0 left-0 z-50 px-[80px] pt-[24px] pb-[24px] ${navBgClass}`}
+    <motion.nav
+      key={pathname}
+      initial="hidden"
+      animate="show"
+      variants={containerVariants}
+      className={`transition-all duration-500 ease-in-out ${
+        shrink ? "h-[80px] py-[12px]" : "h-[104.26px] py-[24px]"
+      } flex items-center justify-between w-full fixed top-0 left-0 z-50 px-[80px] ${navBgClass}`}
     >
-      <div className="mr-8">
+      <motion.div
+        variants={itemVariants}
+        className="mr-8"
+        whileHover={{
+          scale: 1.1,
+          rotate: [0, -5, 5, -5, 0],
+          transition: {
+            duration: 0.5,
+            rotate: {
+              repeat: 0,
+              duration: 0.5,
+            },
+          },
+        }}
+      >
         <Link href="/Home">
           <Image
             src="/Images/Logos/NavBarLogo.png"
@@ -71,9 +173,14 @@ function NavBar() {
             height={78.63}
           />
         </Link>
-      </div>
+      </motion.div>
 
-      <ul className="flex items-center list-none m-0 p-0 gap-6 h-[37px]">
+      <motion.ul
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className="flex items-center list-none m-0 p-0 gap-6 h-[37px]"
+      >
         {navItems.map((item) => {
           const isMinistries = item.text === "MINISTRIES";
           const liProps = isMinistries
@@ -83,17 +190,21 @@ function NavBar() {
                   setMinistriesHovered(true);
                 },
                 onMouseLeave: () => {
-                  const timeout = setTimeout(() => {
-                    setMinistriesHovered(false);
-                  }, 150); // 👈 you can tweak this delay
+                  const timeout = setTimeout(
+                    () => setMinistriesHovered(false),
+                    150
+                  );
                   setMinistriesTimeout(timeout);
                 },
               }
             : {};
 
           return (
-            <li
+            <motion.li
               key={item.text}
+              variants={itemVariants}
+              whileHover={{ scale: 1.08 }}
+              transition={{ type: "spring", stiffness: 300 }}
               className="relative inline-block rounded-xl transition-colors duration-300 hover:bg-[#695532]"
               {...liProps}
             >
@@ -102,8 +213,8 @@ function NavBar() {
                 className={`${
                   outfit.className
                 } flex items-center justify-center gap-1 ${
-                  useBlackText ? "text-black" : "text-white"
-                } no-underline font-semibold text-sm leading-[21px] tracking-[0.02em] uppercase whitespace-nowrap px-3 py-2 rounded-xl`}
+                  useBlackText ? "text-black hover:text-white" : "text-white"
+                } no-underline font-semibold text-sm leading-[21px] tracking-[0.02em] uppercase whitespace-nowrap px-3 py-2 rounded-xl transition-colors duration-200`}
               >
                 {item.text}
                 {isMinistries && (
@@ -112,147 +223,280 @@ function NavBar() {
                       src={
                         useBlackText
                           ? ministriesHovered
-                            ? "/Images/Icons/ArrowUpBlack.png"
+                            ? "/Images/Icons/ArrowUpWhite.png"
                             : "/Images/Icons/ArrowDownBlack.png"
                           : ministriesHovered
                           ? "/Images/Icons/ArrowUpWhite.png"
                           : "/Images/Icons/ArrowDownWhite.png"
                       }
                       alt="dropdown arrow"
-                      width={
-                        useBlackText
-                          ? ministriesHovered
-                            ? 16
-                            : 24
-                          : ministriesHovered
-                          ? 16
-                          : 24
-                      }
-                      height={
-                        useBlackText
-                          ? ministriesHovered
-                            ? 16
-                            : 24
-                          : ministriesHovered
-                          ? 16
-                          : 24
-                      }
+                      width={useBlackText ? (ministriesHovered ? 16 : 16) : 16}
+                      height={useBlackText ? (ministriesHovered ? 16 : 16) : 16}
                       className={`${
-                        ministriesHovered ? "ml-[12px]" : "ml-[4px]"
+                        ministriesHovered ? "ml-[4px]" : "ml-[4px]"
                       } transition-transform duration-200`}
                     />
 
-                    {/* ▼ Dropdown Panel */}
-                    {ministriesHovered && (
-                      <ul className="absolute left-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg z-40">
-                        <li
-                          onMouseEnter={() => setYouthHovered(true)}
-                          onMouseLeave={() => setYouthHovered(false)}
-                          className="relative"
+                    <AnimatePresence>
+                      {ministriesHovered && (
+                        <motion.ul
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          variants={dropdownVariants}
+                          className="absolute left-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg z-40 origin-top"
                         >
-                          <Link
-                            href="/YouthKidsServices"
-                            className="flex items-center justify-between px-4 py-3 text-black hover:bg-[#FEFAF1] hover:shadow-md hover:rounded-xl
-l transition-colors duration-200 text-sm font-semibold uppercase tracking-wide"
+                          {/* Example: Youth submenu */}
+                          <motion.li
+                            onMouseEnter={() => setYouthHovered(true)}
+                            onMouseLeave={() => setYouthHovered(false)}
+                            className="relative"
                           >
-                            Youth & Kids Services
-                            <Image
-                              src="/Images/Icons/ArrowRightBlack.png"
-                              alt="right arrow"
-                              width={6}
-                              height={6}
-                            />
-                          </Link>
-
-                          {youthHovered && (
-                            <ul className="absolute left-full top-0 ml-2 w-64 bg-white rounded-xl shadow-lg z-50">
-                              {[
-                                "Sunday School",
-                                "High School",
-                                "Children’s Choir",
-                                "Kids Club",
-                                "Kids Camp",
-                                "Mosaic Club",
-                                "Gym",
-                                "Fine Arts",
-                                "Hymns Practice",
-                              ].map((label) => (
-                                <li key={label}>
-                                  <Link
-                                    href={`/YouthKidsServices#${label
-                                      .toLowerCase()
-                                      .replace(/ /g, "-")
-                                      .replace(/’/g, "")}`}
-                                    className="block px-4 py-3 text-black hover:bg-[#FEFAF1] transition-colors duration-200 text-sm font-medium"
-                                  >
-                                    {label}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </li>
-
-                        <li>
-                          <Link
-                            href="/AdultsMinistries"
-                            className="flex items-center justify-between px-4 py-3 text-black hover:bg-[#FEFAF1] hover:shadow-md hover:rounded-xl transition-colors duration-200 text-sm font-semibold uppercase tracking-wide"
+                            <Link
+                              href="/YouthKidsServices"
+                              className="flex items-center justify-between px-4 py-3 text-black hover:bg-[#FEFAF1] hover:shadow-md hover:rounded-xl transition-colors duration-200 text-sm font-semibold uppercase tracking-wide"
+                            >
+                              Youth & Kids Services
+                              <Image
+                                src="/Images/Icons/ArrowRightBlack.png"
+                                alt="right arrow"
+                                width={6}
+                                height={6}
+                              />
+                            </Link>
+                            <AnimatePresence>
+                              {youthHovered && (
+                                <motion.ul
+                                  initial="hidden"
+                                  animate="visible"
+                                  exit="exit"
+                                  variants={submenuVariants}
+                                  className="absolute left-full top-0 ml-2 w-64 bg-white rounded-xl shadow-lg z-50 origin-left"
+                                >
+                                  {[
+                                    "Sunday School",
+                                    "High School",
+                                    "Children's Choir",
+                                  ].map((label) => (
+                                    <motion.li
+                                      variants={menuItemVariants}
+                                      key={label}
+                                    >
+                                      <Link
+                                        href={`/YouthKidsServices#${label
+                                          .toLowerCase()
+                                          .replace(/ /g, "-")
+                                          .replace(/'/g, "")}`}
+                                        className="block px-4 py-3 text-black hover:bg-[#FEFAF1] transition-colors duration-200 text-sm font-medium"
+                                      >
+                                        {label}
+                                      </Link>
+                                    </motion.li>
+                                  ))}
+                                </motion.ul>
+                              )}
+                            </AnimatePresence>
+                          </motion.li>
+                          {/* Add Adults, Education, Community in same format... */}
+                          <motion.li
+                            onMouseEnter={() => setAdultsHovered(true)}
+                            onMouseLeave={() => setAdultsHovered(false)}
+                            className="relative"
                           >
-                            Adults Ministries
-                            <Image
-                              src="/Images/Icons/ArrowRightBlack.png"
-                              alt="right arrow"
-                              width={6}
-                              height={6}
-                            />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/EducationalServices"
-                            className="flex items-center justify-between px-4 py-3 text-black hover:bg-[#FEFAF1] hover:shadow-md hover:rounded-xl transition-colors duration-200 text-sm font-semibold uppercase tracking-wide"
+                            <Link
+                              href="/AdultsMinistries"
+                              className="flex items-center justify-between px-4 py-3 text-black hover:bg-[#FEFAF1] hover:shadow-md hover:rounded-xl transition-colors duration-200 text-sm font-semibold uppercase tracking-wide"
+                            >
+                              Adults Services
+                              <Image
+                                src="/Images/Icons/ArrowRightBlack.png"
+                                alt="right arrow"
+                                width={6}
+                                height={6}
+                              />
+                            </Link>
+                            <AnimatePresence>
+                              {adultsHovered && (
+                                <motion.ul
+                                  initial="hidden"
+                                  animate="visible"
+                                  exit="exit"
+                                  variants={submenuVariants}
+                                  className="absolute left-full top-0 ml-2 w-64 bg-white rounded-xl shadow-lg z-50 origin-left"
+                                >
+                                  {[
+                                    "Young Adult Ministries",
+                                    "Pope Kyrillos Family Meeting",
+                                    "Marriage Preparation",
+                                    "Family Services",
+                                    "Senior Services",
+                                    "Adults Choir",
+                                    "Usher Service",
+                                  ].map((label) => (
+                                    <motion.li
+                                      variants={menuItemVariants}
+                                      key={label}
+                                    >
+                                      <Link
+                                        href={`/AdultsMinistries#${label
+                                          .toLowerCase()
+                                          .replace(/ /g, "-")
+                                          .replace(/'/g, "")}`}
+                                        className="block px-4 py-3 text-black hover:bg-[#FEFAF1] transition-colors duration-200 text-sm font-medium"
+                                      >
+                                        {label}
+                                      </Link>
+                                    </motion.li>
+                                  ))}
+                                </motion.ul>
+                              )}
+                            </AnimatePresence>
+                          </motion.li>
+                          <motion.li
+                            onMouseEnter={() => setEducationHovered(true)}
+                            onMouseLeave={() => setEducationHovered(false)}
+                            className="relative"
                           >
-                            Educational Services
-                            <Image
-                              src="/Images/Icons/ArrowRightBlack.png"
-                              alt="right arrow"
-                              width={6}
-                              height={6}
-                            />
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/CommunityServices"
-                            className="flex items-center justify-between px-4 py-3 text-black hover:bg-[#FEFAF1] hover:shadow-md hover:rounded-xl transition-colors duration-200 text-sm font-semibold uppercase tracking-wide"
+                            <Link
+                              href="/EducationalServices"
+                              className="flex items-center justify-between px-4 py-3 text-black hover:bg-[#FEFAF1] hover:shadow-md hover:rounded-xl transition-colors duration-200 text-sm font-semibold uppercase tracking-wide"
+                            >
+                              Educational Services
+                              <Image
+                                src="/Images/Icons/ArrowRightBlack.png"
+                                alt="right arrow"
+                                width={6}
+                                height={6}
+                              />
+                            </Link>
+                            <AnimatePresence>
+                              {educationHovered && (
+                                <motion.ul
+                                  initial="hidden"
+                                  animate="visible"
+                                  exit="exit"
+                                  variants={submenuVariants}
+                                  className="absolute left-full top-0 ml-2 w-64 bg-white rounded-xl shadow-lg z-50 origin-left"
+                                >
+                                  {[
+                                    {
+                                      label: "Let There Be Light",
+                                      subtitle: "(Foundations + Apologetics)",
+                                    },
+                                    {
+                                      label: "St. Moses the Strong",
+                                      subtitle:
+                                        " (Continuing Servant Education)",
+                                    },
+                                    { label: "Catechesis Program" },
+                                    { label: "Servants Preparation" },
+                                    { label: "Bible Studies" },
+                                  ].map(({ label, subtitle }) => (
+                                    <motion.li
+                                      variants={menuItemVariants}
+                                      key={label}
+                                    >
+                                      <Link
+                                        href={`/Education#${label
+                                          .toLowerCase()
+                                          .replace(/ /g, "-")
+                                          .replace(/'/g, "")}`}
+                                        className="block px-4 py-3 text-black hover:bg-[#FEFAF1] transition-colors duration-200 text-sm font-medium"
+                                      >
+                                        {label}
+                                        {subtitle && (
+                                          <div className="text-xs text-gray-500 leading-tight">
+                                            {subtitle}
+                                          </div>
+                                        )}
+                                      </Link>
+                                    </motion.li>
+                                  ))}
+                                </motion.ul>
+                              )}
+                            </AnimatePresence>
+                          </motion.li>
+                          <motion.li
+                            onMouseEnter={() => setCommunityHovered(true)}
+                            onMouseLeave={() => setCommunityHovered(false)}
+                            className="relative"
                           >
-                            Community Services
-                            <Image
-                              src="/Images/Icons/ArrowRightBlack.png"
-                              alt="right arrow"
-                              width={6}
-                              height={6}
-                            />
-                          </Link>
-                        </li>
-                      </ul>
-                    )}
+                            <Link
+                              href="/CommunityServices"
+                              className="flex items-center justify-between px-4 py-3 text-black hover:bg-[#FEFAF1] hover:shadow-md hover:rounded-xl transition-colors duration-200 text-sm font-semibold uppercase tracking-wide"
+                            >
+                              Community Services
+                              <Image
+                                src="/Images/Icons/ArrowRightBlack.png"
+                                alt="right arrow"
+                                width={6}
+                                height={6}
+                              />
+                            </Link>
+                            <AnimatePresence>
+                              {communityHovered && (
+                                <motion.ul
+                                  initial="hidden"
+                                  animate="visible"
+                                  exit="exit"
+                                  variants={submenuVariants}
+                                  className="absolute left-full top-0 ml-2 w-64 bg-white rounded-xl shadow-lg z-50 origin-left"
+                                >
+                                  {[
+                                    "Family Retreat Services",
+                                    "Maintenance Group",
+                                    "Newcomer Services",
+                                    "Homeless Ministry",
+                                    "Kitchen Service",
+                                    "St. Joseph Bookstore",
+                                    "Gym Service",
+                                    "Ray of Hope",
+                                    "Ride Service",
+                                  ].map((label) => (
+                                    <motion.li
+                                      variants={menuItemVariants}
+                                      key={label}
+                                    >
+                                      <Link
+                                        href={`/CommunityServices#${label
+                                          .toLowerCase()
+                                          .replace(/ /g, "-")
+                                          .replace(/'/g, "")}`}
+                                        className="block px-4 py-3 text-black hover:bg-[#FEFAF1] hover:shadow-md hover:rounded-xl transition-colors duration-200 text-sm font-medium"
+                                      >
+                                        {label}
+                                      </Link>
+                                    </motion.li>
+                                  ))}
+                                </motion.ul>
+                              )}
+                            </AnimatePresence>
+                          </motion.li>
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
                   </>
                 )}
               </Link>
-            </li>
+            </motion.li>
           );
         })}
-      </ul>
+      </motion.ul>
 
-      <button
+      <motion.button
+        variants={itemVariants}
+        whileHover={{
+          scale: 1.06,
+          boxShadow: "0px 0px 12px rgba(224, 174, 84, 0.7)",
+        }}
+        transition={{ type: "spring", stiffness: 300 }}
         className={`${outfit.className} bg-[#E0AE54] ${
           useBlackText ? "text-black" : "text-black"
-        } border-none rounded-lg px-4 py-3 leading-[21px] font-semibold uppercase text-sm cursor-pointer transition-colors duration-300 hover:bg-[#B18F54]`}
+        } border-none rounded-lg px-6 py-3 leading-[21px] font-semibold uppercase text-sm cursor-pointer transition-colors duration-300 hover:bg-[#B18F54]`}
       >
         SCHEDULE A SPACE
-      </button>
-    </nav>
+      </motion.button>
+    </motion.nav>
   );
 }
 
