@@ -1,10 +1,14 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Hero from "../components/Hero";
 import CalendarViewSwitcherWrapper from "../components/Calendar/CalenarViewSwitcherWrapper";
 import { Urbanist, Outfit, Raleway, Zilla_Slab } from "next/font/google";
 import ImageTextBlock from "../components/ImageTextBlock";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import MahraganKids from "../../public/Images/Home/MahraganKids.jpg";
 import Choir from "../../public/Images/Home/Choir.jpeg";
 import Tasbeha from "../../public/Images/Home/St.MaryTasbeha.jpeg";
@@ -34,56 +38,207 @@ const zillaSlab = Zilla_Slab({
 });
 
 export default function Home() {
+  const [calendarView, setCalendarView] = useState<"day" | "week" | "month">("day");
+  
+  // Calculate dynamic height based on calendar view
+  const getCalendarSectionHeight = () => {
+    switch (calendarView) {
+      case "day":
+        return "h-[1200px]"; // Reduced height for day view
+      case "week":
+        return "h-[1600px]"; // Medium height for week view
+      case "month":
+        return "h-[2175px]"; // Original height for month view
+      default:
+        return "h-[1200px]";
+    }
+  };
+
   {
     /* ------------------------------------HOME PAGE------------------------------------- */
   }
 
   return (
     <>
-      <div className="relative w-full min-h-screen overflow-visible">
-        {/* GLOBAL BACKGROUND IMAGE */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0 transform translate-y-[-28.5%]">
-            <Image
-              src="/Images/StMaryChurchBackground.png"
-              alt="Home Church"
-              fill
-              priority
-              className="object-cover brightness-[1.1] transition-all duration-500"
-              style={{
-                objectPosition: "62.5%",
+      <div className="relative w-full min-h-screen overflow-hidden">
+        {/* BACKGROUND IMAGE SECTION - St Mary Church Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none bg-[#171E34]">
+          <div className="relative w-full h-full overflow-hidden">
+            <motion.div
+              initial={{
+                opacity: 0,
+                scale: 1.3,
+                y: 50,
+                filter: "blur(8px)",
               }}
-            />
+              animate={{
+                opacity: 1,
+                scale: 1.1,
+                y: 0,
+                filter: "blur(0px)",
+              }}
+              transition={{
+                duration: 2.5,
+                ease: "easeOut",
+                delay: 0.2,
+              }}
+              className="relative w-full h-full"
+            >
+              <Image
+                src="/Images/Home/StMaryChurchBackground.png"
+                alt="St Mary Church Background"
+                width={1512}
+                height={379.7890625}
+                className="object-cover object-center -translate-y-75 -translate-x-9.5 scale-110"
+              />
+
+              {/* Animated overlay for depth */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.15 }}
+                transition={{ duration: 3, delay: 1 }}
+                className="absolute inset-0 bg-gradient-to-b from-transparent via-[#171E34]/20 to-[#171E34]/40"
+              />
+
+              {/* Subtle floating particles */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 2, delay: 1.5 }}
+                className="absolute inset-0 pointer-events-none"
+              >
+                {[...Array(8)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{
+                      opacity: 0,
+                      y: 20,
+                      x: Math.random() * 100,
+                      scale: 0,
+                    }}
+                    animate={{
+                      opacity: [0, 0.6, 0],
+                      y: -80,
+                      x: Math.random() * 200,
+                      scale: [0, 1, 0.5],
+                    }}
+                    transition={{
+                      duration: 4 + Math.random() * 2,
+                      delay: Math.random() * 3,
+                      repeat: Infinity,
+                      repeatType: "loop",
+                    }}
+                    className="absolute w-1 h-1 bg-white rounded-full"
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      top: `${80 + Math.random() * 20}%`,
+                    }}
+                  />
+                ))}
+              </motion.div>
+            </motion.div>
+            {/* Subtle overlay to ensure text readability */}{" "}
           </div>
         </div>
-        <div className="bg-[#171E34] overflow-visible">
-          <div className="w-full h-[1000px] md:h-[800px] sm:h-[750px] pt-[100px] relative overflow-visible">
+
+        <div className="bg-gradient-to-b from-[rgba(23,30,52,0.3)] via-[rgba(23,30,52,0.2)] to-[rgba(23,30,52,0.4)] overflow-hidden">
+          <div className="w-full h-[1000px] md:h-[800px] sm:h-[750px] pt-[100px] relative overflow-hidden">
             {/* 1st Header Section */}
-            <div className="w-[1512px] h-[548px] mx-auto relative px-[100px] flex justify-center items-center gap-[24px]">
+            <div className="w-full max-w-[1512px] h-[548px] mx-auto relative px-[100px] flex justify-center items-center gap-[24px]">
               {/* Text Components Frame*/}
-              <div className="w-[1124px] h-[411px] gap-[26px] flex flex-col items-center justify-center">
+              <div className="w-full max-w-[1124px] h-[411px] gap-[26px] flex flex-col items-center justify-center">
                 {/* Text Components */}
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center gap-[32px] pt-10">
                   {/* Living Orthodoxy */}
-                  <div className="w-[267px] h-[41px] rounded-[25px] py-[6px] px-[14px] gap-[8px] bg-[#FDEFD5] shadow-[0_6px_24px_rgba(0,0,0,1)]">
+                  <motion.div
+                    initial={{ opacity: 0, y: -50, rotate: -10 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      rotate: 0,
+                      transition: {
+                        duration: 0.8,
+                        delay: 0.3,
+                        type: "spring",
+                        stiffness: 120,
+                      },
+                    }}
+                    whileHover={{
+                      scale: 1.05,
+                      rotate: [0, -2, 2, -2, 0],
+                      transition: {
+                        rotate: {
+                          duration: 0.5,
+                          repeat: Infinity,
+                          repeatType: "reverse",
+                        },
+                      },
+                    }}
+                    className="w-[267px] h-[41px] rounded-[25px] py-[6px] px-[14px] gap-[8px] bg-[#FDEFD5] bg-opacity-95 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-sm cursor-pointer"
+                  >
                     <p
                       className={`${zillaSlab.className} w-[239px] h-[29px] font-[600] text-[24px] leading-[120%] tracking-[0.02em] text-[#896F41] drop-shadow-md`}
                     >
                       LIVING ORTHODOXY
                     </p>
-                  </div>
+                  </motion.div>
 
                   {/* Faith, Family, Fellowship */}
-                  <div className="w-full h-[80px]">
-                    <h3
-                      className={`${outfit.className} font-[700] text-[64px] tracking-[0.02em] text-white drop-shadow-xl`}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      duration: 1.2,
+                      delay: 0.6,
+                      type: "spring",
+                      bounce: 0.4,
+                    }}
+                    className="w-full h-[80px] relative"
+                  >
+                    <motion.h3
+                      className={`${outfit.className} font-[700] text-[64px] tracking-[0.02em] text-white drop-shadow-2xl`}
                       style={{
-                        textShadow: "2px 4px 6px rgba(0, 0, 0, 0.8)",
+                        textShadow:
+                          "3px 6px 12px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.5)",
+                      }}
+                      initial={{ backgroundPosition: "200% 0" }}
+                      animate={{
+                        backgroundPosition: "0 0",
+                        transition: {
+                          duration: 2,
+                          delay: 1.2,
+                          repeat: Infinity,
+                          repeatType: "reverse",
+                        },
+                      }}
+                      whileHover={{
+                        scale: 1.02,
+                        transition: { duration: 0.2 },
                       }}
                     >
-                      FAITH, FAMILY, FELLOWSHIP
-                    </h3>
-                  </div>
+                      <motion.span
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.8 }}
+                      >
+                        FAITH,{" "}
+                      </motion.span>
+                      <motion.span
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 1.0 }}
+                      >
+                        FAMILY,{" "}
+                      </motion.span>
+                      <motion.span
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 1.2 }}
+                      >
+                        FELLOWSHIP
+                      </motion.span>
+                    </motion.h3>
+                  </motion.div>
                 </div>
               </div>
             </div>
@@ -91,41 +246,341 @@ export default function Home() {
         </div>
 
         {/* Yellow Text Section */}
-        <div className="relative bg-[rgba(60,0,0,0.2)] z-10 -mt-[150px] overflow-visible">
-          <div className="w-full h-[380px] mx-auto px-[100px] rounded-[64px] gap-[24px] flex items-center justify-between bg-[rgba(177,143,84,0.8)] z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 100, scale: 0.8 }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            transition: {
+              type: "spring",
+              duration: 1.2,
+              bounce: 0.4,
+            },
+          }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="relative bg-[rgba(60,0,0,0.2)] z-10 -mt-[150px] overflow-hidden"
+        >
+          {/* Floating Particles */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 2, delay: 0.5 }}
+            viewport={{ once: true }}
+            className="absolute inset-0 pointer-events-none"
+          >
+            {[...Array(15)].map((_, i) => (
+              <motion.div
+                key={i}
+                initial={{
+                  opacity: 0,
+                  y: 50,
+                  x: Math.random() * 100 - 50,
+                  scale: 0,
+                }}
+                whileInView={{
+                  opacity: [0, 1, 0],
+                  y: -100,
+                  x: Math.random() * 200 - 100,
+                  scale: [0, 1, 0.5],
+                }}
+                transition={{
+                  duration: 3 + Math.random() * 2,
+                  delay: Math.random() * 2,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                }}
+                viewport={{ once: true }}
+                className="absolute w-2 h-2 bg-white rounded-full opacity-60"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+              />
+            ))}
+          </motion.div>
+
+          {/* Main Content Container */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, rotateX: 15 }}
+            whileInView={{
+              opacity: 1,
+              scale: 1,
+              rotateX: 0,
+              transition: {
+                delay: 0.2,
+                duration: 1.2,
+                type: "spring",
+                bounce: 0.3,
+              },
+            }}
+            viewport={{ once: true }}
+            className="w-full h-[380px] mx-auto px-[100px] rounded-[64px] gap-[24px] flex items-center justify-between bg-[rgba(177,143,84,0.8)] z-10 relative overflow-hidden"
+          >
+            {/* Animated Background Pattern */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 0.1, scale: 1 }}
+              transition={{ duration: 2, delay: 0.8 }}
+              viewport={{ once: true }}
+              className="absolute inset-0 pointer-events-none"
+            >
+              <motion.div
+                animate={{
+                  rotate: [0, 360],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 20,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border-2 border-white rounded-full opacity-20"
+              />
+              <motion.div
+                animate={{
+                  rotate: [360, 0],
+                  scale: [1, 0.9, 1],
+                }}
+                transition={{
+                  duration: 15,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] border border-white rounded-full opacity-10"
+              />
+            </motion.div>
+
             {/* Text and Button Section */}
-            <div className="w-full h-[144px] gap-[158px] flex justify-between items-center">
+            <div className="w-full h-[144px] gap-[120px] flex justify-between items-center relative z-10">
               {/* Text */}
-              <p
-                className={`${outfit.className} w-[969px] h-[144px] font-[700] text-[40px] leading-[120%] tracking-[0.02em] text-white`}
+              <motion.div
+                initial={{ opacity: 0, x: -100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 0.6,
+                  type: "spring",
+                  bounce: 0.4,
+                }}
+                viewport={{ once: true }}
+                className="relative"
               >
-                Join us at St. Mary and St. Maurice's Coptic Orthodox Church,
-                where ancient traditions meet modern hearts in Kitchener.
-              </p>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
+                  viewport={{ once: true }}
+                  className={`${outfit.className} w-full max-w-[969px] h-[144px] font-[700] text-[40px] leading-[120%] tracking-[0.02em] text-white relative z-10`}
+                >
+                  <motion.span
+                    initial={{ opacity: 0, y: 20, rotateX: 90 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    transition={{ duration: 0.6, delay: 1.0 }}
+                    viewport={{ once: true }}
+                    className="inline-block mr-2"
+                  >
+                    Join us at
+                  </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0, y: 20, rotateX: 90 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    transition={{ duration: 0.6, delay: 1.2 }}
+                    viewport={{ once: true }}
+                    className="inline-block text-white font-[800] mr-2"
+                  >
+                    St. Mary and St. Maurice&apos;s
+                  </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0, y: 20, rotateX: 90 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    transition={{ duration: 0.6, delay: 1.4 }}
+                    viewport={{ once: true }}
+                    className="inline-block mr-2"
+                  >
+                    Coptic Orthodox Church, where
+                  </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0, y: 20, rotateX: 90 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    transition={{ duration: 0.6, delay: 1.6 }}
+                    viewport={{ once: true }}
+                    className="inline-block mr-2"
+                  >
+                    <span className="relative z-10">ancient traditions</span>
+                  </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0, y: 20, rotateX: 90 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    transition={{ duration: 0.6, delay: 1.8 }}
+                    viewport={{ once: true }}
+                    className="inline-block mr-2"
+                  >
+                    meet
+                  </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0, y: 20, rotateX: 90 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    transition={{ duration: 0.6, delay: 2.0 }}
+                    viewport={{ once: true }}
+                    className="inline-block mr-2"
+                  >
+                    <span className="relative z-10">modern hearts</span>
+                  </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0, y: 20, rotateX: 90 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    transition={{ duration: 0.6, delay: 2.2 }}
+                    viewport={{ once: true }}
+                    className="inline-block"
+                  >
+                    in Kitchener.
+                  </motion.span>
+                </motion.p>
+
+                {/* Text Glow Effect */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: 0.3, scale: 1 }}
+                  transition={{ duration: 2, delay: 2.5 }}
+                  viewport={{ once: true }}
+                  className="absolute inset-0 bg-gradient-to-r from-white to-gray-200 blur-xl opacity-20 -z-10"
+                />
+              </motion.div>
 
               {/* Button */}
-              <div>
-                <button
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
+                whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                transition={{
+                  duration: 1.2,
+                  delay: 2.8,
+                  type: "spring",
+                  bounce: 0.6,
+                }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                {/* Button Glow Effect */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1, delay: 3.0 }}
+                  viewport={{ once: true }}
+                  className="absolute inset-0 bg-[#171E34] rounded-[8px] blur-sm"
+                />
+
+                <motion.div
+                  animate={{
+                    boxShadow: [
+                      "0 0 20px rgba(23, 30, 52, 0.3)",
+                      "0 0 40px rgba(23, 30, 52, 0.6)",
+                      "0 0 20px rgba(23, 30, 52, 0.3)",
+                    ],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                  }}
+                  className="absolute inset-0 bg-[#171E34] rounded-[8px]"
+                />
+
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow:
+                      "0 8px 30px rgba(23, 30, 52, 0.4), 0 4px 15px rgba(23, 30, 52, 0.3)",
+                    transition: {
+                      duration: 0.3,
+                      type: "spring",
+                      stiffness: 300,
+                    },
+                  }}
+                  whileTap={{ scale: 0.98 }}
                   className={`${outfit.className} w-[185px] h-[45px] bg-[#171E34] text-white font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] 
-                    flex items-center justify-center transition duration-300 ease-out hover:bg-red-800`}
+                    flex items-center justify-center relative z-10 overflow-hidden cursor-pointer
+                    shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out
+                    hover:bg-[#1f2640] active:bg-[#151a2e]`}
                 >
-                  VISIT US THIS SUNDAY
-                </button>
-              </div>
+                  <motion.span
+                    className="relative z-10"
+                    whileHover={{
+                      textShadow: "0 2px 8px rgba(255, 255, 255, 0.3)",
+                      transition: { duration: 0.2 },
+                    }}
+                  >
+                    VISIT US THIS SUNDAY
+                  </motion.span>
+
+                  {/* Button Shine Effect */}
+                  <motion.div
+                    initial={{ x: "-100%", opacity: 0 }}
+                    whileInView={{ x: "100%", opacity: [0, 1, 0] }}
+                    transition={{ duration: 2, delay: 3.5 }}
+                    viewport={{ once: true }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 skew-x-12"
+                  />
+
+                  {/* Hover shine effect */}
+                  <motion.div
+                    initial={{ x: "-100%", opacity: 0 }}
+                    whileHover={{
+                      x: "100%",
+                      opacity: [0, 0.3, 0],
+                      transition: { duration: 0.6, ease: "easeInOut" },
+                    }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 skew-x-12"
+                  />
+                </motion.button>
+              </motion.div>
             </div>
-          </div>
-        </div>
+
+            {/* Corner Decorations */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0, rotate: -180 }}
+              whileInView={{ opacity: 0.6, scale: 1, rotate: 0 }}
+              transition={{ duration: 1.5, delay: 1.5 }}
+              viewport={{ once: true }}
+              className="absolute top-4 left-4 w-8 h-8 border-2 border-white rounded-full"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0, rotate: 180 }}
+              whileInView={{ opacity: 0.6, scale: 1, rotate: 0 }}
+              transition={{ duration: 1.5, delay: 1.7 }}
+              viewport={{ once: true }}
+              className="absolute top-4 right-4 w-8 h-8 border-2 border-white rounded-full"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0, rotate: -180 }}
+              whileInView={{ opacity: 0.6, scale: 1, rotate: 0 }}
+              transition={{ duration: 1.5, delay: 1.9 }}
+              viewport={{ once: true }}
+              className="absolute bottom-4 left-4 w-8 h-8 border-2 border-white rounded-full"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0, rotate: 180 }}
+              whileInView={{ opacity: 0.6, scale: 1, rotate: 0 }}
+              transition={{ duration: 1.5, delay: 2.1 }}
+              viewport={{ once: true }}
+              className="absolute bottom-4 right-4 w-8 h-8 border-2 border-white rounded-full"
+            />
+          </motion.div>
+        </motion.div>
 
         {/* CALENDAR SECTION */}
         <section
-          className="relative w-full h-[2175px] bg-[#430600] text-white z-0"
+          className={`relative w-full ${getCalendarSectionHeight()} bg-[#430600] text-white z-50 transition-all duration-500 ease-in-out`}
           style={{
-            clipPath: "polygon(50% 30%, 100% 0, 100% 100%, 0 100%, 0 0)",
+            clipPath: "polygon(50% 20%, 100% 0, 100% 100%, 0 100%, 0 0)",
           }}
         >
-          {/* Cross overlapping the triangle tip */}
           {/* Faint Cross in Calendar Background */}
-          <div className="absolute top-[75%] left-[-4%] w-[300px] h-[300px] opacity-100 z-0 pointer-events-none">
+          <div className="absolute top-[50%] left-[-4%] w-[300px] h-[300px] opacity-100 z-0 pointer-events-none">
             <Image
               src="/Images/Home/Calendar/Cross.png"
               alt="Faint Calendar Background Cross"
@@ -134,7 +589,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="absolute top-[70%] left-[-2.5%] w-[300px] h-[300px] opacity-100 z-0 pointer-events-none">
+          <div className="absolute top-[45%] left-[-2.5%] w-[300px] h-[300px] opacity-100 z-0 pointer-events-none">
             <Image
               src="/Images/Home/Calendar/Circle.png"
               alt="Faint Calendar Background Circle"
@@ -144,46 +599,131 @@ export default function Home() {
             />
           </div>
 
-          <div className="absolute top-[31.5%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
-            <Image
-              src="/Images/Home/WhiteCross.png"
-              alt="Gold Cross"
-              width={40}
-              height={40}
-            />
-          </div>
-
-          <div className="max-w-[1512px] px-[100px] pt-[263px] pb-[40px] mx-auto"></div>
+          <div className="max-w-[1512px] px-[100px] pt-[80px] pb-[40px] mx-auto"></div>
           <section className="w-full md:px-12 xl:px-24 py-110 bg-[#430600]">
             <div className="max-w-[1312px] mx-auto space-y-10">
-              <div className="text-center">
-                <h2
-                  className={`${outfit.className} text-[36px] md:text-3xl font-[700] leading-[120%] tracking-[0.02em] text-white`}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <motion.h2
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className={`${outfit.className} text-[64px] md:text-5xl font-[700] leading-[120%] tracking-[0.02em] text-white`}
                 >
                   UPCOMING EVENTS & COMMUNITY ANNOUNCEMENTS
-                </h2>
-                <p
-                  className={`${outfit.className} text-[20px] md:text-base mt-2 font-[700] leading-[120%] tracking-[0.02em] text-white`}
+                </motion.h2>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  viewport={{ once: true }}
+                  className={`${outfit.className} text-[32px] md:text-2xl mt-2 font-[700] leading-[120%] tracking-[0.02em] text-white`}
                 >
                   Stay Updated with Our Upcoming Church Events and Activities
-                </p>
-              </div>
-              <CalendarViewSwitcherWrapper />
+                </motion.p>
+              </motion.div>
+              <CalendarViewSwitcherWrapper onViewChange={setCalendarView} />
+
+              {/* EXPLORE CHURCH EVENTS Button */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
+                whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                transition={{
+                  duration: 1.2,
+                  delay: 0.5,
+                  type: "spring",
+                  bounce: 0.6,
+                }}
+                viewport={{ once: true }}
+                className="relative flex justify-center mt-8 pt-12"
+              >
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow:
+                      "0 8px 30px rgba(224, 174, 84, 0.4), 0 4px 15px rgba(224, 174, 84, 0.3)",
+                    transition: {
+                      duration: 0.3,
+                      type: "spring",
+                      stiffness: 300,
+                    },
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`${outfit.className} w-[216px] h-[45px] bg-[#E0AE54] text-[#430600] font-[600] text-[12px] leading-[120%] tracking-[0.02em] rounded-[8px] 
+                    flex items-center justify-center relative z-10 overflow-hidden cursor-pointer
+                    shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out
+                    hover:bg-[#d4a049] active:bg-[#c89840] flex-shrink-0 whitespace-nowrap`}
+                >
+                  <motion.span
+                    className="relative z-10"
+                    whileHover={{
+                      textShadow: "0 2px 8px rgba(67, 6, 0, 0.3)",
+                      transition: { duration: 0.2 },
+                    }}
+                  >
+                    EXPLORE CHURCH EVENTS
+                  </motion.span>
+
+                  {/* Button Shine Effect */}
+                  <motion.div
+                    initial={{ x: "-100%", opacity: 0 }}
+                    whileInView={{ x: "100%", opacity: [0, 1, 0] }}
+                    transition={{ duration: 2, delay: 1.2 }}
+                    viewport={{ once: true }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 skew-x-12"
+                  />
+
+                  {/* Hover shine effect */}
+                  <motion.div
+                    initial={{ x: "-100%", opacity: 0 }}
+                    whileHover={{
+                      x: "100%",
+                      opacity: [0, 0.3, 0],
+                      transition: { duration: 0.6, ease: "easeInOut" },
+                    }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 skew-x-12"
+                  />
+                </motion.button>
+              </motion.div>
             </div>
           </section>
         </section>
       </div>
 
       {/* 35 YEARS OF SERVICE VIDEO SECTION */}
-      <div className="w-full pt-[100px] pr-[100px] pl-[100px] pb-[100px] gap-[80px] bg-[#E8E9EB] items-center text-center flex flex-col">
-        <h3
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+        className="w-full pt-[100px] pr-[100px] pl-[100px] pb-[100px] gap-[80px] bg-[#E8E9EB] items-center text-center flex flex-col"
+      >
+        <motion.h3
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
           className={`${outfit.className} font-bold text-4xl leading-[120%] tracking-[0.02em] text-[#0A0D16]`}
         >
           35 YEARS OF SERVICE
-        </h3>
+        </motion.h3>
 
         {/* 🎥 Video Block */}
-        <video
+        <motion.video
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          viewport={{ once: true }}
           className="max-w-7xl w-full h-auto rounded-lg shadow-lg"
           controls
           autoPlay={false}
@@ -191,8 +731,8 @@ export default function Home() {
         >
           <source src="/videos/Abouna35thAnniversary.mp4" type="video/mp4" />
           Your browser does not support the video tag.
-        </video>
-      </div>
+        </motion.video>
+      </motion.div>
 
       {/* Youth & Kids */}
       <ImageTextBlock
@@ -305,11 +845,11 @@ export default function Home() {
         btnHoverColor="#171E34"
         btnTextColor="#FFFFFF"
       >
-        St. Mary and St. Maurice's Coptic Orthodox Church in Kitchener embodied
-        a fusion of Orthodox tradition with a vibrant community spirit. Here,
-        faith, education, and service unite, fostering spiritual growth and
-        compassionate outreach. All are welcome to explore faith and journey
-        together in Christ's love.
+        St. Mary and St. Maurice&apos;s Coptic Orthodox Church in Kitchener
+        embodied a fusion of Orthodox tradition with a vibrant community spirit.
+        Here, faith, education, and service unite, fostering spiritual growth
+        and compassionate outreach. All are welcome to explore faith and journey
+        together in Christ&apos;s love.
       </ImageTextBlock>
 
       {/* Book & Schedule */}
@@ -432,7 +972,7 @@ export default function Home() {
       ></Hero>
 
       {/* Captured Moments */}
-      <div className="w-full bg-[#E8E9EB] flex flex-col items-center pb-25">
+      <div className="w-full bg-[#E8E9EB] flex flex-col items-center pb-25 px-6 md:px-12">
         <Hero
           backgroundColor="#E8E9EB"
           altText="Priests and Bishop in Altar"
@@ -458,8 +998,10 @@ export default function Home() {
           <Image
             src="/images/Clergy.jpg"
             alt="Clergy in Altar"
-            fill
-            className="object-cover"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-xl"
+            priority
           />
 
           {/* Centered Play Button */}
@@ -588,6 +1130,16 @@ export default function Home() {
             </form>
           </div>
         </div>
+      </div>
+
+      {/* Cross overlapping the triangle bottom tip - positioned to overlay everything */}
+      <div className="absolute top-[1466px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[9999] pointer-events-none">
+        <Image
+          src="/Images/Home/WhiteCross.png"
+          alt="Gold Cross"
+          width={40}
+          height={40}
+        />
       </div>
     </>
   );

@@ -59,16 +59,19 @@ export default function EducationalServices() {
     <>
       <Hero
         image={SoccerWatchingStMauriceHallPicture}
-        altText="Youth gathered with Fr. Jeremiah in St. Maurice Hall watching a soccer game on the projector screen"
-        textPosition="Center"
-        title={<div className="pt-[50px]">Educational Services</div>}
+        altText="Vespers in St Mary's church"
+        title={<div className="pt-30 text-center">Educational Services</div>}
+        titleSize="64px"
         textColor="#0D111D"
         textWidth="1312px"
-        overlayColor="#FEFAF1"
+        overlayColor="#FEFAF1CC"
         overlayOpacity={0.8}
         height="464px"
         imagePlacement="47%"
-      ></Hero>
+        textPosition="Center"
+        contentAlignment="center"
+      />
+
       <ImageTextBlock
         inverted={false}
         title="Enrich Your Journey"

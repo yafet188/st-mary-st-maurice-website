@@ -39,10 +39,7 @@ export default function CommunityServices() {
       image: "/Images/CommunityServices/Newcomers.png",
       title: "Newcomer Services",
       subheading: "Embracing New Beginnings",
-      description: `Welcome Home!\nOur church warmly welcomes new members with comprehensive Newcomer Services and is ready to assist
-      with integration into both the church and the local community.\n\nAirport pickup\n Help with government documents like SIN and Health Cards.
-      \nGuidance on banking\nProvide essential information for settling in, such as housing, schooling, and furniture.
-      \n\nAdvice on navigating Canadian government support programs. Job finding assistance.`,
+      description: `Welcome Home! Our church warmly welcomes new members with comprehensive Newcomer Services to assist with integration into both the church and the local community.\n\nOur services include:\n• Airport pickup service\n• Government document assistance\n• Banking guidance\n• Housing and education support\n• Basic furniture provision\n• Settlement program guidance`,
       buttontext: "CONTACT US",
     },
     {
@@ -114,6 +111,7 @@ export default function CommunityServices() {
             Community Services <br></br> Serving and Supporting Together
           </div>
         }
+        titleSize="64px"
         textColor="#0D111D"
         textWidth="1312px"
         overlayColor="#FEFAF1"
@@ -123,14 +121,13 @@ export default function CommunityServices() {
       ></Hero>
       <ImageTextBlock
         inverted={false}
-        title="Nurturing Spiritual Growth"
+        title="Fostering Care and Connection"
         image={StMauriceChurchFromBackPicture}
         altText="Fr. Athansius praying over newly wed couple in St. Mary's Church"
         bgColor="#FEFAF1"
       >
-        Enriching the spiritual journey of our adult and senior parishioners by
-        engaging them with us through tailored programs that foster community
-        connections and personal development.
+        We share various community services designed to support and enrich the
+        lives of our parishioners and the local community. 
       </ImageTextBlock>
       <div className="w-full px-[100px] py-[100px] gap-[80px] flex flex-col items-center justify-center bg-[#171E34]">
         {/* Title */}

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import { Urbanist, Outfit, Zilla_Slab } from "next/font/google";
 import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -79,6 +80,19 @@ const useTypewriter = (text: string, speed: number = 50, delay: number = 0) => {
   return { displayText, isComplete, showCursor };
 };
 
+const imageVariants = {
+  hidden: {
+    scale: 1.2,
+    opacity: 0,
+    transition: { duration: 0 },
+  },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: { duration: 1.2 },
+  },
+} as const;
+
 const Hero = ({
   backgroundColor,
   image,
@@ -88,6 +102,7 @@ const Hero = ({
   subtitle,
   textPosition = "Center",
   overlayColor,
+  overlayOpacity,
   textColor = "black",
   textWidth,
   height = "460px",
@@ -124,12 +139,12 @@ const Hero = ({
   };
 
   // Use custom typewriter hooks
-  const titleTypewriter = useTypewriter(inView ? getTitleText() : "", 100, 250);
+  const titleTypewriter = useTypewriter(inView ? getTitleText() : "", 50, 500);
 
   const descriptionTypewriter = useTypewriter(
     inView && titleTypewriter.isComplete ? descriptionText : "",
     30,
-    500
+    5000
   );
 
   return (
@@ -144,7 +159,12 @@ const Hero = ({
         }}
       >
         {image && (
-          <div className="absolute inset-0 z-0">
+          <motion.div
+            className="absolute inset-0 z-0"
+            initial="hidden"
+            animate="visible"
+            variants={imageVariants}
+          >
             <Image
               src={image}
               alt={altText}
@@ -152,13 +172,18 @@ const Hero = ({
               priority
               className={`object-cover object-[center_${imagePlacement}]`}
             />
-            <div
+            <motion.div
               className="absolute inset-0 z-10"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: overlayOpacity !== undefined ? overlayOpacity : 1,
+              }}
+              transition={{ duration: 1 }}
               style={{
                 backgroundColor: overlayColor || "transparent",
               }}
             />
-          </div>
+          </motion.div>
         )}
 
         <div
@@ -171,8 +196,11 @@ const Hero = ({
         : "justify-center"
     }`}
         >
-          <div
+          <motion.div
             ref={ref}
+            initial={{ opacity: 0, y: 50 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className={`w-full flex flex-col gap-5 ${
               contentAlignment === "left"
                 ? "items-start"
@@ -182,16 +210,22 @@ const Hero = ({
             }`}
           >
             {subtitle && (
-              <h2
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
                 className={`${zilla_slab.className} font-[500] text-[36px] leading-[120%] tracking-[-0.02em] text-black`}
                 style={{ textAlign: textAlignment }}
               >
                 {subtitle}
-              </h2>
+              </motion.h2>
             )}
 
             {title && (
-              <h1
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
                 className={`${outfit.className} font-[700] uppercase items-center text-center justify-center leading-[120%] whitespace-pre-line`}
                 style={{
                   color: textColor,
@@ -204,11 +238,14 @@ const Hero = ({
                 {titleTypewriter.showCursor && (
                   <span className="animate-pulse">|</span>
                 )}
-              </h1>
+              </motion.h1>
             )}
 
             {descriptionText && (
-              <p
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
                 className={`${urbanist.className} leading-[150%]`}
                 style={{
                   color: descriptionColor,
@@ -222,23 +259,29 @@ const Hero = ({
                 {descriptionTypewriter.showCursor && (
                   <span className="animate-pulse">|</span>
                 )}
-              </p>
+              </motion.p>
             )}
 
             {buttonText && (
-              <a href={buttonLink}>
-                <button
-                  className={`${outfit.className} px-6 py-3 mt-4 rounded-[8px] font-semibold transition duration-200`}
-                  style={{
-                    backgroundColor: buttonColor,
-                    color: buttonTextColor,
-                  }}
-                >
-                  {buttonText}
-                </button>
-              </a>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+              >
+                <a href={buttonLink}>
+                  <button
+                    className={`${outfit.className} px-6 py-3 mt-4 rounded-[8px] font-semibold transition duration-200`}
+                    style={{
+                      backgroundColor: buttonColor,
+                      color: buttonTextColor,
+                    }}
+                  >
+                    {buttonText}
+                  </button>
+                </a>
+              </motion.div>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

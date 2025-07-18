@@ -83,7 +83,7 @@ const mockMonth: CalendarDay[][] = [
 
 const MonthView = () => {
   return (
-    <div className="pt-8 space-y-4 text-white">
+    <div className="pt-4 pb-8 space-y-4 text-white">
       {/* Month Label */}
       <div className="text-center">
         <h2 className={`${outfit.className} text-[20px] font-bold`}>

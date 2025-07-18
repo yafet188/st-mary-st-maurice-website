@@ -1,10 +1,8 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
-
-{
-  /*Test Sharobeem*/
-}
-
+import { motion } from "framer-motion";
 import { Urbanist, Outfit, Raleway } from "next/font/google";
 
 const urbanist = Urbanist({
@@ -35,48 +33,84 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <div className="w-[632px] h-[811px] bg-[#E8E9EB] rounded-[16px] p-[32px] gap-[32px] flex flex-col justify-between">
-      {/* Image (Taller) */}
-      <Image
-        src={product.image}
-        alt={product.title}
-        width={568}
-        height={367.81}
-        className="rounded-[24px] object-cover"
-      />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ scale: 1.02 }}
+      className="w-[632px] h-[811px] bg-[#E8E9EB] rounded-[16px] p-[32px] flex flex-col shadow-lg hover:shadow-xl transition-all duration-300"
+    >
+      {/* Image Container with Hover Effect */}
+      <motion.div className="relative overflow-hidden rounded-[24px] mb-[32px]">
+        <motion.div
+          initial={{ scale: 1 }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Image
+            src={product.image}
+            alt={product.title}
+            width={568}
+            height={367.81}
+            className="rounded-[24px] object-cover"
+          />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"
+        />
+      </motion.div>
 
-      {/* Content */}
-      <div className="flex flex-col gap-6 flex-grow">
+      {/* Content with Staggered Animation */}
+      <motion.div
+        className="flex flex-col flex-grow"
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
         {/* Title & Subheading */}
-        <div className="flex flex-col gap-[12px] justify-between">
-          <p
+        <motion.div
+          className="flex flex-col gap-[12px] mb-6"
+          whileHover={{ y: -2 }}
+          transition={{ duration: 0.3 }}
+        >
+          <motion.p
             className={`${urbanist.className} font-[700] text-[#0D111D] text-[28px] leading-[120%] tracking-[0.02em]`}
           >
             {product.title}
-          </p>
-          <p
+          </motion.p>
+          <motion.p
             className={`${raleway.className} font-[600] text-[#0D111D] text-[18px] leading-[120%] tracking-[0.02em]`}
           >
             {product.subheading}
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        {/* Description */}
-        <p
-          className={`${urbanist.className} font-[400] text-[#151B2F] text-[18px] leading-[150%] tracking-[0.02em]`}
+        {/* Description with Fade Effect */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className={`${urbanist.className} font-[400] text-[#151B2F] text-[18px] leading-[150%] tracking-[0.02em] mb-auto`}
         >
           {product.description}
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
 
-      {/* Button at bottom */}
-      <div className="mt-6">
-        <button
-          className={`${outfit.className} w-full h-[45px] bg-white border border-[#E8E9EB] rounded-[8px] text-[#0D111D] text-sm font-semibold tracking-[0.02em] hover:bg-gray-100 transition`}
+      {/* Animated Button */}
+      <motion.div className="mt-6">
+        <motion.button
+          whileHover={{ scale: 1.05, backgroundColor: "#E0AE54" }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2 }}
+          className={`${outfit.className} w-full h-[45px] bg-white border border-[#E8E9EB] rounded-[8px] text-[#0D111D] text-sm font-semibold tracking-[0.02em] hover:text-white transition-all duration-300`}
         >
           {product.buttontext}
-        </button>
-      </div>
-    </div>
+        </motion.button>
+      </motion.div>
+    </motion.div>
   );
 }

@@ -1,17 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CalendarViewSwitcher from "./CalendarViewSwitcher";
 
-export default function CalendarViewSwitcherWrapper() {
+interface Props {
+  onViewChange?: (view: "day" | "week" | "month") => void;
+}
+
+export default function CalendarViewSwitcherWrapper({ onViewChange }: Props) {
   const [calendarView, setCalendarView] = useState<"day" | "week" | "month">(
     "day"
   );
 
+  useEffect(() => {
+    if (onViewChange) {
+      onViewChange(calendarView);
+    }
+  }, [calendarView, onViewChange]);
+
   return (
-    <CalendarViewSwitcher
-      calendarView={calendarView}
-      setCalendarView={setCalendarView}
-    />
+    <div className="min-h-fit">
+      <CalendarViewSwitcher
+        calendarView={calendarView}
+        setCalendarView={setCalendarView}
+      />
+    </div>
   );
 }

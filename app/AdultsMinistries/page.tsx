@@ -86,7 +86,7 @@ export default function AdultsMinistries() {
       <Hero
         image={StMaryVespersPicture}
         altText="Vespers in St Mary's church"
-        title={<div className="pt-30 text-center">Adult Ministries</div>}
+        title="ADULTS MINISTRIES"
         titleSize="64px"
         textColor="#0D111D"
         textWidth="1312px"

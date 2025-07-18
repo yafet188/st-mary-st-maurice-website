@@ -105,8 +105,7 @@ export default function YouthKidsServices() {
     <>
       <Hero
         image={KidsByStMaryAltarPicture}
-        altText="Kids with Fr. Athanasius standing in front of St. Mary's Altar"
-        textPosition="Center"
+        altText="Vespers in St Mary's church"
         title={
           <div className="pt-[50px]">
             Youth & Kids Services
@@ -114,12 +113,14 @@ export default function YouthKidsServices() {
             Growing in Faith and Fun
           </div>
         }
+        titleSize="64px"
         textColor="#0D111D"
         textWidth="1312px"
-        overlayColor="#FEFAF1"
+        overlayColor="#FEFAF1CC"
         overlayOpacity={0.8}
         height="464px"
-        imagePlacement="47%"
+        textPosition="Center"
+        contentAlignment="center"
       ></Hero>
 
       <ImageTextBlock

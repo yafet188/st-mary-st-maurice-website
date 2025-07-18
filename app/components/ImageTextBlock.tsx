@@ -1,7 +1,10 @@
+"use client";
+
 import { ReactNode } from "react";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import { Outfit, Urbanist, Zilla_Slab } from "next/font/google";
+import { motion } from "framer-motion";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -64,43 +67,119 @@ interface RoundedTagProps {
 // Special component specifically to deal with image styling, reassess if necessary
 const RoundedImage = ({ image, altText }: RoundedImageProps) => {
   return (
-    <Image
-      className="w-[616px] h-[392.69px] rounded-[24px] object-cover"
-      src={image}
-      alt={altText}
-    ></Image>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.3, y: 100 }}
+      whileInView={{
+        opacity: 1,
+        scale: 1,
+        y: [100, -20, 0],
+        rotate: [0, -5, 5, 0],
+      }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{
+        duration: 1,
+        ease: "easeOut",
+        y: {
+          duration: 0.8,
+          times: [0, 0.6, 1],
+          ease: "easeOut",
+        },
+        rotate: {
+          duration: 0.8,
+          times: [0, 0.3, 0.6, 1],
+          ease: "easeOut",
+        },
+      }}
+      whileHover={{ scale: 1.05 }}
+    >
+      <motion.div
+        className="relative w-[616px] h-[392.69px] rounded-[24px] shadow-[0_10px_20px_rgba(0,0,0,0.15),_0_5px_10px_rgba(0,0,0,0.10)] transition-all duration-500"
+        style={{
+          perspective: "10000px",
+          transformStyle: "preserve-3d",
+          transition: "transform 0.5s ease-out",
+        }}
+        whileHover={{
+          boxShadow:
+            "0 50px 70px rgba(0,0,0,0.2), 0 10px 15px rgba(0,0,0,0.15)",
+        }}
+        onHoverStart={(e) => {
+          const element = e.target as HTMLElement;
+          element.onmousemove = (mouseEvent) => {
+            const rect = element.getBoundingClientRect();
+            const x = mouseEvent.clientX - rect.left;
+            const y = mouseEvent.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+
+            element.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          };
+        }}
+        onHoverEnd={(e) => {
+          const element = e.target as HTMLElement;
+          element.onmousemove = null;
+          element.style.transform =
+            "perspective(1000px) rotateX(0deg) rotateY(0deg)";
+        }}
+      >
+        <motion.div
+          className="w-full h-full"
+          style={{
+            transformStyle: "preserve-3d",
+          }}
+        >
+          <Image
+            className="w-full h-full rounded-[24px] object-cover"
+            src={image}
+            alt={altText}
+            style={{
+              transformStyle: "preserve-3d",
+            }}
+          />
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 
 // Ditto For Buttons
 const RoundedButton = ({
   children,
-  color,
   borderColor,
   link,
   textColor = "white",
 }: RoundedButtonProps) => {
-  const btnStyle = `${outfit.className} w-auto px-[16px] py-[16px] pt-[12px] pb-[12px] font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] flex items-center justify-center transition duration-300 ease-out bg-[${color}]`;
+  const btnStyle = `${outfit.className} w-auto px-[16px] py-[16px] pt-[12px] pb-[12px] font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] flex items-center justify-center`;
 
   const inlineStyle = {
     color: textColor,
     border: borderColor ? `1.5px solid ${borderColor}` : undefined,
   };
 
+  const MotionButton = () => (
+    <motion.button
+      className={btnStyle}
+      style={inlineStyle}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      {children}
+    </motion.button>
+  );
+
   if (link != "") {
     return (
       <a href={link}>
-        <button className={btnStyle} style={inlineStyle}>
-          {children}
-        </button>
+        <MotionButton />
       </a>
     );
   } else {
-    return (
-      <button className={btnStyle} style={inlineStyle}>
-        {children}
-      </button>
-    );
+    return <MotionButton />;
   }
 };
 
@@ -113,11 +192,27 @@ const RoundedTag = ({
   const textStyle = `${zillaSlab.className} font-[600] text-[20px] md:text-[24px] leading-[120%] tracking-[0.02em] uppercase`;
 
   return (
-    <div className={tagStyle} style={{ backgroundColor: roundedBgColor }}>
+    <motion.div
+      className={tagStyle}
+      style={{ backgroundColor: roundedBgColor }}
+      initial={{ opacity: 0, scale: 0.5, x: -20 }}
+      whileInView={{ opacity: 1, scale: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{
+        duration: 0.6,
+        ease: [0.19, 1, 0.22, 1],
+        scale: { duration: 0.6 },
+      }}
+      whileHover={{
+        scale: 1.05,
+        rotate: [0, -2, 2, 0],
+        transition: { duration: 0.3 },
+      }}
+    >
       <p className={textStyle} style={{ color: roundedTextColor }}>
         {roundedText}
       </p>
-    </div>
+    </motion.div>
   );
 };
 //Ditto For Rounded Tags
@@ -143,22 +238,21 @@ const ImageTextBlock = ({
   btnHoverColor,
   btnTextColor,
 }: ImageTextBlockProps) => {
-  const bgClass =
-    bgColor === "#FEFAF1"
-      ? "bg-[#FEFAF1]"
-      : bgColor === "#E8E9EB"
-      ? "bg-[#E8E9EB]"
-      : bgColor === "#FFFFFF"
-      ? "bg-[#FFFFFF]"
-      : "bg-[#171E34]";
   return (
-    <div className={`w-full ${bgClass} h-[592.69px]`}>
-      <div
-        className={`${bgClass} p-[100px] flex flex-row items-center gap-[80px] w-[1512px] mx-auto`}
+    <div
+      style={{ backgroundColor: bgColor }}
+      className="w-full min-h-[592.69px]"
+    >
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{
+          opacity: 1,
+        }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.3, delay: 0.4 }}
+        className="p-[100px] flex flex-row items-center gap-[80px] max-w-[1512px] w-full mx-auto"
       >
-        {!inverted && (
-          <RoundedImage image={image} altText={altText}></RoundedImage>
-        )}
+        {!inverted && <RoundedImage image={image} altText={altText} />}
         <div className="w-[616px] flex flex-col gap-[24px]">
           {showTag && (
             <RoundedTag
@@ -168,28 +262,57 @@ const ImageTextBlock = ({
             />
           )}
 
-          <h2
+          <motion.h2
             className={`${outfit.className} font-bold text-[36px] leading-[120%] tracking-[2%] uppercase`}
             style={{ color: titleColor }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
             {title}
-          </h2>
+          </motion.h2>
+
           {miniTitle && (
-            <h6 className="font-[outfit] font-bold text-[20px] leading-[120%] tracking-[2%]">
+            <motion.h6
+              className="font-[outfit] font-bold text-[20px] leading-[120%] tracking-[2%]"
+              initial={{ y: 20, opacity: 0, filter: "blur(10px)" }}
+              whileInView={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+            >
               {miniTitle}
-            </h6>
+            </motion.h6>
           )}
-          <div
-            className={`${urbanist.className} text-[${textColor}] font-normal text-[18px] leading-[150%] tracking-[2%] text-[#151B2F]`}
+
+          <motion.div
+            className={`${urbanist.className} font-normal text-[18px] leading-[150%] tracking-[2%] overflow-hidden`}
+            style={{ color: textColor }}
+            initial={{ height: 0, opacity: 0 }}
+            whileInView={{ height: "auto", opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.6 }}
           >
-            {children}
-          </div>
+            <motion.div
+              initial={{ y: 50 }}
+              whileInView={{ y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.6 }}
+            >
+              {children}
+            </motion.div>
+          </motion.div>
+
           {bottomMiniTitle && (
-            <p
+            <motion.p
               className={`${outfit.className} font-bold text-[18px] leading-[150%] tracking-[2%]`}
+              initial={{ x: -20, opacity: 0, skewX: 10 }}
+              whileInView={{ x: 0, opacity: 1, skewX: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.7 }}
             >
               {bottomMiniTitle}
-            </p>
+            </motion.p>
           )}
 
           {btnTxt && btnColor && (
@@ -205,10 +328,8 @@ const ImageTextBlock = ({
           )}
         </div>
 
-        {inverted && (
-          <RoundedImage image={image} altText={altText}></RoundedImage>
-        )}
-      </div>
+        {inverted && <RoundedImage image={image} altText={altText} />}
+      </motion.div>
     </div>
   );
 };

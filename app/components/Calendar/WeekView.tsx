@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Outfit, Raleway } from "next/font/google";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const outfit = Outfit({ subsets: ["latin"], weight: ["600"] });
 const raleway = Raleway({ subsets: ["latin"], weight: ["400", "500", "600"] });
@@ -118,47 +119,75 @@ const mockWeekData: WeekData[] = [
   },
 ];
 
+const DayColumn = ({ day, index }: { day: WeekData; index: number }) => {
+  const columnRef = React.useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: columnRef,
+    offset: ["start end", "center center"],
+  });
+
+  const x = useTransform(scrollYProgress, [0, 1], [200, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
+
+  return (
+    <motion.div
+      ref={columnRef}
+      style={{
+        opacity,
+        scale,
+        x,
+        transformOrigin: "left center",
+      }}
+      className="flex flex-col gap-4"
+    >
+      {/* Day Header */}
+      <div className="text-center text-white">
+        <h4
+          className={`${raleway.className} font-semibold text-[18px] leading-[120%]`}
+        >
+          {day.date}
+        </h4>
+      </div>
+
+      {/* Events Column */}
+      <div className="flex flex-col gap-4">
+        {day.events.map((event, idx) => (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.1 + idx * 0.05 }}
+            className="bg-[#570901] rounded-[10px] px-4 py-3 w-full"
+          >
+            <p
+              className={`${outfit.className} text-[14px] font-[600] uppercase text-[#F2E7E6]`}
+            >
+              {event.time}
+            </p>
+            <h3
+              className={`${raleway.className} text-[16px] font-[500] text-white mt-1`}
+            >
+              {event.name}
+            </h3>
+            <p
+              className={`${raleway.className} text-[14px] font-[400] text-[#F2E7E6] mt-1`}
+            >
+              {event.description}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
 const WeekView = () => {
   return (
-    <div className="pt-8 overflow-x-auto">
-      <div className="grid grid-cols-7 gap-6 min-w-[1200px]">
+    <div className="pt-4 pb-4 w-full">
+      <div className="grid grid-cols-7 gap-6 w-full">
         {mockWeekData.map((day, index) => (
-          <div key={index} className="flex flex-col gap-4">
-            {/* Day Header */}
-            <div className="text-center text-white">
-              <h4
-                className={`${raleway.className} font-semibold text-[18px] leading-[120%]`}
-              >
-                {day.date}
-              </h4>
-            </div>
-
-            {/* Events Column */}
-            <div className="flex flex-col gap-4">
-              {day.events.map((event, idx) => (
-                <div
-                  key={idx}
-                  className="bg-[#570901] rounded-[10px] px-4 py-3 w-full"
-                >
-                  <p
-                    className={`${outfit.className} text-[14px] font-[600] uppercase text-[#F2E7E6]`}
-                  >
-                    {event.time}
-                  </p>
-                  <h3
-                    className={`${raleway.className} text-[16px] font-[500] text-white mt-1`}
-                  >
-                    {event.name}
-                  </h3>
-                  <p
-                    className={`${raleway.className} text-[14px] font-[400] text-[#F2E7E6] mt-1`}
-                  >
-                    {event.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <DayColumn key={index} day={day} index={index} />
         ))}
       </div>
     </div>
