@@ -12,6 +12,7 @@ export default function CalendarViewSwitcherWrapper({ onViewChange }: Props) {
     "day"
   );
 
+  // Notify parent component when view changes
   useEffect(() => {
     if (onViewChange) {
       onViewChange(calendarView);
@@ -19,11 +20,9 @@ export default function CalendarViewSwitcherWrapper({ onViewChange }: Props) {
   }, [calendarView, onViewChange]);
 
   return (
-    <div className="min-h-fit">
-      <CalendarViewSwitcher
-        calendarView={calendarView}
-        setCalendarView={setCalendarView}
-      />
-    </div>
+    <CalendarViewSwitcher
+      calendarView={calendarView}
+      setCalendarView={setCalendarView}
+    />
   );
 }

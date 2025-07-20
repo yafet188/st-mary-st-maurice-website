@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Outfit, Raleway } from "next/font/google";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 const outfit = Outfit({ subsets: ["latin"], weight: ["600"] });
 const raleway = Raleway({ subsets: ["latin"], weight: ["400", "500", "600"] });
@@ -120,61 +120,103 @@ const mockWeekData: WeekData[] = [
 ];
 
 const DayColumn = ({ day, index }: { day: WeekData; index: number }) => {
-  const columnRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: columnRef,
-    offset: ["start end", "center center"],
-  });
-
-  const x = useTransform(scrollYProgress, [0, 1], [200, 0]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
-
   return (
     <motion.div
-      ref={columnRef}
-      style={{
-        opacity,
-        scale,
-        x,
-        transformOrigin: "left center",
+      initial={{ opacity: 0, y: 30, scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{
+        duration: 0.6,
+        delay: 0.2 + index * 0.1,
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
       }}
       className="flex flex-col gap-4"
     >
       {/* Day Header */}
-      <div className="text-center text-white">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+        className="text-center text-white relative overflow-hidden rounded-[8px]
+                   backdrop-blur-sm bg-gradient-to-br from-white/10 via-white/5 to-transparent
+                   border border-white/10 p-3 shadow-lg shadow-black/20"
+        style={{
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          background:
+            "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.1) 100%)",
+          boxShadow:
+            "0 4px 16px rgba(0,0,0,0.2), inset 0 1px 1px rgba(255,255,255,0.1)",
+        }}
+      >
         <h4
-          className={`${raleway.className} font-semibold text-[18px] leading-[120%]`}
+          className={`${raleway.className} font-semibold text-[18px] leading-[120%] relative z-10 drop-shadow-sm`}
         >
           {day.date}
         </h4>
-      </div>
+      </motion.div>
 
       {/* Events Column */}
       <div className="flex flex-col gap-4">
         {day.events.map((event, idx) => (
           <motion.div
             key={idx}
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1 + idx * 0.05 }}
-            className="bg-[#570901] rounded-[10px] px-4 py-3 w-full"
+            transition={{
+              duration: 0.5,
+              delay: 0.6 + index * 0.1 + idx * 0.1,
+            }}
+            whileHover={{
+              scale: 1.02,
+              transition: { duration: 0.2 },
+            }}
+            className="bg-[#570901]/80 backdrop-blur-sm rounded-[10px] px-4 py-3 w-full relative overflow-hidden
+                       border border-white/10 shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30
+                       hover:bg-[#570901]/90 transition-all duration-200"
+            style={{
+              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)",
+              background:
+                "linear-gradient(135deg, rgba(87,9,1,0.8) 0%, rgba(87,9,1,0.6) 50%, rgba(0,0,0,0.2) 100%)",
+              boxShadow:
+                "0 6px 24px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -1px 1px rgba(0,0,0,0.2)",
+            }}
           >
-            <p
-              className={`${outfit.className} text-[14px] font-[600] uppercase text-[#F2E7E6]`}
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.4,
+                delay: 0.7 + index * 0.1 + idx * 0.1,
+              }}
+              className={`${outfit.className} text-[14px] font-[600] uppercase text-[#F2E7E6] relative z-10 drop-shadow-sm`}
             >
               {event.time}
-            </p>
-            <h3
-              className={`${raleway.className} text-[16px] font-[500] text-white mt-1`}
+            </motion.p>
+            <motion.h3
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.4,
+                delay: 0.8 + index * 0.1 + idx * 0.1,
+              }}
+              className={`${raleway.className} text-[16px] font-[500] text-white mt-1 relative z-10 drop-shadow-sm`}
             >
               {event.name}
-            </h3>
-            <p
-              className={`${raleway.className} text-[14px] font-[400] text-[#F2E7E6] mt-1`}
+            </motion.h3>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.4,
+                delay: 0.9 + index * 0.1 + idx * 0.1,
+              }}
+              className={`${raleway.className} text-[14px] font-[400] text-[#F2E7E6] mt-1 relative z-10 drop-shadow-sm`}
             >
               {event.description}
-            </p>
+            </motion.p>
           </motion.div>
         ))}
       </div>
@@ -184,13 +226,30 @@ const DayColumn = ({ day, index }: { day: WeekData; index: number }) => {
 
 const WeekView = () => {
   return (
-    <div className="pt-4 pb-4 w-full">
-      <div className="grid grid-cols-7 gap-6 w-full">
+    <motion.div
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{
+        duration: 0.8,
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+      }}
+      className="pt-8 w-full"
+    >
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className="grid grid-cols-7 gap-6 w-full"
+      >
         {mockWeekData.map((day, index) => (
           <DayColumn key={index} day={day} index={index} />
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

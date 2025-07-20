@@ -1,4 +1,10 @@
-import React from "react";
+"use client";
+
+// AboutUs/page.tsx
+// This file contains the About Us page for the St. Mary & St. Maurice Church website.
+// It includes the church's history, images, and information about the fathers of the church.
+
+import React, { useState } from "react";
 import Image from "next/image";
 import { Urbanist, Outfit, Raleway } from "next/font/google";
 
@@ -31,6 +37,42 @@ const fathers = [
 ];
 
 const AboutUs = () => {
+  // State to control collapse/expand of each story column
+  const [col1Expanded, setCol1Expanded] = useState(false);
+  const [col2Expanded, setCol2Expanded] = useState(false);
+  // State for auto scroll position
+  const [scrollY, setScrollY] = useState(0);
+
+  // Ref to control scrolling state
+  const scrollingRef = React.useRef(true);
+  // Ref for story section
+  const storySectionRef = React.useRef<HTMLDivElement>(null);
+  // Auto-scroll effect
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      const storyDiv = storySectionRef.current;
+      if (scrollingRef.current && storyDiv) {
+        storyDiv.scrollTop += 0.5; // even slower scroll
+        if (
+          storyDiv.scrollTop + storyDiv.clientHeight >=
+          storyDiv.scrollHeight
+        ) {
+          storyDiv.scrollTop = 0;
+        }
+      }
+    }, 50); // slower scroll
+    return () => clearInterval(interval);
+  }, []);
+
+  // Staggered expand after page loads
+  React.useEffect(() => {
+    const timer1 = setTimeout(() => setCol1Expanded(true), 600);
+    const timer2 = setTimeout(() => setCol2Expanded(true), 1600);
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
   {
     /* ------------------------------------ABOUT US SECTION ------------------------------------- */
   }
@@ -73,9 +115,18 @@ const AboutUs = () => {
         </div>
 
         {/* Story Text Components */}
-        <div className="w-full md:w-2/3 h-auto md:h-screen overflow-y-auto flex flex-col md:flex-row gap-[40px] md:gap-[80px] px-6 md:pr-[60px] pt-[60px]">
+        <div
+          className="w-full md:w-2/3 h-auto md:h-screen overflow-y-auto flex flex-col md:flex-row gap-[40px] md:gap-[80px] px-6 md:pr-[60px] pt-[60px]"
+          ref={storySectionRef}
+          onMouseEnter={() => (scrollingRef.current = false)}
+          onMouseLeave={() => (scrollingRef.current = true)}
+        >
           {/* First Row */}
-          <div className="w-full max-w-[462px] h-[2841px] flex flex-col gap-[80px] mx-auto">
+          <div
+            className={`w-full max-w-[462px] flex flex-col gap-[80px] mx-auto transition-all duration-[2000ms] ease-in-out overflow-hidden ${
+              col1Expanded ? "h-[2841px]" : "h-0"
+            }`}
+          >
             {/* Our Beginnings Text */}
             <div className="w-full max-w-[462px] h-[327px] gap-[16px] justify-center flex flex-col items-center">
               {/* Our Beginnings Header */}
@@ -217,7 +268,11 @@ const AboutUs = () => {
           </div>
 
           {/* Second Row */}
-          <div className="w-full max-w-[462px] h-[2841px] flex flex-col gap-[80px] mx-auto">
+          <div
+            className={`w-full max-w-[462px] flex flex-col gap-[80px] mx-auto transition-all duration-[2000ms] ease-in-out overflow-hidden ${
+              col2Expanded ? "h-[2841px]" : "h-0"
+            }`}
+          >
             {/* Old Church Image */}
             <div>
               <Image

@@ -8,7 +8,6 @@ import CalendarViewSwitcherWrapper from "../components/Calendar/CalenarViewSwitc
 import { Urbanist, Outfit, Raleway, Zilla_Slab } from "next/font/google";
 import ImageTextBlock from "../components/ImageTextBlock";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import MahraganKids from "../../public/Images/Home/MahraganKids.jpg";
 import Choir from "../../public/Images/Home/Choir.jpeg";
 import Tasbeha from "../../public/Images/Home/St.MaryTasbeha.jpeg";
@@ -38,19 +37,27 @@ const zillaSlab = Zilla_Slab({
 });
 
 export default function Home() {
-  const [calendarView, setCalendarView] = useState<"day" | "week" | "month">("day");
-  
-  // Calculate dynamic height based on calendar view
-  const getCalendarSectionHeight = () => {
+  // State to track the current calendar view for dynamic triangle sizing
+  const [calendarView, setCalendarView] = useState<"day" | "week" | "month">(
+    "day"
+  );
+
+  // Function to handle calendar view changes
+  const handleCalendarViewChange = (view: "day" | "week" | "month") => {
+    setCalendarView(view);
+  };
+
+  // Define different triangle sizes based on calendar view
+  const getTriangleClipPath = () => {
     switch (calendarView) {
       case "day":
-        return "h-[1200px]"; // Reduced height for day view
+        return "polygon(50% 31.25%, 100% 0, 100% 100%, 0 100%, 0 0)"; // Larger triangle
       case "week":
-        return "h-[1600px]"; // Medium height for week view
+        return "polygon(50% 35.5%, 100% 0, 100% 100%, 0 100%, 0 0)"; // Medium triangle (current)
       case "month":
-        return "h-[2175px]"; // Original height for month view
+        return "polygon(50% 21.35%, 100% 0, 100% 100%, 0 100%, 0 0)"; // Smaller triangle
       default:
-        return "h-[1200px]";
+        return "polygon(50% 20%, 100% 0, 100% 100%, 0 100%, 0 0)";
     }
   };
 
@@ -62,7 +69,7 @@ export default function Home() {
     <>
       <div className="relative w-full min-h-screen overflow-hidden">
         {/* BACKGROUND IMAGE SECTION - St Mary Church Background */}
-        <div className="absolute inset-0 z-0 pointer-events-none bg-[#171E34]">
+        <div className="absolute inset-0 z-0 bg-[#171E34]">
           <div className="relative w-full h-full overflow-hidden">
             <motion.div
               initial={{
@@ -105,7 +112,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 2, delay: 1.5 }}
-                className="absolute inset-0 pointer-events-none"
+                className="absolute inset-0"
               >
                 {[...Array(8)].map((_, i) => (
                   <motion.div
@@ -259,7 +266,7 @@ export default function Home() {
             },
           }}
           viewport={{ once: true, margin: "-100px" }}
-          className="relative bg-[rgba(60,0,0,0.2)] z-10 -mt-[150px] overflow-hidden"
+          className="relative z-10 -mt-[150px] overflow-hidden"
         >
           {/* Floating Particles */}
           <motion.div
@@ -267,7 +274,8 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 2, delay: 0.5 }}
             viewport={{ once: true }}
-            className="absolute inset-0 pointer-events-none"
+            className="absolute inset-0 z-5"
+            style={{ pointerEvents: "none" }}
           >
             {[...Array(15)].map((_, i) => (
               <motion.div
@@ -291,12 +299,32 @@ export default function Home() {
                   repeatType: "loop",
                 }}
                 viewport={{ once: true }}
-                className="absolute w-2 h-2 bg-white rounded-full opacity-60"
+                className="absolute w-2 h-2 opacity-10"
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
                 }}
-              />
+              >
+                {/* Coptic Cross shape */}
+                <div className="relative w-full h-full p-0.5">
+                  {/* Vertical bar with flared ends */}
+                  <div className="absolute left-1/2 top-0 w-0.5 h-full bg-white/30 transform -translate-x-1/2">
+                    {/* Top flare */}
+                    <div className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 w-1.5 h-0.5 bg-white/30 rounded-t-full"></div>
+                    {/* Bottom flare */}
+                    <div className="absolute -bottom-0.5 left-1/2 transform -translate-x-1/2 w-1.5 h-0.5 bg-white/30 rounded-b-full"></div>
+                  </div>
+                  {/* Horizontal bar with flared ends */}
+                  <div className="absolute top-1/2 left-0 w-full h-0.5 bg-white/30 transform -translate-y-1/2">
+                    {/* Left flare */}
+                    <div className="absolute -left-0.5 top-1/2 transform -translate-y-1/2 w-0.5 h-1.5 bg-white/30 rounded-l-full"></div>
+                    {/* Right flare */}
+                    <div className="absolute -right-0.5 top-1/2 transform -translate-y-1/2 w-0.5 h-1.5 bg-white/30 rounded-r-full"></div>
+                  </div>
+                  {/* Center circle (typical of Coptic crosses) */}
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-white/30 rounded-full"></div>
+                </div>
+              </motion.div>
             ))}
           </motion.div>
 
@@ -315,7 +343,12 @@ export default function Home() {
               },
             }}
             viewport={{ once: true }}
-            className="w-full h-[380px] mx-auto px-[100px] rounded-[64px] gap-[24px] flex items-center justify-between bg-[rgba(177,143,84,0.8)] z-10 relative overflow-hidden"
+            className="w-full h-[380px] mx-auto px-[100px] rounded-[64px] gap-[24px] flex items-center justify-between bg-[rgba(177,143,84,0.8)] border border-[rgba(177,143,84,0.4)] z-10 relative overflow-hidden"
+            style={{
+              background: "rgba(177,143,84,0.8)",
+              border: "1px solid rgba(177,143,84,0.3)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+            }}
           >
             {/* Animated Background Pattern */}
             <motion.div
@@ -323,7 +356,7 @@ export default function Home() {
               whileInView={{ opacity: 0.1, scale: 1 }}
               transition={{ duration: 2, delay: 0.8 }}
               viewport={{ once: true }}
-              className="absolute inset-0 pointer-events-none"
+              className="absolute inset-0"
             >
               <motion.div
                 animate={{
@@ -372,6 +405,10 @@ export default function Home() {
                   transition={{ duration: 0.8, delay: 0.8 }}
                   viewport={{ once: true }}
                   className={`${outfit.className} w-full max-w-[969px] h-[144px] font-[700] text-[40px] leading-[120%] tracking-[0.02em] text-white relative z-10`}
+                  style={{
+                    textShadow:
+                      "3px 3px 12px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.3)",
+                  }}
                 >
                   <motion.span
                     initial={{ opacity: 0, y: 20, rotateX: 90 }}
@@ -437,15 +474,6 @@ export default function Home() {
                     in Kitchener.
                   </motion.span>
                 </motion.p>
-
-                {/* Text Glow Effect */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  whileInView={{ opacity: 0.3, scale: 1 }}
-                  transition={{ duration: 2, delay: 2.5 }}
-                  viewport={{ once: true }}
-                  className="absolute inset-0 bg-gradient-to-r from-white to-gray-200 blur-xl opacity-20 -z-10"
-                />
               </motion.div>
 
               {/* Button */}
@@ -459,33 +487,9 @@ export default function Home() {
                   bounce: 0.6,
                 }}
                 viewport={{ once: true }}
-                className="relative"
+                className="relative z-[100]"
+                style={{ pointerEvents: "auto" }}
               >
-                {/* Button Glow Effect */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1, delay: 3.0 }}
-                  viewport={{ once: true }}
-                  className="absolute inset-0 bg-[#171E34] rounded-[8px] blur-sm"
-                />
-
-                <motion.div
-                  animate={{
-                    boxShadow: [
-                      "0 0 20px rgba(23, 30, 52, 0.3)",
-                      "0 0 40px rgba(23, 30, 52, 0.6)",
-                      "0 0 20px rgba(23, 30, 52, 0.3)",
-                    ],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                  }}
-                  className="absolute inset-0 bg-[#171E34] rounded-[8px]"
-                />
-
                 <motion.button
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
@@ -493,35 +497,27 @@ export default function Home() {
                   viewport={{ once: true }}
                   whileHover={{
                     scale: 1.1,
+                    backgroundColor: "#1f2640",
                     boxShadow:
-                      "0 8px 30px rgba(23, 30, 52, 0.4), 0 4px 15px rgba(23, 30, 52, 0.3)",
+                      "0 12px 35px rgba(23, 30, 52, 0.5), 0 6px 20px rgba(23, 30, 52, 0.4)",
                     transition: {
-                      duration: 0.3,
-                      type: "spring",
-                      stiffness: 300,
+                      duration: 0.2,
+                      ease: "easeOut",
                     },
                   }}
-                  whileTap={{ scale: 0.98 }}
+                  whileTap={{ scale: 0.95 }}
                   className={`${outfit.className} w-[185px] h-[45px] bg-[#171E34] text-white font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] 
-                    flex items-center justify-center relative z-10 overflow-hidden cursor-pointer
-                    shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out
-                    hover:bg-[#1f2640] active:bg-[#151a2e]`}
+                    flex items-center justify-center relative cursor-pointer border-2 border-transparent
+                    shadow-lg hover:shadow-xl hover:border-white/20 transition-all duration-200 ease-out overflow-hidden`}
+                  style={{ pointerEvents: "auto" }}
                 >
-                  <motion.span
-                    className="relative z-10"
-                    whileHover={{
-                      textShadow: "0 2px 8px rgba(255, 255, 255, 0.3)",
-                      transition: { duration: 0.2 },
-                    }}
-                  >
-                    VISIT US THIS SUNDAY
-                  </motion.span>
+                  <span className="relative z-10">VISIT US THIS SUNDAY</span>
 
                   {/* Button Shine Effect */}
                   <motion.div
                     initial={{ x: "-100%", opacity: 0 }}
                     whileInView={{ x: "100%", opacity: [0, 1, 0] }}
-                    transition={{ duration: 2, delay: 3.5 }}
+                    transition={{ duration: 2, delay: 3.2 }}
                     viewport={{ once: true }}
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 skew-x-12"
                   />
@@ -540,163 +536,130 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Corner Decorations */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0, rotate: -180 }}
-              whileInView={{ opacity: 0.6, scale: 1, rotate: 0 }}
-              transition={{ duration: 1.5, delay: 1.5 }}
-              viewport={{ once: true }}
-              className="absolute top-4 left-4 w-8 h-8 border-2 border-white rounded-full"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0, rotate: 180 }}
-              whileInView={{ opacity: 0.6, scale: 1, rotate: 0 }}
-              transition={{ duration: 1.5, delay: 1.7 }}
-              viewport={{ once: true }}
-              className="absolute top-4 right-4 w-8 h-8 border-2 border-white rounded-full"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0, rotate: -180 }}
-              whileInView={{ opacity: 0.6, scale: 1, rotate: 0 }}
-              transition={{ duration: 1.5, delay: 1.9 }}
-              viewport={{ once: true }}
-              className="absolute bottom-4 left-4 w-8 h-8 border-2 border-white rounded-full"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0, rotate: 180 }}
-              whileInView={{ opacity: 0.6, scale: 1, rotate: 0 }}
-              transition={{ duration: 1.5, delay: 2.1 }}
-              viewport={{ once: true }}
-              className="absolute bottom-4 right-4 w-8 h-8 border-2 border-white rounded-full"
-            />
+            {/* Corner Decorations - REMOVED */}
           </motion.div>
         </motion.div>
 
         {/* CALENDAR SECTION */}
-        <section
-          className={`relative w-full ${getCalendarSectionHeight()} bg-[#430600] text-white z-50 transition-all duration-500 ease-in-out`}
-          style={{
-            clipPath: "polygon(50% 20%, 100% 0, 100% 100%, 0 100%, 0 0)",
-          }}
-        >
-          {/* Faint Cross in Calendar Background */}
-          <div className="absolute top-[50%] left-[-4%] w-[300px] h-[300px] opacity-100 z-0 pointer-events-none">
-            <Image
-              src="/Images/Home/Calendar/Cross.png"
-              alt="Faint Calendar Background Cross"
-              fill
-              className="object-contain"
-            />
-          </div>
+        <section className="relative w-full text-white z-50 overflow-hidden">
+          {/* Red background with triangle mask (creates hollow triangle) */}
+          <motion.div
+            className="absolute inset-0 bg-[#430600] z-0"
+            style={{
+              clipPath: getTriangleClipPath(),
+            }}
+          ></motion.div>
 
-          <div className="absolute top-[45%] left-[-2.5%] w-[300px] h-[300px] opacity-100 z-0 pointer-events-none">
-            <Image
-              src="/Images/Home/Calendar/Circle.png"
-              alt="Faint Calendar Background Circle"
-              width={500}
-              height={500}
-              className="object-contain"
-            />
-          </div>
+          {/* Fixed Background Decorative Elements */}
 
-          <div className="max-w-[1512px] px-[100px] pt-[80px] pb-[40px] mx-auto"></div>
-          <section className="w-full md:px-12 xl:px-24 py-110 bg-[#430600]">
-            <div className="max-w-[1312px] mx-auto space-y-10">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="text-center"
-              >
-                <motion.h2
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
+          {/* Dynamic Content Container */}
+          <div className="relative z-10 w-full">
+            <div className="max-w-[1512px] px-[100px] pt-[450px] pb-[20px] mx-auto"></div>
+
+            <section className="w-full md:px-12 xl:px-24 py-8 bg-transparent flex flex-col">
+              <div className="max-w-[1312px] mx-auto space-y-6 relative">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
                   viewport={{ once: true }}
-                  className={`${outfit.className} text-[64px] md:text-5xl font-[700] leading-[120%] tracking-[0.02em] text-white`}
+                  className="text-center"
                 >
-                  UPCOMING EVENTS & COMMUNITY ANNOUNCEMENTS
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  viewport={{ once: true }}
-                  className={`${outfit.className} text-[32px] md:text-2xl mt-2 font-[700] leading-[120%] tracking-[0.02em] text-white`}
-                >
-                  Stay Updated with Our Upcoming Church Events and Activities
-                </motion.p>
-              </motion.div>
-              <CalendarViewSwitcherWrapper onViewChange={setCalendarView} />
-
-              {/* EXPLORE CHURCH EVENTS Button */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
-                whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-                transition={{
-                  duration: 1.2,
-                  delay: 0.5,
-                  type: "spring",
-                  bounce: 0.6,
-                }}
-                viewport={{ once: true }}
-                className="relative flex justify-center mt-8 pt-12"
-              >
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                  viewport={{ once: true }}
-                  whileHover={{
-                    scale: 1.1,
-                    boxShadow:
-                      "0 8px 30px rgba(224, 174, 84, 0.4), 0 4px 15px rgba(224, 174, 84, 0.3)",
-                    transition: {
-                      duration: 0.3,
-                      type: "spring",
-                      stiffness: 300,
-                    },
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`${outfit.className} w-[216px] h-[45px] bg-[#E0AE54] text-[#430600] font-[600] text-[12px] leading-[120%] tracking-[0.02em] rounded-[8px] 
-                    flex items-center justify-center relative z-10 overflow-hidden cursor-pointer
-                    shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out
-                    hover:bg-[#d4a049] active:bg-[#c89840] flex-shrink-0 whitespace-nowrap`}
-                >
-                  <motion.span
-                    className="relative z-10"
-                    whileHover={{
-                      textShadow: "0 2px 8px rgba(67, 6, 0, 0.3)",
-                      transition: { duration: 0.2 },
-                    }}
-                  >
-                    EXPLORE CHURCH EVENTS
-                  </motion.span>
-
-                  {/* Button Shine Effect */}
-                  <motion.div
-                    initial={{ x: "-100%", opacity: 0 }}
-                    whileInView={{ x: "100%", opacity: [0, 1, 0] }}
-                    transition={{ duration: 2, delay: 1.2 }}
+                  <motion.h2
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
                     viewport={{ once: true }}
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 skew-x-12"
-                  />
+                    className={`${outfit.className} text-[64px] md:text-5xl font-[700] leading-[120%] tracking-[0.02em] text-white`}
+                  >
+                    UPCOMING EVENTS & COMMUNITY ANNOUNCEMENTS
+                  </motion.h2>
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    viewport={{ once: true }}
+                    className={`${outfit.className} text-[32px] md:text-2xl mt-2 font-[700] leading-[120%] tracking-[0.02em] text-white`}
+                  >
+                    Stay Updated with Our Upcoming Church Events and Activities
+                  </motion.p>
+                </motion.div>
 
-                  {/* Hover shine effect */}
-                  <motion.div
-                    initial={{ x: "-100%", opacity: 0 }}
-                    whileHover={{
-                      x: "100%",
-                      opacity: [0, 0.3, 0],
-                      transition: { duration: 0.6, ease: "easeInOut" },
-                    }}
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 skew-x-12"
+                {/* Calendar Component Container - Dynamic Height */}
+                <div>
+                  <CalendarViewSwitcherWrapper
+                    onViewChange={handleCalendarViewChange}
                   />
-                </motion.button>
-              </motion.div>
-            </div>
-          </section>
+                </div>
+
+                {/* EXPLORE CHURCH EVENTS Button */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
+                  whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                  transition={{
+                    duration: 1.2,
+                    delay: 0.5,
+                    type: "spring",
+                    bounce: 0.6,
+                  }}
+                  viewport={{ once: true }}
+                  className="relative flex justify-center mt-4 pt-4 pb-8"
+                >
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}
+                    whileHover={{
+                      scale: 1.1,
+                      boxShadow:
+                        "0 8px 30px rgba(224, 174, 84, 0.4), 0 4px 15px rgba(224, 174, 84, 0.3)",
+                      transition: {
+                        duration: 0.3,
+                        type: "spring",
+                        stiffness: 300,
+                      },
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`${outfit.className} w-[216px] h-[45px] bg-[#E0AE54] text-[#430600] font-[600] text-[12px] leading-[120%] tracking-[0.02em] rounded-[8px] 
+                  flex items-center justify-center relative z-10 overflow-hidden cursor-pointer
+                  shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out
+                  hover:bg-[#d4a049] active:bg-[#c89840] flex-shrink-0 whitespace-nowrap`}
+                  >
+                    <motion.span
+                      className="relative z-10"
+                      whileHover={{
+                        textShadow: "0 2px 8px rgba(67, 6, 0, 0.3)",
+                        transition: { duration: 0.2 },
+                      }}
+                    >
+                      EXPLORE CHURCH EVENTS
+                    </motion.span>
+
+                    {/* Button Shine Effect */}
+                    <motion.div
+                      initial={{ x: "-100%", opacity: 0 }}
+                      whileInView={{ x: "100%", opacity: [0, 1, 0] }}
+                      transition={{ duration: 2, delay: 1.2 }}
+                      viewport={{ once: true }}
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 skew-x-12"
+                    />
+
+                    {/* Hover shine effect */}
+                    <motion.div
+                      initial={{ x: "-100%", opacity: 0 }}
+                      whileHover={{
+                        x: "100%",
+                        opacity: [0, 0.3, 0],
+                        transition: { duration: 0.6, ease: "easeInOut" },
+                      }}
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 skew-x-12"
+                    />
+                  </motion.button>
+                </motion.div>
+              </div>
+            </section>
+          </div>
         </section>
       </div>
 
@@ -992,6 +955,7 @@ export default function Home() {
           buttonColor="White"
           buttonTextColor="#171E34"
           buttonLink=""
+          disableCurtainEffect={true}
         ></Hero>
 
         <div className="relative w-full max-w-[1400px] aspect-[2.5/1] rounded-xl overflow-hidden shadow-md mx-auto">
@@ -1133,7 +1097,7 @@ export default function Home() {
       </div>
 
       {/* Cross overlapping the triangle bottom tip - positioned to overlay everything */}
-      <div className="absolute top-[1466px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[9999] pointer-events-none">
+      <div className="absolute top-[1466px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
         <Image
           src="/Images/Home/WhiteCross.png"
           alt="Gold Cross"

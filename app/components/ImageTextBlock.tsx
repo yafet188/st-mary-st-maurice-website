@@ -147,28 +147,122 @@ const RoundedImage = ({ image, altText }: RoundedImageProps) => {
 // Ditto For Buttons
 const RoundedButton = ({
   children,
+  color,
   borderColor,
   link,
   textColor = "white",
 }: RoundedButtonProps) => {
-  const btnStyle = `${outfit.className} w-auto px-[16px] py-[16px] pt-[12px] pb-[12px] font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] flex items-center justify-center`;
+  const btnStyle = `${outfit.className} w-auto px-[16px] py-[16px] pt-[12px] pb-[12px] font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] flex items-center justify-center relative overflow-hidden backdrop-blur-md`;
 
   const inlineStyle = {
+    backgroundColor: `${color}CC`, // Add transparency for glass effect
     color: textColor,
-    border: borderColor ? `1.5px solid ${borderColor}` : undefined,
+    border: borderColor
+      ? `1.5px solid ${borderColor}80`
+      : `1px solid rgba(255, 255, 255, 0.18)`,
+    boxShadow: `
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      0 4px 16px rgba(0, 0, 0, 0.10),
+      0 2px 8px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+      inset 1px 0 0 rgba(255, 255, 255, 0.2),
+      inset -1px 0 0 rgba(0, 0, 0, 0.1)
+    `,
+    backdropFilter: "blur(20px) saturate(200%) brightness(110%)",
+    WebkitBackdropFilter: "blur(20px) saturate(200%) brightness(110%)",
   };
 
   const MotionButton = () => (
     <motion.button
       className={btnStyle}
       style={inlineStyle}
-      whileHover={{ scale: 1.05 }}
+      whileHover={{
+        scale: 1.05,
+        boxShadow: `
+          0 16px 64px rgba(0, 0, 0, 0.18),
+          0 8px 32px rgba(0, 0, 0, 0.15),
+          0 4px 16px rgba(0, 0, 0, 0.12),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+          inset 1px 0 0 rgba(255, 255, 255, 0.3),
+          inset -1px 0 0 rgba(0, 0, 0, 0.15)
+        `,
+        backdropFilter: "blur(25px) saturate(220%) brightness(120%)",
+        transition: { duration: 0.2, ease: "easeOut" },
+      }}
       whileTap={{ scale: 0.95 }}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+      initial={{
+        opacity: 0,
+        y: 30,
+        scale: 0.8,
+        rotateX: 15,
+        filter: "blur(10px)",
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotateX: 0,
+        filter: "blur(0px)",
+      }}
+      viewport={{ once: true }}
+      transition={{
+        duration: 0.8,
+        delay: 0.3,
+        type: "spring",
+        stiffness: 200,
+        damping: 20,
+      }}
     >
-      {children}
+      {/* Glass shine effect */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0"
+        initial={{ x: "-100%", opacity: 0 }}
+        whileInView={{
+          x: "100%",
+          opacity: [0, 0.2, 0],
+          transition: {
+            duration: 1.5,
+            delay: 1,
+            ease: "easeInOut",
+          },
+        }}
+        whileHover={{
+          x: "100%",
+          opacity: [0, 0.3, 0],
+          transition: { duration: 0.6, ease: "easeInOut" },
+        }}
+        viewport={{ once: true }}
+        style={{ transform: "skewX(-20deg)" }}
+      />
+
+      {/* Button text */}
+      <span className="relative z-10">{children}</span>
+
+      {/* Subtle gradient overlay for glass effect */}
+      <div
+        className="absolute inset-0 rounded-[8px] pointer-events-none"
+        style={{
+          background: `linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.25) 0%, 
+            rgba(255, 255, 255, 0.1) 25%,
+            rgba(255, 255, 255, 0.05) 50%, 
+            rgba(0, 0, 0, 0.05) 75%,
+            rgba(0, 0, 0, 0.1) 100%)`,
+        }}
+      />
+
+      {/* Additional frosted glass layer */}
+      <div
+        className="absolute inset-0 rounded-[8px] pointer-events-none opacity-60"
+        style={{
+          background: `radial-gradient(circle at top left, 
+            rgba(255, 255, 255, 0.3) 0%, 
+            rgba(255, 255, 255, 0.15) 30%,
+            transparent 60%)`,
+        }}
+      />
     </motion.button>
   );
 

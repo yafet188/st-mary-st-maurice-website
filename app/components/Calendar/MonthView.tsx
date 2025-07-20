@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Outfit, Raleway } from "next/font/google";
+import { motion } from "framer-motion";
 
 const outfit = Outfit({ subsets: ["latin"], weight: ["700"] });
 const raleway = Raleway({ subsets: ["latin"], weight: ["400", "600"] });
@@ -83,16 +84,38 @@ const mockMonth: CalendarDay[][] = [
 
 const MonthView = () => {
   return (
-    <div className="pt-4 pb-8 space-y-4 text-white">
+    <motion.div
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{
+        duration: 0.8,
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+      }}
+      className="pt-8 space-y-4 text-white"
+    >
       {/* Month Label */}
-      <div className="text-center">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="text-center"
+      >
         <h2 className={`${outfit.className} text-[20px] font-bold`}>
           September 2024
         </h2>
-      </div>
+      </motion.div>
 
       {/* Days of the Week Header */}
-      <div className="grid grid-cols-7 text-center text-white border-b border-[#570901] pb-2">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="grid grid-cols-7 text-center text-white border-b border-[#570901] pb-2"
+      >
         {daysOfWeek.map((day, idx) => (
           <div
             key={idx}
@@ -101,37 +124,79 @@ const MonthView = () => {
             {day}
           </div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Calendar Grid */}
-      <div className="grid grid-cols-7 gap-2">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="grid grid-cols-7 gap-2"
+      >
         {mockMonth.flat().map((calendarDay, index) => (
-          <div
+          <motion.div
             key={index}
-            className="h-[205px] px-2 py-2 border border-[#570901] rounded-[8px] flex flex-col gap-2"
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{
+              duration: 0.6,
+              delay: 0.1 + index * 0.03,
+              type: "spring",
+              stiffness: 100,
+              damping: 12,
+            }}
+            whileHover={{
+              scale: 1.05,
+              transition: { duration: 0.2 },
+            }}
+            className="h-[205px] px-2 py-2 border border-[#570901] rounded-[8px] flex flex-col gap-2 relative overflow-hidden
+                       backdrop-blur-sm bg-gradient-to-br from-white/10 via-white/5 to-transparent
+                       shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30
+                       before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/20 before:via-transparent before:to-black/10 before:opacity-50
+                       after:absolute after:inset-0 after:bg-gradient-to-t after:from-[#570901]/20 after:to-transparent"
+            style={{
+              backdropFilter: "blur(10px)",
+              WebkitBackdropFilter: "blur(10px)",
+              background:
+                "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.1) 100%)",
+              boxShadow:
+                "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -1px 1px rgba(0,0,0,0.1)",
+            }}
           >
             {/* Day Number */}
             <div
-              className={`${raleway.className} text-[18px] font-semibold text-white`}
+              className={`${raleway.className} text-[18px] font-semibold text-white relative z-10 drop-shadow-sm`}
             >
               {calendarDay.day}
             </div>
 
             {/* Events */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 relative z-10">
               {calendarDay.events.map((event, eIndex) => (
-                <div
+                <motion.div
                   key={eIndex}
-                  className="bg-[#570901] text-[#F2E7E6] text-[12px] font-normal rounded-md px-3 py-1"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{
+                    duration: 0.4,
+                    delay: 0.7 + index * 0.03 + eIndex * 0.1,
+                  }}
+                  className="bg-[#570901]/80 backdrop-blur-sm text-[#F2E7E6] text-[12px] font-normal rounded-md px-3 py-1
+                             border border-white/10 shadow-sm hover:bg-[#570901]/90 transition-all duration-200
+                             hover:scale-105 hover:shadow-md"
+                  style={{
+                    backdropFilter: "blur(5px)",
+                    WebkitBackdropFilter: "blur(5px)",
+                  }}
                 >
                   {event.time} {event.name}
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
