@@ -566,7 +566,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright section - bottom part */}
+        {/* Copyright and developer credit section - bottom part of the footer */}
         <div className="mt-16 pt-6 border-t border-[#454B5D] flex flex-col md:flex-row justify-between items-center gap-4">
           <p
             className={`${outfit.className} text-[#9498A2] text-[14px] font-[400] mb-4 md:mb-0`}
