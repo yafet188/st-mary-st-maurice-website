@@ -420,11 +420,12 @@ export default function Footer() {
                   </label>
                   <div className="flex w-full">
                     <div className="w-56 min-w-[135px]">
+                      {/* Country dropdown for selecting country code, uses react-select-country-list and ReactCountryFlag for internationalization */}
                       <Select
                         options={countryList().getData()}
                         defaultValue={countryList()
                           .getData()
-                          .find((c: any) => c.value === "CA")}
+                          .find((c: { value: string; label: string }) => c.value === "CA")}
                         classNamePrefix="country-select"
                         styles={{
                           control: (base) => ({
@@ -467,10 +468,10 @@ export default function Footer() {
                           input: (base) => ({ ...base, color: "#fff" }),
                         }}
                         isSearchable={false}
-                        formatOptionLabel={(option: any) => {
+                        formatOptionLabel={(option: { value: string; label: string }) => {
                           let code = "";
                           try {
-                            code = getCountryCallingCode(option.value);
+                            code = getCountryCallingCode(option.value as import('libphonenumber-js').CountryCode);
                           } catch {
                             code = "";
                           }
@@ -504,7 +505,7 @@ export default function Footer() {
                             const country = props.data;
                             let code = "";
                             try {
-                              code = getCountryCallingCode(country.value);
+                              code = getCountryCallingCode(country.value as import('libphonenumber-js').CountryCode);
                             } catch {
                               code = "";
                             }
