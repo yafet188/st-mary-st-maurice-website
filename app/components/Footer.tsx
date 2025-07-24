@@ -541,6 +541,7 @@ export default function Footer() {
                     </div>
 
                     <input
+                      // Phone number input for user to enter their contact number
                       type="tel"
                       placeholder="000-000-0000"
                       className={`${outfit.className} w-full h-14 px-4 py-3 bg-[#151B2F] text-white rounded-r-2xl focus:outline-none focus:ring-2 focus:ring-gray-500 font-normal border-none z-1`}
@@ -549,7 +550,9 @@ export default function Footer() {
                 </div>
 
                 {/* Subscribe button to submit the form */}
+                {/* Container for the subscribe button, aligns button to the bottom */}
                 <div className="hover:underline flex items-end">
+                  {/* Button to submit the subscription form */}
                   <button
                     type="submit"
                     className={`${outfit.className} h-14 px-3 py-4 bg-white text-black text-sm font-semibold rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 hover:bg-gray-100 w-30`}
