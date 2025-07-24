@@ -387,7 +387,7 @@ export default function Footer() {
               </motion.h6>
 
               <form className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-5 justify-between">
-                {/* Email field */}
+                {/* Email field for newsletter subscription */}
                 <div className="flex flex-col gap-2">
                   <label
                     className={`${outfit.className} text-sm font-semibold`}
@@ -411,7 +411,7 @@ export default function Footer() {
                   </div>
                 </div>
 
-                {/* Phone field with custom country dropdown and phone input */}
+                {/* Phone field with custom country dropdown and phone input for international support */}
                 <div className="flex flex-col gap-2">
                   <label
                     className={`${outfit.className} text-sm font-semibold`}
@@ -548,7 +548,7 @@ export default function Footer() {
                   </div>
                 </div>
 
-                {/* Subscribe button */}
+                {/* Subscribe button to submit the form */}
                 <div className="hover:underline flex items-end">
                   <button
                     type="submit"
