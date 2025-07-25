@@ -3,9 +3,105 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
+
 import { Urbanist, Outfit, Zilla_Slab } from "next/font/google";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
+
+// --- Glass Animated Button (copied from ImageTextBlock) ---
+// This is a reusable button component with a glassmorphism effect and hover animation.
+const RoundedButton = ({
+  children,
+  color = "#7A0C02",
+  borderColor,
+  link = "",
+  textColor = "white",
+}: {
+  children: React.ReactNode;
+  color?: string;
+  borderColor?: string;
+  link?: string;
+  textColor?: string;
+}) => {
+  const btnStyle = `${outfit.className} w-auto px-[16px] py-[16px] pt-[12px] pb-[12px] font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] flex items-center justify-center relative overflow-hidden backdrop-blur-md`;
+  const inlineStyle = {
+    backgroundColor: `${color}CC`,
+    color: textColor,
+    border: borderColor
+      ? `1.5px solid ${borderColor}80`
+      : `1px solid rgba(255, 255, 255, 0.18)`,
+    boxShadow: `
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      0 4px 16px rgba(0, 0, 0, 0.10),
+      0 2px 8px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+      inset 1px 0 0 rgba(255, 255, 255, 0.2),
+      inset -1px 0 0 rgba(0, 0, 0, 0.1)
+    `,
+    backdropFilter: "blur(20px) saturate(200%) brightness(110%)",
+    WebkitBackdropFilter: "blur(20px) saturate(200%) brightness(110%)",
+  };
+  const StaticButton = () => {
+    const [hovered, setHovered] = React.useState(false);
+    return (
+      <button
+        className={btnStyle}
+        style={{
+          ...inlineStyle,
+          transform: hovered ? "scale(1.05)" : "scale(1)",
+          boxShadow: hovered
+            ? `0 16px 64px rgba(0, 0, 0, 0.18),
+                0 8px 32px rgba(0, 0, 0, 0.15),
+                0 4px 16px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                inset 1px 0 0 rgba(255, 255, 255, 0.3),
+                inset -1px 0 0 rgba(0, 0, 0, 0.15)`
+            : inlineStyle.boxShadow,
+          transition:
+            "transform 0.18s cubic-bezier(.4,2,.3,1), box-shadow 0.18s cubic-bezier(.4,2,.3,1)",
+        }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        {/* Button text */}
+        <span className="relative z-10">{children}</span>
+        {/* Subtle gradient overlay for glass effect */}
+        <div
+          className="absolute inset-0 rounded-[8px] pointer-events-none"
+          style={{
+            background: `linear-gradient(135deg, 
+              rgba(255, 255, 255, 0.25) 0%, 
+              rgba(255, 255, 255, 0.1) 25%,
+              rgba(255, 255, 255, 0.05) 50%, 
+              rgba(0, 0, 0, 0.05) 75%,
+              rgba(0, 0, 0, 0.1) 100%)`,
+          }}
+        />
+        {/* Additional frosted glass layer */}
+        <div
+          className="absolute inset-0 rounded-[8px] pointer-events-none opacity-60"
+          style={{
+            background: `radial-gradient(circle at top left, 
+              rgba(255, 255, 255, 0.3) 0%, 
+              rgba(255, 255, 255, 0.15) 30%,
+              transparent 60%)`,
+          }}
+        />
+      </button>
+    );
+  };
+  if (link && link !== "") {
+    return (
+      <a href={link}>
+        <StaticButton />
+      </a>
+    );
+  } else {
+    return <StaticButton />;
+  }
+};
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -44,9 +140,11 @@ interface HeroProps {
   buttonLink?: string;
   textAlignment?: "left" | "center" | "right";
   contentAlignment?: "left" | "center" | "right";
+  backgroundPosition?: string; // NEW PROP
 }
 
 // Custom typewriter hook
+// Custom hook to create a typewriter effect for text display
 const useTypewriter = (text: string, speed: number = 50, delay: number = 0) => {
   const [displayText, setDisplayText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
@@ -80,6 +178,7 @@ const useTypewriter = (text: string, speed: number = 50, delay: number = 0) => {
   return { displayText, isComplete, showCursor };
 };
 
+// Animation variants for the hero image
 const imageVariants = {
   hidden: {
     scale: 1.2,
@@ -93,35 +192,40 @@ const imageVariants = {
   },
 } as const;
 
-const Hero = ({
-  backgroundColor,
-  image,
-  altText,
-  title,
-  titleSize,
-  subtitle,
-  textPosition = "Center",
-  overlayColor,
-  overlayOpacity,
-  textColor = "black",
-  textWidth,
-  height = "460px",
-  imagePlacement = "29%",
-  descriptionText = "",
-  descriptionColor = "#0D111D",
-  descriptionSize = "18px",
-  buttonText,
-  buttonColor = "#7A0C02",
-  buttonTextColor = "#ffffff",
-  buttonLink = "#",
-  textAlignment = "center",
-  contentAlignment = "center",
-}: HeroProps) => {
+// Main Hero component for displaying a prominent section with image, title, subtitle, and button
+function Hero(props: HeroProps) {
+  const {
+    backgroundColor,
+    image,
+    altText,
+    title,
+    titleSize,
+    subtitle,
+    textPosition = "Center",
+    overlayColor,
+    overlayOpacity,
+    textColor = "black",
+    textWidth,
+    height = "460px",
+    imagePlacement = "90%",
+    descriptionText = "",
+    descriptionColor = "#0D111D",
+    descriptionSize = "18px",
+    buttonText,
+    buttonColor = "#7A0C02",
+    buttonTextColor = "#ffffff",
+    buttonLink = "#",
+    textAlignment = "center",
+    contentAlignment = "center",
+    backgroundPosition,
+  } = props;
+
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
 
+  // Helper function to extract plain text from React nodes (for typewriter effect)
   const extractTextFromNode = (node: React.ReactNode): React.ReactNode[] => {
     if (typeof node === "string") return [node];
     if (Array.isArray(node)) return node.flatMap(extractTextFromNode);
@@ -133,27 +237,37 @@ const Hero = ({
     return [];
   };
 
+  // Get the full title text as a string
   const getTitleText = () => {
     const nodes = extractTextFromNode(title);
     return nodes.join("");
   };
 
   // Use custom typewriter hooks
+  // Typewriter effect for the title
   const titleTypewriter = useTypewriter(inView ? getTitleText() : "", 50, 500);
 
+  // Typewriter effect for the description, starts after title is complete
   const descriptionTypewriter = useTypewriter(
     inView && titleTypewriter.isComplete ? descriptionText : "",
-    30,
-    5000
+    25, // faster typing speed
+    1200
   );
 
+  // Render the hero section with animated image, title, subtitle, description, and button
   return (
-    <div>
+    <motion.div
+      ref={ref}
+      initial={{ height: 0 }}
+      animate={inView ? { height: height } : { height: 0 }}
+      transition={{ duration: 1, ease: "easeInOut" }}
+      style={{ overflow: "hidden" }}
+    >
       {/* Header Section with Background Image */}
       <div
         className="w-full relative overflow-hidden"
         style={{
-          height: height,
+          height: "100%",
           backgroundColor:
             !image && backgroundColor ? backgroundColor : undefined,
         }}
@@ -170,7 +284,11 @@ const Hero = ({
               alt={altText}
               fill
               priority
-              className={`object-cover object-[center_${imagePlacement}]`}
+              className="object-cover"
+              style={{
+                objectPosition:
+                  backgroundPosition || `center ${imagePlacement}`,
+              }}
             />
             <motion.div
               className="absolute inset-0 z-10"
@@ -255,7 +373,14 @@ const Hero = ({
                   width: "100%",
                 }}
               >
-                {descriptionTypewriter.displayText}
+                {descriptionTypewriter.displayText
+                  .split("\n")
+                  .map((line, idx, arr) => (
+                    <React.Fragment key={idx}>
+                      {line}
+                      {idx < arr.length - 1 && <br />}
+                    </React.Fragment>
+                  ))}
                 {descriptionTypewriter.showCursor && (
                   <span className="animate-pulse">|</span>
                 )}
@@ -263,29 +388,21 @@ const Hero = ({
             )}
 
             {buttonText && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-              >
-                <a href={buttonLink}>
-                  <button
-                    className={`${outfit.className} px-6 py-3 mt-4 rounded-[8px] font-semibold transition duration-200`}
-                    style={{
-                      backgroundColor: buttonColor,
-                      color: buttonTextColor,
-                    }}
-                  >
-                    {buttonText}
-                  </button>
-                </a>
-              </motion.div>
+              <div className="mt-4">
+                <RoundedButton
+                  color={buttonColor}
+                  textColor={buttonTextColor}
+                  link={buttonLink}
+                >
+                  {buttonText}
+                </RoundedButton>
+              </div>
             )}
           </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
-};
+}
 
 export default Hero;
