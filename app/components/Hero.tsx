@@ -254,7 +254,7 @@ function Hero(props: HeroProps) {
     1200
   );
 
-  // Render the hero section with animated image, title, subtitle, description, and button
+  // Main container for the hero section with entry animation
   return (
     <motion.div
       ref={ref}
