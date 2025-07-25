@@ -263,7 +263,7 @@ function Hero(props: HeroProps) {
       transition={{ duration: 1, ease: "easeInOut" }}
       style={{ overflow: "hidden" }}
     >
-      {/* Header Section with Background Image */}
+      {/* Header Section with Background Image and optional overlay */}
       <div
         className="w-full relative overflow-hidden"
         style={{
