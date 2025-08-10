@@ -1,0 +1,64 @@
+
+/* Custom styles for react-phone-input-2 dropdown */
+.react-phone-input-2 .country-list .search-box,
+.react-phone-input-2 .country-list .search-box input,
+.react-phone-input-2 .country-list .search,
+.react-phone-input-2 .country-list input[type="search"],
+body .react-phone-input-2 .country-list input[type="search"] {
+  background: #FFD700 !important;
+  color: #151B2F !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.react-phone-input-2 .country-list .highlight {
+  background: #FFD700 !important; /* dark yellow */
+  color: #151B2F !important;
+}
+
+/* Hide country names in the dropdown, show only flags */
+.react-phone-input-2 .country-list .country .country-name {
+  display: none !important;
+}
+
+.react-phone-input-2 .country-list .country {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  cursor: pointer;
+}
+
+/* Remove text cursor and prevent typing in the flag select */
+
+.country-select__control,
+.country-select__single-value {
+  cursor: pointer !important;
+  user-select: none !important;
+  justify-content: center !important;
+  text-align: center !important;
+  caret-color: transparent !important;
+  appearance: none !important;
+}
+
+/* Remove text cursor from the input area completely */
+/* NOTE: To fully prevent typing, set isSearchable={false} on the Select component in your React code. */
+.country-select__input-container,
+.country-select__input-container input {
+  display: none !important;
+}
+
+/* Center the flag in the control */
+.country-select__single-value {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  padding: 0 !important;
+}
+
+.country-select__input-container {
+  display: none !important;
+}

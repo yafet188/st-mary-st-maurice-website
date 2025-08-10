@@ -121,6 +121,7 @@ export default function YouthKidsServices() {
         height="464px"
         textPosition="Center"
         contentAlignment="center"
+        backgroundPosition="center 30%"
       ></Hero>
 
       <ImageTextBlock

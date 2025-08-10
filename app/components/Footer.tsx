@@ -54,7 +54,7 @@ export default function Footer() {
                 initial={{ rotate: 0, scale: 1 }}
                 animate={
                   isInView
-                    ? { rotate: [0, 10, 0], scale: [1, 1.08, 1] }
+                    ? { rotate: [0, 10, 0], scale: [1, 1] }
                     : { rotate: 0, scale: 1 }
                 }
                 whileHover={{ scale: 1.12 }}
@@ -425,7 +425,10 @@ export default function Footer() {
                         options={countryList().getData()}
                         defaultValue={countryList()
                           .getData()
-                          .find((c: { value: string; label: string }) => c.value === "CA")}
+                          .find(
+                            (c: { value: string; label: string }) =>
+                              c.value === "CA"
+                          )}
                         classNamePrefix="country-select"
                         styles={{
                           control: (base) => ({
@@ -468,10 +471,15 @@ export default function Footer() {
                           input: (base) => ({ ...base, color: "#fff" }),
                         }}
                         isSearchable={false}
-                        formatOptionLabel={(option: { value: string; label: string }) => {
+                        formatOptionLabel={(option: {
+                          value: string;
+                          label: string;
+                        }) => {
                           let code = "";
                           try {
-                            code = getCountryCallingCode(option.value as import('libphonenumber-js').CountryCode);
+                            code = getCountryCallingCode(
+                              option.value as import("libphonenumber-js").CountryCode
+                            );
                           } catch {
                             code = "";
                           }
@@ -505,7 +513,9 @@ export default function Footer() {
                             const country = props.data;
                             let code = "";
                             try {
-                              code = getCountryCallingCode(country.value as import('libphonenumber-js').CountryCode);
+                              code = getCountryCallingCode(
+                                country.value as import("libphonenumber-js").CountryCode
+                              );
                             } catch {
                               code = "";
                             }

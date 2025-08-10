@@ -1,7 +1,12 @@
 // app/pages/ContactUs.tsx
 import React from "react";
+// import { motion } from "framer-motion";
 import Image from "next/image";
+import Hero from "../components/Hero";
+
 import { Urbanist, Outfit, Raleway } from "next/font/google";
+import ConnectWithFathersForm from "../components/ConnectWithFathersForm";
+import SacredSpacesSection from "../components/SacredSpacesSection";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -34,49 +39,131 @@ const fathers = [
 const ContactUs = () => {
   return (
     <div className="min-h-screen">
-      {/* Header Section with Background Image */}
-      <div className="w-full relative overflow-hidden pt-50">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/Images/ContactUs/HeaderBackground.jpg"
-            alt="St.Mary's roof"
-            fill
-            priority
-            className="object-cover object-[center_29%]"
-          />
-        </div>
-        <div className="relative z-10 w-full max-w-[1512px] mx-auto min-h-[300px] px-6 md:px-12 xl:px-[100px] flex items-start pt-5">
-          {/* Text component */}
-          <div className="w-full md:w-[606px] flex flex-col gap-5">
-            <h1
-              className={`${outfit.className} text-[40px] md:text-[64px] leading-[120%] font-[700] text-black`}
-            >
-              CONTACT US
-            </h1>
-            <p
-              className={`${urbanist.className} text-[16px] md:text-[18px] text-[#0D11D] leading-[150%]`}
-            >
-              We warmly welcome your questions, feedback, and any inquiries
-              about our events, scheduling confessions or retreats and more.
-            </p>
-          </div>
-        </div>
-      </div>
+      {/* Hero Section */}
+      <Hero
+        title={
+          <span className={`${outfit.className} font-[700] text-black`}>
+            CONTACT US
+          </span>
+        }
+        titleSize="64px"
+        subtitle={""}
+        descriptionText={
+          "We warmly welcome your questions, feedback, and any inquiries about our events,\nscheduling confessions or retreats and more."
+        }
+        descriptionColor="#0D11D"
+        descriptionSize="18px"
+        image={"/Images/ContactUs/HeaderBackground.jpg" as any}
+        altText="St.Mary's roof"
+        height="458.26px"
+        textAlignment="left"
+        contentAlignment="left"
+        imagePlacement="30%"
+      />
 
       {/* Connect With Our Fathers Section */}
       <div className="w-full py-20 bg-[#E8E9EB]">
+        {/* Fade-in animation for heading */}
+        <style>{`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .fade-in {
+            animation: fadeIn 1.2s ease-out;
+          }
+          @keyframes popUp {
+            0% {
+              opacity: 0;
+              transform: scale(0.5);
+            }
+            55% {
+              opacity: 1;
+              transform: scale(1.18);
+            }
+            75% {
+              transform: scale(0.97);
+            }
+            100% {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+          .pop-up {
+            animation: popUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+          }
+          @keyframes buttonPop {
+            0% {
+              opacity: 0;
+              transform: scale(0.7);
+            }
+            60% {
+              opacity: 1;
+              transform: scale(1.08);
+            }
+            80% {
+              transform: scale(0.96);
+            }
+            100% {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+          .button-pop {
+            animation: buttonPop 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+          }
+          @keyframes shine {
+            0% {
+              left: -60%;
+              opacity: 0.3;
+            }
+            40% {
+              opacity: 0.7;
+            }
+            60% {
+              opacity: 1;
+            }
+            100% {
+              left: 110%;
+              opacity: 0.3;
+            }
+          }
+          .shine-effect {
+            position: relative;
+            overflow: hidden;
+          }
+          .shine-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -60%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(255,255,0,0) 0%, rgba(255,255,0,0.7) 50%, rgba(255,255,0,0) 100%);
+            opacity: 0.4;
+            pointer-events: none;
+            animation: shine 2.5s ease-in-out 0.1s both;
+          }
+          .shine-effect:hover::after {
+            animation: shine 1.5s ease-in-out 0s both;
+          }
+        `}</style>
         <h2
-          className={`${outfit.className} text-center text-[28px] md:text-[36px] font-bold uppercase tracking-[0.02em] leading-tight text-black mb-20`}
+          className={`${outfit.className} fade-in text-center text-[28px] md:text-[36px] font-bold uppercase tracking-[0.02em] leading-tight text-black mb-20`}
         >
           CONNECT WITH OUR FATHERS
         </h2>
         <div className="flex flex-col md:flex-row justify-center items-center gap-16 px-6">
-          {fathers.map((father) => (
+          {fathers.map((father, idx) => (
             <div
               key={father.name}
-              className="w-[90%] max-w-[300px] flex flex-col items-center relative"
+              className="group w-[90%] max-w-[300px] flex flex-col items-center relative cursor-pointer"
             >
-              <div className="absolute top-[-20px]">
+              {/* Cross background with pop-up animation and hover effect */}
+              <div
+                className="absolute top-[-20px] pop-up transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-lg"
+                style={{ animationDelay: `${0.2 + idx * 0.15}s` }}
+              >
                 <Image
                   src="/Images/ContactUs/Cross.png"
                   alt="Cross"
@@ -85,7 +172,11 @@ const ContactUs = () => {
                   className="object-contain"
                 />
               </div>
-              <div className="relative w-[180px] h-[200px] z-10 rounded-full overflow-hidden">
+              {/* Priest image with pop-up animation and hover effect */}
+              <div
+                className="relative w-[180px] h-[200px] z-10 rounded-full overflow-hidden pop-up transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-xl"
+                style={{ animationDelay: `${0.35 + idx * 0.15}s` }}
+              >
                 <Image
                   src={father.image}
                   alt={father.name}
@@ -103,7 +194,7 @@ const ContactUs = () => {
         </div>
         <div className="mt-16 flex justify-center">
           <button
-            className={`${outfit.className} w-[180px] h-[45px] bg-[#7A0C02] text-white font-semibold text-sm leading-[120%] tracking-[0.02em] rounded-[8px] flex items-center justify-center transition duration-300 ease-out hover:bg-red-800`}
+            className={`${outfit.className} button-pop shine-effect w-[180px] h-[45px] bg-[#7A0C02] text-white font-semibold text-sm leading-[120%] tracking-[0.02em] rounded-[8px] flex items-center justify-center transition-all duration-300 ease-out hover:bg-red-800 hover:scale-105 hover:shadow-xl active:scale-95`}
           >
             BOOK A CONFESSION
           </button>
@@ -111,76 +202,10 @@ const ContactUs = () => {
       </div>
 
       {/* Connect With Our Fathers Form*/}
-      <div className="w-full bg-[#B7B9C0] py-[100px] px-6 md:px-12 flex justify-center">
-        {/* Outer Container for Text & Form */}
-        <div className="w-full max-w-[1280px] flex flex-col lg:flex-row justify-between items-start gap-12">
-          {/* Left Side - Text Container */}
-          <div className="flex-1 flex flex-col justify-center items-center gap-6 h-full">
-            {/* Heading and description */}
-            <h3
-              className={`${urbanist.className} text-[32px] md:text-[52px] font-[700] leading-[120%] tracking-[-0.02em] text-[#171E34]`}
-            >
-              Connect With Our Fathers
-            </h3>
-            <p
-              className={`${urbanist.className} text-[16px] md:text-[18px] font-[700] leading-[150%] tracking-[0.02rem] text-[#454B5D]`}
-            >
-              Please use this form to schedule a confession, request a prayer,
-              or submit inquiries.
-            </p>
-          </div>
+      <ConnectWithFathersForm />
 
-          {/* Right Side - Form Container */}
-          <div className="flex-1 bg-[#0A0D16] text-white p-6 md:p-8 gap-12 rounded-[24px] border border-[#151B2F] shadow-lg">
-            {/* Form Placeholder */}
-            <form className="w-full flex flex-col gap-[24px]">
-              {/* Input Fields */}
-              {[
-                { label: "NAME", placeholder: "First & Last Name" },
-                { label: "EMAIL ADDRESS", placeholder: "email@provider.com" },
-                { label: "SELECT A FATHER", placeholder: "Select Father" },
-                { label: "SUBJECT", placeholder: "ex. Confession" },
-              ].map((field) => (
-                <div key={field.label} className="flex flex-col gap-[8px]">
-                  <label
-                    className={`${outfit.className} text-[14px] font-[600] leading-[150%] tracking-[0.02em] text-white`}
-                  >
-                    {field.label}
-                  </label>
-                  <input
-                    type="text"
-                    placeholder={field.placeholder}
-                    className={`${raleway.className} h-[56px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
-                  />
-                </div>
-              ))}
-
-              {/* Message Section */}
-              <div className="flex flex-col gap-[8px]">
-                <label
-                  className={`${outfit.className} text-[14px] font-[600] leading-[150%] tracking-[0.02em] text-white`}
-                >
-                  MESSAGE
-                </label>
-                <textarea
-                  placeholder="What is your inquiry..."
-                  className={`${raleway.className} h-[120px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
-                />
-              </div>
-
-              {/* Submit Button */}
-              <div>
-                <button
-                  type="submit"
-                  className={`${outfit.className} w-full h-[48px] rounded-[8px] px-[12px] py-[16px] text-[14px] font-semibold bg-[#E0AE54] text-white`}
-                >
-                  SUBMIT
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+      {/* Sacred Spaces Section */}
+      <SacredSpacesSection />
     </div>
   );
 };

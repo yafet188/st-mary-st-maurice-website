@@ -117,7 +117,7 @@ export default function CommunityServices() {
         overlayColor="#FEFAF1"
         overlayOpacity={0.8}
         height="464px"
-        imagePlacement="10%"
+        backgroundPosition="center 50%"
       ></Hero>
       <ImageTextBlock
         inverted={false}

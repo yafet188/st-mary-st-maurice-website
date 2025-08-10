@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Hero from "../components/Hero";
@@ -37,6 +37,20 @@ const zillaSlab = Zilla_Slab({
 });
 
 export default function Home() {
+  // State to control animation sequencing
+  const [titleDone, setTitleDone] = useState(false);
+  const [descriptionDone, setDescriptionDone] = useState(false);
+  const [showHeroButton, setShowHeroButton] = useState(false);
+
+  // When description is done, show the button after 2 seconds (no animation)
+  useEffect(() => {
+    if (descriptionDone) {
+      const timer = setTimeout(() => setShowHeroButton(true), 2000); // 2s after desc
+      return () => clearTimeout(timer);
+    } else {
+      setShowHeroButton(false);
+    }
+  }, [descriptionDone]);
   // State to track the current calendar view for dynamic triangle sizing
   const [calendarView, setCalendarView] = useState<"day" | "week" | "month">(
     "day"
@@ -241,6 +255,7 @@ export default function Home() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 1.2 }}
+                        onAnimationComplete={() => setTitleDone(true)}
                       >
                         FELLOWSHIP
                       </motion.span>
@@ -389,21 +404,21 @@ export default function Home() {
               {/* Text */}
               <motion.div
                 initial={{ opacity: 0, x: -100 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                animate={
+                  titleDone ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }
+                }
                 transition={{
                   duration: 1,
-                  delay: 0.6,
+                  delay: titleDone ? 0 : 0.6,
                   type: "spring",
                   bounce: 0.4,
                 }}
-                viewport={{ once: true }}
                 className="relative"
               >
                 <motion.p
                   initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.8 }}
-                  viewport={{ once: true }}
+                  animate={titleDone ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ duration: 0.8, delay: 0 }}
                   className={`${outfit.className} w-full max-w-[969px] h-[144px] font-[700] text-[40px] leading-[120%] tracking-[0.02em] text-white relative z-10`}
                   style={{
                     textShadow:
@@ -412,128 +427,108 @@ export default function Home() {
                 >
                   <motion.span
                     initial={{ opacity: 0, y: 20, rotateX: 90 }}
-                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ duration: 0.6, delay: 1.0 }}
-                    viewport={{ once: true }}
+                    animate={
+                      titleDone
+                        ? { opacity: 1, y: 0, rotateX: 0 }
+                        : { opacity: 0, y: 20, rotateX: 90 }
+                    }
+                    transition={{ duration: 0.6, delay: 0 }}
                     className="inline-block mr-2"
                   >
                     Join us at
                   </motion.span>
                   <motion.span
                     initial={{ opacity: 0, y: 20, rotateX: 90 }}
-                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ duration: 0.6, delay: 1.2 }}
-                    viewport={{ once: true }}
+                    animate={
+                      titleDone
+                        ? { opacity: 1, y: 0, rotateX: 0 }
+                        : { opacity: 0, y: 20, rotateX: 90 }
+                    }
+                    transition={{ duration: 0.6, delay: 0 }}
                     className="inline-block text-white font-[800] mr-2"
                   >
                     St. Mary and St. Maurice&apos;s
                   </motion.span>
                   <motion.span
                     initial={{ opacity: 0, y: 20, rotateX: 90 }}
-                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ duration: 0.6, delay: 1.4 }}
-                    viewport={{ once: true }}
+                    animate={
+                      titleDone
+                        ? { opacity: 1, y: 0, rotateX: 0 }
+                        : { opacity: 0, y: 20, rotateX: 90 }
+                    }
+                    transition={{ duration: 0.6, delay: 0 }}
                     className="inline-block mr-2"
                   >
                     Coptic Orthodox Church, where
                   </motion.span>
                   <motion.span
                     initial={{ opacity: 0, y: 20, rotateX: 90 }}
-                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ duration: 0.6, delay: 1.6 }}
-                    viewport={{ once: true }}
+                    animate={
+                      titleDone
+                        ? { opacity: 1, y: 0, rotateX: 0 }
+                        : { opacity: 0, y: 20, rotateX: 90 }
+                    }
+                    transition={{ duration: 0.6, delay: 0 }}
                     className="inline-block mr-2"
                   >
                     <span className="relative z-10">ancient traditions</span>
                   </motion.span>
                   <motion.span
                     initial={{ opacity: 0, y: 20, rotateX: 90 }}
-                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ duration: 0.6, delay: 1.8 }}
-                    viewport={{ once: true }}
+                    animate={
+                      titleDone
+                        ? { opacity: 1, y: 0, rotateX: 0 }
+                        : { opacity: 0, y: 20, rotateX: 90 }
+                    }
+                    transition={{ duration: 0.6, delay: 0 }}
                     className="inline-block mr-2"
                   >
                     meet
                   </motion.span>
                   <motion.span
                     initial={{ opacity: 0, y: 20, rotateX: 90 }}
-                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ duration: 0.6, delay: 2.0 }}
-                    viewport={{ once: true }}
+                    animate={
+                      titleDone
+                        ? { opacity: 1, y: 0, rotateX: 0 }
+                        : { opacity: 0, y: 20, rotateX: 90 }
+                    }
+                    transition={{ duration: 0.6, delay: 0 }}
                     className="inline-block mr-2"
                   >
                     <span className="relative z-10">modern hearts</span>
                   </motion.span>
                   <motion.span
                     initial={{ opacity: 0, y: 20, rotateX: 90 }}
-                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ duration: 0.6, delay: 2.2 }}
-                    viewport={{ once: true }}
+                    animate={
+                      titleDone
+                        ? { opacity: 1, y: 0, rotateX: 0 }
+                        : { opacity: 0, y: 20, rotateX: 90 }
+                    }
+                    transition={{ duration: 0.6, delay: 0 }}
                     className="inline-block"
+                    onAnimationComplete={() => setDescriptionDone(true)}
                   >
                     in Kitchener.
                   </motion.span>
                 </motion.p>
               </motion.div>
 
-              {/* Button */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
-                whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-                transition={{
-                  duration: 1.2,
-                  delay: 2.8,
-                  type: "spring",
-                  bounce: 0.6,
-                }}
-                viewport={{ once: true }}
-                className="relative z-[100]"
-                style={{ pointerEvents: "auto" }}
-              >
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                  viewport={{ once: true }}
-                  whileHover={{
-                    scale: 1.1,
-                    backgroundColor: "#1f2640",
-                    boxShadow:
-                      "0 12px 35px rgba(23, 30, 52, 0.5), 0 6px 20px rgba(23, 30, 52, 0.4)",
-                    transition: {
-                      duration: 0.2,
-                      ease: "easeOut",
-                    },
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`${outfit.className} w-[185px] h-[45px] bg-[#171E34] text-white font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] 
-                    flex items-center justify-center relative cursor-pointer border-2 border-transparent
-                    shadow-lg hover:shadow-xl hover:border-white/20 transition-all duration-200 ease-out overflow-hidden`}
+              {/* Button (no animation) */}
+              {showHeroButton && (
+                <div
+                  className="relative z-[100]"
                   style={{ pointerEvents: "auto" }}
                 >
-                  <span className="relative z-10">VISIT US THIS SUNDAY</span>
-
-                  {/* Button Shine Effect */}
-                  <motion.div
-                    initial={{ x: "-100%", opacity: 0 }}
-                    whileInView={{ x: "100%", opacity: [0, 1, 0] }}
-                    transition={{ duration: 2, delay: 3.2 }}
-                    viewport={{ once: true }}
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 skew-x-12"
-                  />
-
-                  {/* Hover shine effect */}
-                  <motion.div
-                    initial={{ x: "-100%", opacity: 0 }}
-                    whileHover={{
-                      x: "100%",
-                      opacity: [0, 0.3, 0],
-                      transition: { duration: 0.6, ease: "easeInOut" },
-                    }}
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 skew-x-12"
-                  />
-                </motion.button>
-              </motion.div>
+                  <button
+                    className={`${outfit.className} w-[185px] h-[45px] bg-[#171E34] text-white font-[600] text-[14px] leading-[120%] tracking-[0.02em] rounded-[8px] 
+                      flex items-center justify-center relative cursor-pointer border-2 border-transparent
+                      shadow-lg hover:shadow-xl hover:border-white/20 transition-all duration-200 ease-out overflow-hidden`}
+                    style={{ pointerEvents: "auto" }}
+                  >
+                    <span className="relative z-10">VISIT US THIS SUNDAY</span>
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Corner Decorations - REMOVED */}
@@ -839,7 +834,7 @@ export default function Home() {
         social life with us.
       </ImageTextBlock>
 
-      {/* Explore Our Spiritual Resources */}
+      {/* Explore Our Spiritual Resources (no appear animation) */}
       <Hero
         overlayColor="#171E34EB"
         image={Tree}
@@ -859,7 +854,7 @@ export default function Home() {
         buttonColor="#E0AE54"
         buttonTextColor="#171E34"
         buttonLink=""
-      ></Hero>
+      />
 
       {/* Unite in Generosity */}
       <ImageTextBlock
@@ -908,7 +903,7 @@ export default function Home() {
         strengthen our bonds and uplift those in need.
       </ImageTextBlock>
 
-      {/* RENEW YOUR SPIRIT */}
+      {/* RENEW YOUR SPIRIT (no appear animation) */}
       <Hero
         overlayColor="#E0AE546B"
         image={Abouna}
@@ -932,7 +927,7 @@ export default function Home() {
         buttonLink=""
         contentAlignment="left"
         textAlignment="left"
-      ></Hero>
+      />
 
       {/* Captured Moments */}
       <div className="w-full bg-[#E8E9EB] flex flex-col items-center pb-25 px-6 md:px-12">
@@ -955,8 +950,7 @@ export default function Home() {
           buttonColor="White"
           buttonTextColor="#171E34"
           buttonLink=""
-          disableCurtainEffect={true}
-        ></Hero>
+        />
 
         <div className="relative w-full max-w-[1400px] aspect-[2.5/1] rounded-xl overflow-hidden shadow-md mx-auto">
           <Image
@@ -994,21 +988,51 @@ export default function Home() {
         {/* Outer Container for Text & Form */}
         <div className="w-full max-w-[1280px] flex flex-col lg:flex-row justify-between items-start gap-12">
           {/* Left Side - Text Container */}
-          <div className="flex-1 flex flex-col justify-center gap-6 h-full">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, type: "spring", bounce: 0.3 }}
+            viewport={{ once: true }}
+            className="flex-1 flex flex-col justify-center gap-6 h-full"
+          >
             {/* Heading and description */}
-            <h3
+            <motion.h3
+              initial={{ opacity: 0, scale: 0.7, y: 40 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 1.1, type: "spring", bounce: 0.5 }}
+              viewport={{ once: true }}
               className={`${urbanist.className} text-[32px] md:text-[52px] font-[700] leading-[120%] tracking-[-0.02em] text-[#ffffff]`}
             >
               REACH OUT
-            </h3>
-            <p
+            </motion.h3>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 1,
+                delay: 0.3,
+                type: "spring",
+                bounce: 0.4,
+              }}
+              viewport={{ once: true }}
               className={`${urbanist.className} text-[18px] md:text-[18px] font-[400] leading-[150%] tracking-[0.02rem] text-[#E8E9EB]`}
             >
               Please contact us with any questions regarding our ministries,
               masses, or upcoming events. We are here to assist you.
-            </p>
+            </motion.p>
 
-            <div className="flex items-start gap-3">
+            <motion.div
+              initial={{ opacity: 0, x: -60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 0.9,
+                delay: 0.5,
+                type: "spring",
+                bounce: 0.4,
+              }}
+              viewport={{ once: true }}
+              className="flex items-start gap-3"
+            >
               <Image
                 src="/Images/Icons/Location.png"
                 alt="Location"
@@ -1026,9 +1050,20 @@ export default function Home() {
                   388 Ottawa St. South, Kitchener, Ontario, Canada N2M 3P4
                 </p>
               </Link>
-            </div>
+            </motion.div>
 
-            <div className="flex items-start gap-3">
+            <motion.div
+              initial={{ opacity: 0, x: -60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 0.9,
+                delay: 0.7,
+                type: "spring",
+                bounce: 0.4,
+              }}
+              viewport={{ once: true }}
+              className="flex items-start gap-3"
+            >
               <Image
                 src="/Images/Icons/Phone.png"
                 alt="Phone"
@@ -1042,35 +1077,123 @@ export default function Home() {
               >
                 +1 519 570 2199
               </a>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right Side - Form Container */}
-          <div className="flex-1 bg-[#0A0D16] text-white p-6 md:p-8 gap-12 rounded-[24px] border border-[#646877] shadow-lg">
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            whileInView={{ height: "auto", opacity: 1 }}
+            transition={{ duration: 1.2, type: "spring", bounce: 0.5 }}
+            viewport={{ once: true }}
+            className="flex-1 bg-[#0A0D16]/70 text-white p-6 md:p-8 gap-12 rounded-[24px] border border-[#646877]/40 shadow-2xl backdrop-blur-xl"
+            style={{
+              perspective: "900px",
+              boxShadow:
+                "0 8px 32px 0 rgba(30, 30, 40, 0.25), 0 1.5px 8px 0 rgba(224, 174, 84, 0.08)",
+              transform: "translateZ(0) rotateX(2deg) rotateY(-2deg)",
+            }}
+          >
             {/* Form Placeholder */}
             <form className="w-full flex flex-col gap-[24px]">
               {/* Input Fields */}
-              {[
-                { label: "NAME", placeholder: "First & Last Name" },
-                { label: "EMAIL ADDRESS", placeholder: "email@provider.com" },
-                { label: "PHONE NUMBER", placeholder: "000-000-0000" },
-              ].map((field) => (
-                <div key={field.label} className="flex flex-col gap-[8px]">
-                  <label
-                    className={`${outfit.className} text-[14px] font-[600] leading-[150%] tracking-[0.02em] text-white`}
-                  >
-                    {field.label}
-                  </label>
-                  <input
-                    type="text"
-                    placeholder={field.placeholder}
-                    className={`${raleway.className} h-[56px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
-                  />
-                </div>
-              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 1.5,
+                  type: "spring",
+                  bounce: 0.4,
+                }}
+                viewport={{ once: true }}
+                className="flex flex-col gap-[8px]"
+              >
+                <label
+                  className={`${outfit.className} text-[14px] font-[600] leading-[150%] tracking-[0.02em] text-white`}
+                >
+                  NAME
+                </label>
+                <input
+                  type="text"
+                  placeholder="First & Last Name"
+                  className={`${raleway.className} h-[56px] rounded-[16px] p-[14px] bg-[#151B2F]/60 text-[#E8E9EB] text-[14px] focus:outline-none focus:ring-4 focus:ring-[#E5A93D] focus:border-2 focus:border-[#E5A93D] border border-white/10 shadow-lg backdrop-blur-md`}
+                  style={{
+                    boxShadow:
+                      "0 2px 8px 0 rgba(30,30,40,0.18), 0 1px 4px 0 rgba(224,174,84,0.08)",
+                  }}
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 1.7,
+                  type: "spring",
+                  bounce: 0.4,
+                }}
+                viewport={{ once: true }}
+                className="flex flex-col gap-[8px]"
+              >
+                <label
+                  className={`${outfit.className} text-[14px] font-[600] leading-[150%] tracking-[0.02em] text-white`}
+                >
+                  EMAIL ADDRESS
+                </label>
+                <input
+                  type="email"
+                  placeholder="Your Email Address"
+                  className={`${raleway.className} h-[56px] rounded-[16px] p-[14px] bg-[#151B2F]/60 text-[#E8E9EB] text-[14px] focus:outline-none focus:ring-4 focus:ring-[#E5A93D] focus:border-2 focus:border-[#E5A93D] border border-white/10 shadow-lg backdrop-blur-md`}
+                  style={{
+                    boxShadow:
+                      "0 2px 8px 0 rgba(30,30,40,0.18), 0 1px 4px 0 rgba(224,174,84,0.08)",
+                  }}
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 1.9,
+                  type: "spring",
+                  bounce: 0.4,
+                }}
+                viewport={{ once: true }}
+                className="flex flex-col gap-[8px]"
+              >
+                <label
+                  className={`${outfit.className} text-[14px] font-[600] leading-[150%] tracking-[0.02em] text-white`}
+                >
+                  PHONE NUMBER
+                </label>
+                <input
+                  type="tel"
+                  placeholder="Your Phone Number"
+                  className={`${raleway.className} h-[56px] rounded-[16px] p-[14px] bg-[#151B2F]/60 text-[#E8E9EB] text-[14px] focus:outline-none focus:ring-4 focus:ring-[#E5A93D] focus:border-2 focus:border-[#E5A93D] border border-white/10 shadow-lg backdrop-blur-md`}
+                  style={{
+                    boxShadow:
+                      "0 2px 8px 0 rgba(30,30,40,0.18), 0 1px 4px 0 rgba(224,174,84,0.08)",
+                  }}
+                />
+              </motion.div>
 
               {/* Message Section */}
-              <div className="flex flex-col gap-[8px]">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 2.1,
+                  type: "spring",
+                  bounce: 0.4,
+                }}
+                viewport={{ once: true }}
+                className="flex flex-col gap-[8px]"
+              >
                 <label
                   className={`${outfit.className} text-[14px] font-[600] leading-[150%] tracking-[0.02em] text-white`}
                 >
@@ -1078,21 +1201,77 @@ export default function Home() {
                 </label>
                 <textarea
                   placeholder="What is your inquiry..."
-                  className={`${raleway.className} h-[120px] rounded-[16px] p-[14px] bg-[#151B2F] text-[#9498A2] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#E5A93D]`}
+                  className={`${raleway.className} h-[120px] rounded-[16px] p-[14px] bg-[#151B2F]/60 text-[#E8E9EB] text-[14px] focus:outline-none focus:ring-4 focus:ring-[#E5A93D] focus:border-2 focus:border-[#E5A93D] border border-white/10 shadow-lg backdrop-blur-md`}
+                  style={{
+                    boxShadow:
+                      "0 2px 8px 0 rgba(30,30,40,0.18), 0 1px 4px 0 rgba(224,174,84,0.08)",
+                  }}
                 />
-              </div>
+              </motion.div>
 
               {/* Submit Button */}
-              <div>
-                <button
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
+                whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                transition={{
+                  duration: 1.2,
+                  delay: 2.3,
+                  type: "spring",
+                  bounce: 0.6,
+                }}
+                viewport={{ once: true }}
+                className="relative z-[100]"
+                style={{ pointerEvents: "auto" }}
+              >
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  whileHover={{
+                    scale: 1.1,
+                    backgroundColor: "#1f2640",
+                    boxShadow:
+                      "0 12px 35px rgba(23, 30, 52, 0.5), 0 6px 20px rgba(23, 30, 52, 0.4)",
+                    transition: {
+                      duration: 0.2,
+                      ease: "easeOut",
+                    },
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`${outfit.className} w-full h-[48px] rounded-[8px] px-[12px] py-[16px] text-[14px] font-semibold bg-[#E0AE54]/80 text-white flex items-center justify-center relative cursor-pointer border-2 border-white/10 shadow-2xl hover:shadow-2xl hover:border-white/20 transition-all duration-200 ease-out overflow-hidden backdrop-blur-md`}
+                  style={{
+                    boxShadow:
+                      "0 4px 16px 0 rgba(30,30,40,0.22), 0 2px 8px 0 rgba(224,174,84,0.10)",
+                    pointerEvents: "auto",
+                  }}
                   type="submit"
-                  className={`${outfit.className} w-full h-[48px] rounded-[8px] px-[12px] py-[16px] text-[14px] font-semibold bg-[#E0AE54] text-white`}
                 >
-                  SUBMIT
-                </button>
-              </div>
+                  <span className="relative z-10">SUBMIT</span>
+
+                  {/* Button Shine Effect */}
+                  <motion.div
+                    initial={{ x: "-100%", opacity: 0 }}
+                    whileInView={{ x: "100%", opacity: [0, 1, 0] }}
+                    transition={{ duration: 2, delay: 1.5 }}
+                    viewport={{ once: true }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 skew-x-12"
+                  />
+
+                  {/* Hover shine effect */}
+                  <motion.div
+                    initial={{ x: "-100%", opacity: 0 }}
+                    whileHover={{
+                      x: "100%",
+                      opacity: [0, 0.3, 0],
+                      transition: { duration: 0.6, ease: "easeInOut" },
+                    }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 skew-x-12"
+                  />
+                </motion.button>
+              </motion.div>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
 

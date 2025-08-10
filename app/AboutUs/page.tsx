@@ -5,6 +5,7 @@
 // It includes the church's history, images, and information about the fathers of the church.
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Urbanist, Outfit, Raleway } from "next/font/google";
 
@@ -42,6 +43,11 @@ const AboutUs = () => {
   const [col2Expanded, setCol2Expanded] = useState(false);
   // State for auto scroll position
   const [scrollY, setScrollY] = useState(0);
+  // Animation state for OUR STORY text and button
+  const [storyTextVisible, setStoryTextVisible] = useState(false);
+  const [storyBtnVisible, setStoryBtnVisible] = useState(false);
+  // For bounce animation
+  const [btnBounce, setBtnBounce] = useState(false);
 
   // Ref to control scrolling state
   const scrollingRef = React.useRef(true);
@@ -68,9 +74,16 @@ const AboutUs = () => {
   React.useEffect(() => {
     const timer1 = setTimeout(() => setCol1Expanded(true), 600);
     const timer2 = setTimeout(() => setCol2Expanded(true), 1600);
+    const timer3 = setTimeout(() => setStoryTextVisible(true), 200);
+    const timer4 = setTimeout(() => {
+      setStoryBtnVisible(true);
+      setBtnBounce(true);
+    }, 600);
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
+      clearTimeout(timer3);
+      clearTimeout(timer4);
     };
   }, []);
   {
@@ -96,7 +109,13 @@ const AboutUs = () => {
             {/* OUR STORY */}
             <div className="w-[228px] h-[160px]">
               <p
-                className={`${outfit.className} font-[700] text-[64px] leading-[80px] tracking-[-0.02em] text-[#0D111D]`}
+                className={`${
+                  outfit.className
+                } font-[700] text-[64px] leading-[80px] tracking-[-0.02em] text-[#0D111D] mt-8 transition-all duration-1000 ease-out transform ${
+                  storyTextVisible
+                    ? "opacity-100 scale-100 translate-y-0 drop-shadow-2xl"
+                    : "opacity-0 scale-150 -translate-y-10"
+                } drop-shadow-lg`}
               >
                 OUR STORY
               </p>
@@ -104,12 +123,49 @@ const AboutUs = () => {
 
             {/* Button */}
             <div>
-              <button
+              <motion.button
                 type="submit"
-                className={`${outfit.className} w-[123px] h-[45px] font-[600] rounded-[8px] px-[16px] py-[16px] gap-[6px] text-[14px] leading-[150%] tracking-[0.02em] bg-[#E0AE54] text-white flex items-center`}
+                initial={{ opacity: 0, rotateY: 90 }}
+                animate={
+                  storyBtnVisible
+                    ? { opacity: 1, rotateY: 0 }
+                    : { opacity: 0, rotateY: 90 }
+                }
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                whileHover={{
+                  scale: 1.1,
+                  boxShadow:
+                    "0 8px 30px rgba(224, 174, 84, 0.4), 0 4px 15px rgba(224, 174, 84, 0.3)",
+                  backgroundColor: "#d4a049",
+                  transition: { duration: 0.3, type: "spring", stiffness: 300 },
+                }}
+                whileTap={{ scale: 0.98 }}
+                className={`${outfit.className} w-[123px] h-[45px] font-[600] rounded-[8px] px-[16px] py-[16px] gap-[6px] text-[14px] leading-[150%] tracking-[0.02em] bg-[#E0AE54] text-white flex items-center relative z-10 overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out flex-shrink-0 whitespace-nowrap ml-6`}
+                style={{ perspective: 600 }}
               >
-                LEARN MORE
-              </button>
+                <span className="relative z-10">LEARN MORE</span>
+                {/* Button Shine Effect */}
+                <motion.div
+                  initial={{ x: "-100%", opacity: 0 }}
+                  animate={
+                    storyBtnVisible
+                      ? { x: "100%", opacity: [0, 1, 0] }
+                      : { x: "-100%", opacity: 0 }
+                  }
+                  transition={{ duration: 2, delay: 1.2 }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 skew-x-12"
+                />
+                {/* Hover shine effect */}
+                <motion.div
+                  initial={{ x: "-100%", opacity: 0 }}
+                  whileHover={{
+                    x: "100%",
+                    opacity: [0, 0.3, 0],
+                    transition: { duration: 0.6, ease: "easeInOut" },
+                  }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 skew-x-12"
+                />
+              </motion.button>
             </div>
           </div>
         </div>
@@ -404,12 +460,24 @@ const AboutUs = () => {
       {/* 2nd Section */}
       <div className="w-full min-h-[900px] py-20 px-6 md:px-[100px] gap-16 bg-[#FEFAF1] flex flex-col z-10">
         {/* Cross Image */}
+        <style>{`
+          @keyframes crossFadePop {
+            0% { opacity: 0; transform: scale(0.4) translateY(-40px); }
+            60% { opacity: 1; transform: scale(1.25) translateY(0); }
+            80% { transform: scale(0.92) translateY(0); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+          }
+          .cross-fade-pop {
+            animation: crossFadePop 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+          }
+        `}</style>
         <div className="flex justify-center items-center">
           <Image
             src="/Images/AboutUs/GoldCross.png"
             alt="Gold Cross"
             width={92}
             height={92}
+            className="cross-fade-pop"
           />
         </div>
 
@@ -417,17 +485,35 @@ const AboutUs = () => {
         <div className="w-full flex flex-col items-center text-center gap-[16px] z-10">
           {/* Header */}
           <div className="w-[898px] h-[43px]">
+            <style>{`
+              @keyframes fadeInText {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+              }
+              .fade-in-text {
+                animation: fadeInText 1.2s ease-out;
+              }
+            `}</style>
             <h3
-              className={`${outfit.className} font-[700] text-[36px] leading-[120%] tracking[0.02em] text-[#695532]`}
+              className={`${outfit.className} fade-in-text font-[700] text-[36px] leading-[120%] tracking[0.02em] text-[#695532]`}
             >
               Guiding Lights: The Fathers of SMSM Church
             </h3>
           </div>
 
           {/* Body */}
+          <style>{`
+            @keyframes fadeInBody {
+              from { opacity: 0; transform: translateY(20px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+            .fade-in-body {
+              animation: fadeInBody 1.3s 0.3s ease-out both;
+            }
+          `}</style>
           <div className="w-[676px] h-[81px]">
             <p
-              className={`${urbanist.className} font-[400] text-[18px] leading-[150%] tracking-[0.02em] text-[#896F41]`}
+              className={`${urbanist.className} fade-in-body font-[400] text-[18px] leading-[150%] tracking-[0.02em] text-[#896F41]`}
             >
               The spiritual lineage of SMSM Church is adorned with Fathers whose
               dedication and guidance have illuminated our path. With a
@@ -440,14 +526,28 @@ const AboutUs = () => {
         {/* Fathers Images */}
         <div className="relative flex justify-center items-center">
           {/* Cross image */}
+          <style>{`
+            @keyframes popUp {
+              0% { opacity: 0; transform: scale(0.5); }
+              60% { opacity: 1; transform: scale(1.25); }
+              80% { transform: scale(0.92); }
+              100% { opacity: 1; transform: scale(1); }
+            }
+            .pop-up {
+              animation: popUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+            }
+          `}</style>
           <div className="flex flex-col md:flex-row justify-center items-center gap-12">
-            {fathers.map((father) => (
+            {fathers.map((father, idx) => (
               <div
                 key={father.name}
-                className="w-[291px] flex flex-col items-center relative"
+                className="group w-[291px] flex flex-col items-center relative cursor-pointer"
               >
-                {/* Cross image - Positioned behind */}
-                <div className="absolute top-[-45px]">
+                {/* Cross image - Positioned behind with pop-up and hover */}
+                <div
+                  className="absolute top-[-45px] pop-up transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-lg"
+                  style={{ animationDelay: `${0.2 + idx * 0.15}s` }}
+                >
                   <Image
                     src="/Images/AboutUs/BigCircle.png"
                     alt="Cross"
@@ -457,8 +557,11 @@ const AboutUs = () => {
                   />
                 </div>
 
-                {/* Father's Image - Positioned on top */}
-                <div className="relative w-[188.54px] h-[200px] z-10 rounded-full overflow-hidden">
+                {/* Father's Image - Positioned on top with pop-up and hover */}
+                <div
+                  className="relative w-[188.54px] h-[200px] z-10 rounded-full overflow-hidden pop-up transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-xl"
+                  style={{ animationDelay: `${0.35 + idx * 0.15}s` }}
+                >
                   <Image
                     src={father.image}
                     alt={father.name}
@@ -479,12 +582,47 @@ const AboutUs = () => {
         </div>
 
         {/* Get In Touch Button */}
+        <style>{`
+          @keyframes buttonPop {
+            0% { opacity: 0; transform: scale(0.7); }
+            60% { opacity: 1; transform: scale(1.08); }
+            80% { transform: scale(0.96); }
+            100% { opacity: 1; transform: scale(1); }
+          }
+          .button-pop {
+            animation: buttonPop 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+          }
+        `}</style>
         <div className="flex justify-center items-center">
+          <style>{`
+            @keyframes shine {
+              0% { left: -75%; opacity: 0; }
+              10% { opacity: 0.2; }
+              50% { left: 110%; opacity: 0.6; }
+              100% { left: 110%; opacity: 0; }
+            }
+            .shine-on-appear::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: -75%;
+              width: 60%;
+              height: 100%;
+              background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.7) 50%, transparent 100%);
+              opacity: 0;
+              pointer-events: none;
+              z-index: 2;
+              animation: shine 4s 0.7s cubic-bezier(0.4,0,0.2,1) 1 both;
+            }
+            .shine-on-appear:hover::before {
+              animation: shine 2.7s cubic-bezier(0.4,0,0.2,1) 1 both;
+            }
+          `}</style>
           <button
             type="submit"
-            className={`${outfit.className} w-full md:w-[133px] h-[45px] font-[600] rounded-[8px] px-[16px] py-[16px] gap-[6px] text-[14px] leading-[150%] tracking-[0.02em] bg-[#7A0C02] text-white flex items-center`}
+            className={`${outfit.className} button-pop shine-on-appear w-full md:w-[133px] h-[45px] font-[600] rounded-[8px] px-[16px] py-[16px] gap-[6px] text-[14px] leading-[150%] tracking-[0.02em] bg-[#7A0C02] text-white flex items-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl active:scale-95 relative overflow-hidden`}
           >
-            GET IN TOUCH
+            <span className="relative z-10">GET IN TOUCH</span>
           </button>
         </div>
       </div>

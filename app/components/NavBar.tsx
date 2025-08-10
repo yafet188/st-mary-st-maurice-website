@@ -357,7 +357,7 @@ function NavBar() {
                                               e
                                             )
                                           }
-                                          className="block px-4 py-3 text-black hover:bg-[#FEFAF1] transition-colors duration-200 text-sm font-medium"
+                                          className="block px-4 py-3 text-black hover:bg-[#FEFAF1] hover:shadow-lg hover:rounded-xl transition-colors duration-200 text-sm font-medium"
                                         >
                                           {label}
                                         </Link>
@@ -424,7 +424,7 @@ function NavBar() {
                                               e
                                             )
                                           }
-                                          className="block px-4 py-3 text-black hover:bg-[#FEFAF1] transition-colors duration-200 text-sm font-medium"
+                                          className="block px-4 py-3 text-black hover:bg-[#FEFAF1] hover:shadow-lg hover:rounded-xl transition-colors duration-200 text-sm font-medium"
                                         >
                                           {label}
                                         </Link>
@@ -495,7 +495,7 @@ function NavBar() {
                                               e
                                             )
                                           }
-                                          className="block px-4 py-3 text-black hover:bg-[#FEFAF1] transition-colors duration-200 text-sm font-medium"
+                                          className="block px-4 py-3 text-black hover:bg-[#FEFAF1] hover:shadow-lg hover:rounded-xl transition-colors duration-200 text-sm font-medium"
                                         >
                                           {label}
                                           {subtitle && (
