@@ -1,3 +1,4 @@
+// Importing necessary components and assets
 import ProductCard from "../components/ProductCard";
 import ImageTextBlock from "../components/ImageTextBlock";
 import Hero from "../components/Hero";
@@ -5,13 +6,15 @@ import { Urbanist } from "next/font/google";
 import StMauriceChurchFromBackPicture from "../../public/Images/EducationalServices/StMauriceChurchFromBack.jpg";
 import SoccerWatchingStMauriceHallPicture from "../../public/Images/EducationalServices/SoccerWatchingStMauriceHall.jpg";
 
-// Initialize the Urbanist font
+// Initialize the Urbanist font with specific settings
 const urbanist = Urbanist({
   subsets: ["latin"],
   display: "swap",
 });
 
+// Main component for the Educational Services page
 export default function EducationalServices() {
+  // Array of products to be displayed as cards
   const products = [
     {
       id: 1,
@@ -57,6 +60,7 @@ export default function EducationalServices() {
 
   return (
     <>
+      {/* Hero section with a background image and overlay */}
       <Hero
         image={SoccerWatchingStMauriceHallPicture}
         altText="Vespers in St Mary's church"
@@ -72,28 +76,33 @@ export default function EducationalServices() {
         contentAlignment="center"
       />
 
+      {/* Image and text block introducing the Educational Services */}
       <ImageTextBlock
-        inverted={false}
+        inverted={false} // Normal layout (image on the left, text on the right)
         title="Enrich Your Journey"
         image={StMauriceChurchFromBackPicture}
         altText="Fr. Athansius praying over newly wed couple in St. Mary's Church"
         bgColor="#FEFAF1"
       >
+        {/* Description of the Educational Services */}
         Explore our learning and spiritual growth services with the Educational
         Services at St. Mary and St. Maurice Church. Our diverse services will
         deepen your knowledge and strengthen your faith.
       </ImageTextBlock>
+
+      {/* Section for displaying product cards */}
       <div className="w-full px-[100px] py-[100px] gap-[80px] flex flex-col items-center justify-center bg-[#171E34]">
-        {/* Title */}
+        {/* Section title */}
         <h1
           className={`${urbanist.className} font-[700] text-[52px] leading-[120%] tracking-[-0.02em] text-white text-center`}
         >
           Educational Services
         </h1>
 
-        {/* Cards Section */}
+        {/* Grid layout for product cards */}
         <div className="w-full max-w-[1312px] grid grid-cols-1 md:grid-cols-2 gap-[48px] justify-center">
           {products.map((product) => (
+            // Render each product as a card
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
