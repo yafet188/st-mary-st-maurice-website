@@ -1,3 +1,4 @@
+// Importing necessary components and assets
 import Hero from "../components/Hero";
 import Image from "next/image";
 import ImageTextBlock from "../components/ImageTextBlock";
@@ -7,10 +8,11 @@ import StMauriceNave from "../../public/Images/Donations/StMauriceNave.png";
 import Circle from "../../public/Images/Donations/Circle.png";
 import Cross from "../../public/Images/Donations/Cross.png";
 
+// Main component for the Donation page
 export default function DonationPage() {
   return (
     <div>
-      {/* Hero on top of the background images */}
+      {/* Hero section with a title and background */}
       <div className="relative">
         <Hero
           altText="White Background"
@@ -34,7 +36,7 @@ export default function DonationPage() {
         />
       </div>
 
-      {/* Decorations positioned behind the Hero but before ImageTextBlock */}
+      {/* Decorative elements positioned behind the Hero */}
       <div className="absolute top-0 left-0 w-full h-[464px] pointer-events-none">
         <Image
           src={Circle}
@@ -52,26 +54,28 @@ export default function DonationPage() {
         />
       </div>
 
-      {/* This content stays above everything else */}
+      {/* Content section with ImageTextBlock */}
       <div className="relative z-20">
         <ImageTextBlock
           roundedText=""
           textColor=""
           titleColor=""
-          inverted={false}
+          inverted={false} // Normal layout (image on the left, text on the right)
           title="Transform Lives Through Giving"
           image={StMaryChurchRain}
           altText="Fr. Athansius praying over newly wed couple in St. Mary's Church"
           bgColor="#FEFAF1"
         >
+          {/* Description of the impact of donations */}
           Every donation helps us enhance our outreach efforts and educational
           programs and maintain our sacred space. With your support, we can
           continue to spread faith and love in our community. 
         </ImageTextBlock>
       </div>
 
+      {/* Second section: Encouraging donations */}
       <ImageTextBlock
-        inverted={true}
+        inverted={true} // Inverted layout (image on the right, text on the left)
         roundedText=""
         textColor=""
         titleColor=""
@@ -80,15 +84,17 @@ export default function DonationPage() {
         image={StMauriceAltar}
         altText="A picture of the Fr.Anthanasius, a couple of young chanters and kids in front of St. Mary's Altar"
         bgColor="#E8E9EB"
-        btnTxt="DONATE NOW AN MAKE A DIFFERENCE"
-        btnColor="#171E34"
+        btnTxt="DONATE NOW AN MAKE A DIFFERENCE" // Button text
+        btnColor="#171E34" // Button color
       >
+        {/* Description of how donations sustain the church's mission */}
         Donations to St. Mary and St. Maurice's Coptic Orthodox Church are a
         step toward sustaining our spiritual mission and community services. 
       </ImageTextBlock>
 
+      {/* Third section: Highlighting donation methods */}
       <ImageTextBlock
-        inverted={false}
+        inverted={false} // Normal layout
         roundedText=""
         textColor=""
         titleColor=""
@@ -96,6 +102,7 @@ export default function DonationPage() {
         miniTitle="Your contribution extends beyond the walls of our building"
         bottomMiniTitle={
           <>
+            {/* Additional donation methods */}
             You can donate now via PayPal. <br />
             We also accept e-Transfers to donate@stmarystmaurice.ca.
           </>
@@ -103,9 +110,10 @@ export default function DonationPage() {
         image={StMauriceNave}
         altText="A picture of the Fr.Anthanasius, a couple of young chanters and kids in front of St. Mary's Altar"
         bgColor="#FFFFFF"
-        btnTxt="DONATE TODAY"
-        btnColor="#7A0C02"
+        btnTxt="DONATE TODAY" // Button text
+        btnColor="#7A0C02" // Button color
       >
+        {/* Description of the broader impact of donations */}
         With each gift, we are able to offer more to those in need, enrich
         spiritual lives, and maintain the beauty and accessibility of our sacred
         spaces.
