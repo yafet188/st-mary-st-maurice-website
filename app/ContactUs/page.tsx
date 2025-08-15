@@ -4,10 +4,12 @@ import React from "react";
 import Image from "next/image";
 import Hero from "../components/Hero";
 
+// Importing Google Fonts for typography
 import { Urbanist, Outfit, Raleway } from "next/font/google";
 import ConnectWithFathersForm from "../components/ConnectWithFathersForm";
 import SacredSpacesSection from "../components/SacredSpacesSection";
 
+// Font configurations with specific weights
 const urbanist = Urbanist({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -21,6 +23,7 @@ const raleway = Raleway({
   weight: ["400", "500", "600", "700"],
 });
 
+// Array containing information about the church fathers
 const fathers = [
   {
     name: "HEG. ATHANASIUS ISKANDER",
@@ -36,10 +39,11 @@ const fathers = [
   },
 ];
 
+// Main ContactUs component
 const ContactUs = () => {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+      {/* Hero Section with contact information */}
       <Hero
         title={
           <span className={`${outfit.className} font-[700] text-black`}>
@@ -63,8 +67,9 @@ const ContactUs = () => {
 
       {/* Connect With Our Fathers Section */}
       <div className="w-full py-20 bg-[#E8E9EB]">
-        {/* Fade-in animation for heading */}
+        {/* CSS animations for visual effects */}
         <style>{`
+          /* Fade-in animation for smooth entry */
           @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -72,6 +77,8 @@ const ContactUs = () => {
           .fade-in {
             animation: fadeIn 1.2s ease-out;
           }
+          
+          /* Pop-up animation for images */
           @keyframes popUp {
             0% {
               opacity: 0;
@@ -92,6 +99,8 @@ const ContactUs = () => {
           .pop-up {
             animation: popUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
           }
+          
+          /* Button-specific pop animation */
           @keyframes buttonPop {
             0% {
               opacity: 0;
@@ -112,6 +121,8 @@ const ContactUs = () => {
           .button-pop {
             animation: buttonPop 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
           }
+          
+          /* Shine effect for interactive elements */
           @keyframes shine {
             0% {
               left: -60%;
@@ -148,18 +159,22 @@ const ContactUs = () => {
             animation: shine 1.5s ease-in-out 0s both;
           }
         `}</style>
+        
+        {/* Section title with fade-in animation */}
         <h2
           className={`${outfit.className} fade-in text-center text-[28px] md:text-[36px] font-bold uppercase tracking-[0.02em] leading-tight text-black mb-20`}
         >
           CONNECT WITH OUR FATHERS
         </h2>
+        
+        {/* Grid layout for displaying fathers' information */}
         <div className="flex flex-col md:flex-row justify-center items-center gap-16 px-6">
           {fathers.map((father, idx) => (
             <div
               key={father.name}
               className="group w-[90%] max-w-[300px] flex flex-col items-center relative cursor-pointer"
             >
-              {/* Cross background with pop-up animation and hover effect */}
+              {/* Cross background with staggered animation */}
               <div
                 className="absolute top-[-20px] pop-up transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-lg"
                 style={{ animationDelay: `${0.2 + idx * 0.15}s` }}
@@ -172,7 +187,8 @@ const ContactUs = () => {
                   className="object-contain"
                 />
               </div>
-              {/* Priest image with pop-up animation and hover effect */}
+              
+              {/* Father's portrait with hover effects */}
               <div
                 className="relative w-[180px] h-[200px] z-10 rounded-full overflow-hidden pop-up transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-xl"
                 style={{ animationDelay: `${0.35 + idx * 0.15}s` }}
@@ -184,6 +200,8 @@ const ContactUs = () => {
                   className="object-cover"
                 />
               </div>
+              
+              {/* Father's name */}
               <p
                 className={`${outfit.className} font-bold text-[18px] md:text-[20px] text-center text-[#0D111D] mt-7`}
               >
@@ -192,6 +210,8 @@ const ContactUs = () => {
             </div>
           ))}
         </div>
+        
+        {/* Call-to-action button for booking confessions */}
         <div className="mt-16 flex justify-center">
           <button
             className={`${outfit.className} button-pop shine-effect w-[180px] h-[45px] bg-[#7A0C02] text-white font-semibold text-sm leading-[120%] tracking-[0.02em] rounded-[8px] flex items-center justify-center transition-all duration-300 ease-out hover:bg-red-800 hover:scale-105 hover:shadow-xl active:scale-95`}
@@ -201,10 +221,10 @@ const ContactUs = () => {
         </div>
       </div>
 
-      {/* Connect With Our Fathers Form*/}
+      {/* Contact form component */}
       <ConnectWithFathersForm />
 
-      {/* Sacred Spaces Section */}
+      {/* Sacred spaces information section */}
       <SacredSpacesSection />
     </div>
   );
