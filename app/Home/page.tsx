@@ -85,26 +85,8 @@ export default function Home() {
         {/* BACKGROUND IMAGE SECTION - St Mary Church Background */}
         <div className="absolute inset-0 z-0 bg-[#171E34]">
           <div className="relative w-full h-full overflow-hidden">
-            <motion.div
-              initial={{
-                opacity: 0,
-                scale: 1.3,
-                y: 50,
-                filter: "blur(8px)",
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1.1,
-                y: 0,
-                filter: "blur(0px)",
-              }}
-              transition={{
-                duration: 2.5,
-                ease: "easeOut",
-                delay: 0.2,
-              }}
-              className="relative w-full h-full"
-            >
+            {/* Removed motion.div animation from the background image */}
+            <div className="relative w-full h-full">
               <Image
                 src="/Images/Home/StMaryChurchBackground.png"
                 alt="St Mary Church Background"
@@ -157,7 +139,7 @@ export default function Home() {
                   />
                 ))}
               </motion.div>
-            </motion.div>
+            </div>
             {/* Subtle overlay to ensure text readability */}{" "}
           </div>
         </div>
@@ -1287,3 +1269,15 @@ export default function Home() {
     </>
   );
 }
+
+{
+  /* Cross overlapping the triangle bottom tip - positioned to overlay everything */
+}
+<div className="absolute top-[1466px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+  <Image
+    src="/Images/Home/WhiteCross.png"
+    alt="Gold Cross"
+    width={40}
+    height={40}
+  />
+</div>;
