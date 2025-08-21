@@ -153,6 +153,7 @@ export default function Home() {
                 {/* Text Components */}
                 <div className="flex flex-col items-center gap-[32px] pt-10">
                   {/* Living Orthodoxy */}
+                  {/* Animation removed from this badge */}
                   <div className="w-[267px] h-[41px] rounded-[25px] py-[6px] px-[14px] gap-[8px] bg-[#FDEFD5] bg-opacity-95 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-sm cursor-pointer">
                     <p
                       className={`${zillaSlab.className} w-[239px] h-[29px] font-[600] text-[24px] leading-[120%] tracking-[0.02em] text-[#896F41] drop-shadow-md`}
