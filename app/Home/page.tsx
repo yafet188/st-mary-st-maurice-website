@@ -153,38 +153,13 @@ export default function Home() {
                 {/* Text Components */}
                 <div className="flex flex-col items-center gap-[32px] pt-10">
                   {/* Living Orthodoxy */}
-                  <motion.div
-                    initial={{ opacity: 0, y: -50, rotate: -10 }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                      rotate: 0,
-                      transition: {
-                        duration: 0.8,
-                        delay: 0.3,
-                        type: "spring",
-                        stiffness: 120,
-                      },
-                    }}
-                    whileHover={{
-                      scale: 1.05,
-                      rotate: [0, -2, 2, -2, 0],
-                      transition: {
-                        rotate: {
-                          duration: 0.5,
-                          repeat: Infinity,
-                          repeatType: "reverse",
-                        },
-                      },
-                    }}
-                    className="w-[267px] h-[41px] rounded-[25px] py-[6px] px-[14px] gap-[8px] bg-[#FDEFD5] bg-opacity-95 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-sm cursor-pointer"
-                  >
+                  <div className="w-[267px] h-[41px] rounded-[25px] py-[6px] px-[14px] gap-[8px] bg-[#FDEFD5] bg-opacity-95 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-sm cursor-pointer">
                     <p
                       className={`${zillaSlab.className} w-[239px] h-[29px] font-[600] text-[24px] leading-[120%] tracking-[0.02em] text-[#896F41] drop-shadow-md`}
                     >
                       LIVING ORTHODOXY
                     </p>
-                  </motion.div>
+                  </div>
 
                   {/* Faith, Family, Fellowship */}
                   <motion.div
@@ -1255,16 +1230,6 @@ export default function Home() {
             </form>
           </motion.div>
         </div>
-      </div>
-
-      {/* Cross overlapping the triangle bottom tip - positioned to overlay everything */}
-      <div className="absolute top-[1466px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
-        <Image
-          src="/Images/Home/WhiteCross.png"
-          alt="Gold Cross"
-          width={40}
-          height={40}
-        />
       </div>
     </>
   );
